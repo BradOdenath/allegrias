@@ -1,0 +1,110 @@
+import 'theme.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_fft/flutter_fft.dart';
+
+import 'music/guitar/guitar.dart';
+import 'music/note/note.dart';
+import 'music/tabulature/tabulature.dart';
+
+void main() => runApp(TabApp());
+
+class TabApp extends StatefulWidget {
+  @override
+  TabAppState createState() => TabAppState();
+}
+
+class TabAppState extends State<TabApp> {
+
+  // Flutterfft Data
+  double? frequency;
+  String? note;
+  bool? isRecording;
+  int? octave;
+  bool? onPitch;
+
+  // String tabulatureStr;
+  Tabulature tabulature = new Tabulature();
+
+  FlutterFft flutterFft = new FlutterFft();
+
+  @override
+  void initState() {
+    isRecording = flutterFft.getIsRecording;
+    frequency = flutterFft.getFrequency;
+    note = flutterFft.getNote;
+    octave = flutterFft.getOctave;
+    onPitch = flutterFft.getIsOnPitch;
+
+    super.initState();
+    _initialize();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Guitar Tabber',
+      theme: ThemeData.light(),
+      color: Colors.blue,
+      home: Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                  isRecording! ?
+                  this.tabulature.toString()
+                  : 'Not Recording',
+                  style: ApplicationTheme.TXTSTYLE
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  _initialize() async {
+
+    print("Starting recorder...");
+
+    while (!(await(flutterFft.checkPermission()))) {
+		flutterFft.requestPermission();
+	}
+
+    await flutterFft.startRecorder();
+    print("Recorder started.");
+    setState(() => isRecording = flutterFft.getIsRecording);
+
+    flutterFft.onRecorderStateChanged.listen(
+        (data) => {
+          setState( () => {
+            onPitch = data[10] as bool,
+            frequency = data[1] as double,
+            note = data[2] as String,
+            octave = data[5] as int,
+            // tabulatureStr = Guitar.NOTE_TO_TABULATURE_STANZA_TOSTRING(note),
+            if (note != null) {
+              tabulature.addNote(
+                Note(
+                  noteOctave: octave,
+                  noteNote: note,
+                  noteFrequency: frequency,
+                )
+              )
+            },
+          }),
+          flutterFft.setIsOnPitch = onPitch!,
+          flutterFft.setOctave = octave!,
+          flutterFft.setNote = note!,
+          flutterFft.setFrequency = frequency!,
+          print(flutterFft.getFrequency.toString()),
+        },
+        onError: (err) => print("Error: $err"),
+        onDone: () => print("Isdone")
+
+    );
+  }
+
+
+
+}
