@@ -37,7 +37,7 @@ class Tabulature {
           //print(tabStanzas[j].getNotesToTabulature.toString());
           outString += tabStanzas[j].getNotesToTabulature[i];
         }
-        outString += '\n';
+        //outString += '\n';
       }
     }
     //print('=> $outString');
@@ -78,13 +78,14 @@ class Tabulature {
         if (gtrbl == true) {
           out += '---';//+'\n';
         }
+        out.replaceAll('\n','');
         // gtrbl = true;
         gtrString++;
       }
     } else {
       out += '||';
     }
-    print('TABULATURE_TOSTRING => $out');
+    //print('TABULATURE_TOSTRING => $out');
     return out;
   }
 

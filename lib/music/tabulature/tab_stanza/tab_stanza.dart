@@ -98,16 +98,17 @@ class TabStanza {
               Note.NOTES_TO_FRETBOARD_COORDINATES_NOTE_MAP(notes)));
 
   static String TAB_STRING(String fretIndex) {
-    //print('TAB_STRING(String $fretIndex)');
+    print('TAB_STRING(String $fretIndex)');
     String out = '';
     if (fretIndex.length == 3) {
       out += '-$fretIndex';
     } else if (fretIndex.length == 2) {
       out += '-$fretIndex-';
     } else if (fretIndex.length == 1) {
-      out += '-$fretIndex--';
+      out += '-$fretIndex--'; //why is it 3 - not 4?
     }
-    //print('=> $out');
+    out.replaceAll('\n','');
+    print('TAB_STRING => $out');
     return out;
   }
 
@@ -216,7 +217,7 @@ class TabStanza {
   String get getGuitarStringTabsToString {
     String tabulatureStanza = '';
     for (String guitarString in getNotesToTabulature) {
-      tabulatureStanza += guitarString + '\n';
+      tabulatureStanza += guitarString;// + '\n';
     }
     return tabulatureStanza;
   }
