@@ -38,25 +38,25 @@ class GuitarString {
 
   static int // fret
   IS_EXISTANT_NOTE_ON_GUITAR_STRING(Note note, GuitarString guitarString) {
-    print('IS_EXISTANT_NOTE_ON_GUITAR_STRING($note, $guitarString)');
+    //print('IS_EXISTANT_NOTE_ON_GUITAR_STRING($note, $guitarString)');
     for (int i = 0; i < Guitar.FRETBOARD_LENGTH; i++) {
       if (guitarString.getScale[i].getFrequency == note.getFrequency) {
-        print('=> $i');
+        //print('=> $i');
         return i;
       }
     }
-    print('=> -1');
+    //print('=> -1');
     return -1;
   }
 
   static List<Note> GUITAR_STRING(Note note) {
-    print('GUITAR_STRING($note)');
+    //print('GUITAR_STRING($note)');
     List<Note> guitarString = [];
     for (int j = 0; j < Guitar.FRETBOARD_LENGTH; j++) {
       guitarString.add(note);
       note.sharpen();
     }
-    print('=> $guitarString');
+    //print('=> $guitarString');
     return guitarString;
   }
 

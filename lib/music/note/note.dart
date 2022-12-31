@@ -95,16 +95,16 @@ class Note {
 
 
   static List<Note> SORT_NOTES(List<Note> notes) {
-    print('SORT_NOTES($notes)');
+    //print('SORT_NOTES($notes)');
     List<Note> outNotes = notes;
     outNotes.sort((a,b) => a.getNoteValue.compareTo(b.getNoteValue));
     outNotes = List.from(outNotes.reversed);
-    print('=> $outNotes');
+    //print('=> $outNotes');
     return outNotes;
   }
   
   static List SCALE_FROM_NOTE(int patternIndex, note) {
-    print('SCALE_FROM_NOTE($patternIndex,$note)');
+    //print('SCALE_FROM_NOTE($patternIndex,$note)');
     List scale = [];
     var focusNote = note;
     if (note != null) {
@@ -123,12 +123,12 @@ class Note {
         focusNote = NEXT_NOTE(focusNote);
       }
     }
-    print('$scale');
+    //print('$scale');
     return scale;
   }
 
   static int? NOTE_INDEX(note) {
-    print('NOTE_INDEX($note)');
+    //print('NOTE_INDEX($note)');
     for (int i = 0; i < CHROMATIC_SCALE.length; i++) {
       if (CHROMATIC_SCALE[i] == NOTE_NO_OCTAVE(note)) {
         return i;
@@ -138,42 +138,42 @@ class Note {
   int get getNoteIndex => NOTE_INDEX(this)!;
 
   static double NOTE_VALUE(note) {
-    print('NOTE_VALUE($note)');
+    //print('NOTE_VALUE($note)');
     //Index of StrNote + 1 * .01 * IntOctave
     var out = (((NOTE_INDEX(NOTE_NO_OCTAVE(note))! + 1) * 0.01)
                   + NOTE_TO_OCTAVE(note));
-    print('=> $out');
+    //print('=> $out');
     return out;
   }
   double get getNoteValue => NOTE_VALUE(this);
 
   static Note NOTE_FROM_NOTE_VALUE(double value) {
-    print('NOTE_FROM_NOTE_VALUE($value)');
+    //print('NOTE_FROM_NOTE_VALUE($value)');
     int noteOctave = (value - value.floor()).toInt();
     int noteIndex = (((value - noteOctave) * 100.0).toInt() - 1);
     Note outNote = Note(noteNote: CHROMATIC_SCALE[noteIndex],
       noteOctave: noteOctave);
-    print('=> $outNote');
+    //print('=> $outNote');
     return outNote;
   }
 
   static Note TO_NOTE(note) {
-    print('$TO_NOTE($note)');
+    // print('$TO_NOTE($note)');
     if (note is Note) return note;
     Note outNote = Note(
         noteNote: NOTE_NO_OCTAVE(note),
         noteOctave: NOTE_TO_OCTAVE(note));
-    print('=> $outNote');
+    // print('=> $outNote');
     return outNote;
   }
 
   static List<Note> TO_NOTES(List<String> strNotes) {
-    print('TO_NOTES($strNotes)');
+    // print('TO_NOTES($strNotes)');
     List<Note> guitarTuning = [];
     for (String strNote in strNotes) {
       guitarTuning.add(TO_NOTE(strNote));
     }
-    print('=> $guitarTuning');
+    // print('=> $guitarTuning');
     return guitarTuning;
 
   }
@@ -188,18 +188,18 @@ class Note {
   }
 
   static String NOTE_NO_OCTAVE(note) {
-    print('NOTE_NO_OCTAVE($note)');
+    //print('NOTE_NO_OCTAVE($note)');
     if (note is String) {
       return note.trimRight();
     } else if (note is Note) {
       return note.getNote;
     }
-    print('=> $note');
+    //print('=> $note');
     return note;
   }
 
   static NEXT_NOTE(note) {
-    print('NEXT_NOTE($note)');
+    //print('NEXT_NOTE($note)');
     dynamic outNote = '';
     int outNoteOctave = 0;
     if (note != null) {
@@ -221,45 +221,45 @@ class Note {
     if (note is Note) {
       outNote = TO_NOTE(outNote);
     }
-    print('=> $outNote');
+    //print('=> $outNote');
     return outNote;
   }
 
   static int NOTE_TO_OCTAVE(note) {
-    print('NOTE_TO_OCTAVE($note)');
+    //print('NOTE_TO_OCTAVE($note)');
     if (note is String) {
       if (note.length > 2) {
         var check = int.parse(note[note.length-1]);
         if (check is int) {
-          print('=> $check');
+          //print('=> $check');
           return check;
         }
       }
     } else if (note is Note) {
-      print('=> '+note.getOctave.toString());
+      //print('=> '+note.getOctave.toString());
       return note.getOctave;
     }
-    print('=> 0');
+    //print('=> 0');
     return 0;
   }
 
   static INCREMENT_NOTE_OCTAVE(note) {
-    print('INCREMENT_NOTE_OCTAVE($note)');
+    //print('INCREMENT_NOTE_OCTAVE($note)');
     if (note is String) {
       TO_NOTE(NOTE_NO_OCTAVE(note)
           +(NOTE_TO_OCTAVE(note)+1).toString());
     } else if (note is Note) {
       note.setOctave = note.getOctave+1;
     }
-    print('=> $note');
+    //print('=> $note');
     return note;
   }
 
   static Map<int,int> NOTE_TO_FRETBOARD_COORDINATES(Note note) {
-    print('NOTE_TO_FRETBOARD_COORDINATES($note)');
+    //print('NOTE_TO_FRETBOARD_COORDINATES($note)');
     Map<int,int>? noteCoordinates;
     for (int i = 0; i < Guitar.GUITAR_STRING_COUNT; i++) {
-      print(i.toString());
+      //print(i.toString());
       if (Guitar.GUITAR_STRINGS[i].isNoteOnGuitarString(note) == true) {
         // print('\ttT$note');
         noteCoordinates!.addAll({i:Guitar.GUITAR_STRINGS[i].noteExistsAtFret(note)});
@@ -267,19 +267,19 @@ class Note {
         // print('\ttF$note');
       }
     }
-    print('=> $noteCoordinates');
+    //print('=> $noteCoordinates');
     return noteCoordinates!;
   }
 
   static Map<Note, Map<int, int>> NOTES_TO_FRETBOARD_COORDINATES_NOTE_MAP(List<Note> notes) {
-    print('NOTE_TO_FRETBOARD_COORDINATES_NOTE_MAP($notes)');
+    //print('NOTE_TO_FRETBOARD_COORDINATES_NOTE_MAP($notes)');
     Map<Note,Map<int,int>> outCoordinates = {};
     if (notes != null) {
       for (Note note in notes) {
         outCoordinates.addAll({note:NOTE_TO_FRETBOARD_COORDINATES(note)});
       }
     }
-    print('=> $outCoordinates');
+    //print('=> $outCoordinates');
     return outCoordinates;
   }
   

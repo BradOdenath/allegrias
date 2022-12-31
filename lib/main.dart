@@ -97,10 +97,12 @@ class TabAppState extends State<TabApp> {
           flutterFft.setOctave = octave!,
           flutterFft.setNote = note!,
           flutterFft.setFrequency = frequency!,
-          print(flutterFft.getFrequency.toString()),
+          print("Note Frequency: " + flutterFft.getFrequency.toString()),
+          print("Note: " + flutterFft.getNote.toString()
+              + flutterFft.getOctave.toString()),
         },
         onError: (err) => print("Error: $err"),
-        onDone: () => print("Isdone")
+        onDone: () => print("Is done")
 
     );
   }

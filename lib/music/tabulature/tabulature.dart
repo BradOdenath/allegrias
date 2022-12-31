@@ -27,25 +27,25 @@ import 'tab_stanza/tab_stanza.dart';
 class Tabulature {
 
   static String TAB_STANZAS_TOSTRING(List<TabStanza> tabStanzas) {
-    print('TAB_STANZAS_TOSTRING($tabStanzas)');
+    //print('TAB_STANZAS_TOSTRING($tabStanzas)');
     String outString = '';
     if (tabStanzas != null && tabStanzas.length > 0) {
       for (int i = 0; i < Guitar.GUITAR_STRING_COUNT; i++) {
         outString += '|-' + Guitar.GUITAR_STRING_TUNING[i] + '-|-';
         for (int j = tabStanzas.length > 10 ? tabStanzas.length-10
             : 0; j < tabStanzas.length; j++) {
-          print(tabStanzas[j].getNotesToTabulature.toString());
+          //print(tabStanzas[j].getNotesToTabulature.toString());
           outString += tabStanzas[j].getNotesToTabulature[i];
         }
         outString += '\n';
       }
     }
-    print('=> $outString');
+    //print('=> $outString');
     return outString;
   }
 
   static String NOTE_TO_TABULATURE_TOSTRING(String note) {
-    print('NOTE_TO_TABULATURE_TOSTRING($note)');
+    //print('NOTE_TO_TABULATURE_TOSTRING($note)');
     int gtrString = 0;
     String out = '';
     if (note != null) {
@@ -61,22 +61,22 @@ class Tabulature {
         }
         for (int j = 0; j < Guitar.FRETBOARD_LENGTH; j++) {
           if (gtrbl == false) {
-            out += '---\n';
+            out += '---';//+'\n';
             break;
           }
           var gn_note = Guitar.GUITAR_STRINGS[i].getScale[j];
           if (gn_note.hashCode == note.hashCode) {
             if (j <= 9) {
-              out += '$j--\n';
+              out += '$j--';//+'\n';
             } else {
-              out += '$j-\n';
+              out += '$j-';//+'\n';
             }
             gtrbl = false;
             break;
           }
         }
         if (gtrbl == true) {
-          out += '---\n';
+          out += '---';//+'\n';
         }
         // gtrbl = true;
         gtrString++;
@@ -84,7 +84,7 @@ class Tabulature {
     } else {
       out += '||';
     }
-    print('=> $out');
+    print('TABULATURE_TOSTRING => $out');
     return out;
   }
 
@@ -110,7 +110,9 @@ class Tabulature {
 
   @override
   String toString() {
-    return tabStanzasToString;
+    String out = tabStanzasToString;
+    //print(out);
+    return out;
   }
 
 }

@@ -37,7 +37,7 @@ import '../tabulature.dart';
 
 class TabStanza {
   static List<String> NOTE_TO_TABULATURE_STANZA_LIST(Note note) {
-    print('NOTE_TO_TABULATURE_STANZA_LIST($note)');
+    //print('NOTE_TO_TABULATURE_STANZA_LIST($note)');
     List<String> out = [];
     if (note != null) {
       bool gtrbl = true;
@@ -74,21 +74,21 @@ class TabStanza {
     } else {
       out.add('||');
     }
-    print('=> $out');
+    //print('=> $out');
     return out;
   }
 
   static bool NOTE_EXISTS(List<Note> noteList, objNote) {
-    print('NOTE_EXISTS($noteList, $objNote)');
+    //print('NOTE_EXISTS($noteList, $objNote)');
     Note focusNote;
     focusNote = Note.TO_NOTE(objNote);
     for (Note note in noteList) {
       if (note == focusNote) {
-        print('=> true');
+        //print('=> true');
         return true;
       }
     }
-    print('=> false');
+    //print('=> false');
     return false;
   }
 
@@ -98,7 +98,7 @@ class TabStanza {
               Note.NOTES_TO_FRETBOARD_COORDINATES_NOTE_MAP(notes)));
 
   static String TAB_STRING(String fretIndex) {
-    print('TAB_STRING(String $fretIndex)');
+    //print('TAB_STRING(String $fretIndex)');
     String out = '';
     if (fretIndex.length == 3) {
       out += '-$fretIndex';
@@ -107,12 +107,12 @@ class TabStanza {
     } else if (fretIndex.length == 1) {
       out += '-$fretIndex--';
     }
-    print('=> $out');
+    //print('=> $out');
     return out;
   }
 
   static List<String> TABSTANZA_MAP_TO_TABSTANZA_STRING_LIST(Map<int,int> tabStanzaMap) {
-    print('TABSTANZA_MAP_TO_TABSTANZA_STRING_LIST($tabStanzaMap)');
+    //print('TABSTANZA_MAP_TO_TABSTANZA_STRING_LIST($tabStanzaMap)');
     List<String> tabStanza = [];
     for (int i = 0; i < Guitar.GUITAR_STRING_COUNT; i++) {
       if (tabStanzaMap[i] != null) {
@@ -121,14 +121,14 @@ class TabStanza {
         tabStanza.add(TAB_STRING('-'));
       }
     }
-    print('=> $tabStanza');
+    //print('=> $tabStanza');
     return tabStanza;
   }
 
   List<String> noteToTabStanzaStringList(Note note) {
-    print('noteToTabStanzaStringList($note)');
+    //print('noteToTabStanzaStringList($note)');
     Map<int,int> fretboardCoordinates = Note.NOTE_TO_FRETBOARD_COORDINATES(note);
-    print('$Note: $fretboardCoordinates');
+    //print('$Note: $fretboardCoordinates');
     List<String> outStrList = [];
     int stringIndex, fretIndex;
     if (fretboardCoordinates != null && fretboardCoordinates.length > 0) {
@@ -138,7 +138,7 @@ class TabStanza {
         outStrList.add((TabStanza.TAB_STRING((i == stringIndex) ? fretIndex.toString() : '-')));
       }
     }
-    print('=> $outStrList');
+    //print('=> $outStrList');
     return outStrList;
   }
   
