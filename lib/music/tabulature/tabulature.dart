@@ -37,7 +37,7 @@ class Tabulature {
           //print(tabStanzas[j].getNotesToTabulature.toString());
           outString += tabStanzas[j].getNotesToTabulature[i];
         }
-        //outString += '\n';
+        outString += '\n';
       }
     }
     //print('=> $outString');

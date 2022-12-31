@@ -52,22 +52,22 @@ class TabStanza {
         } */
         for (int j = 0; j < Guitar.FRETBOARD_LENGTH; j++) {
           if (gtrbl == false) {
-            out.add('---\n');
+            out.add('---'/*+'\n'*/);
             break;
           }
           var gn_note = Guitar.GUITAR_STRINGS[i].getScale[j];
           if (gn_note.hashCode == note.hashCode) {
             if (j <= 9) {
-              out.add('$j--\n');
+              out.add('$j--'/*+'\n'*/);
             } else {
-              out.add('$j-\n');
+              out.add('$j-'/*+'\n'*/);
             }
             gtrbl = false;
             break;
           }
         }
         if (gtrbl == true) {
-          out.add('---\n');
+          out.add('---'/*+'\n'*/);
         }
         // gtrbl = true;
       }
@@ -107,7 +107,7 @@ class TabStanza {
     } else if (fretIndex.length == 1) {
       out += '-$fretIndex--'; //why is it 3 - not 4?
     }
-    out.replaceAll('\n','');
+    //out.replaceAll('\n','');
     print('TAB_STRING => $out');
     return out;
   }
