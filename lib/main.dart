@@ -4,7 +4,7 @@ import 'package:flutter_fft/flutter_fft.dart';
 
 import 'music/guitar/guitar.dart';
 import 'music/note/note.dart';
-import 'music/tabulature/tabulature.dart';
+import 'music/tabulature/tablature.dart';
 
 void main() => runApp(TabApp());
 

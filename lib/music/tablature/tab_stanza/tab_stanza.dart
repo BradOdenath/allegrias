@@ -5,7 +5,7 @@ import 'package:allegrias/music/guitar/guitar_string/guitar_string.dart';
 
 import '../../guitar/guitar.dart';
 import '../../note/note.dart';
-import '../tabulature.dart';
+import '../tablature.dart';
 
 /*  Class:  TabStanza
 *     Static
@@ -37,7 +37,7 @@ import '../tabulature.dart';
 
 class TabStanza {
   static List<String> NOTE_TO_TABULATURE_STANZA_LIST(Note note) {
-    //print('NOTE_TO_TABULATURE_STANZA_LIST($note)');
+    print('NOTE_TO_TABULATURE_STANZA_LIST($note)');
     List<String> out = [];
     if (note != null) {
       bool gtrbl = true;
@@ -62,6 +62,7 @@ class TabStanza {
             } else {
               out.add('$j-'/*+'\n'*/);
             }
+            print('j: $j');
             gtrbl = false;
             break;
           }
