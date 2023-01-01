@@ -70,10 +70,10 @@ class Tablature {
             out += '---';//+'\n';
             break;
           }
-          var in_note = StringedInstrument
+          var sin_note = StringedInstrument
               .STRINGED_INSTRUMENT_STRINGS[i]
               .getScale[j];
-          if (in_note.hashCode == note.hashCode) {
+          if (sin_note.hashCode == note.hashCode) {
             if (j <= 9) {
               out += '$j--';//+'\n';
             } else {
