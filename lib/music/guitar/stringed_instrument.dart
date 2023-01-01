@@ -106,7 +106,7 @@ class StringedInstrument {
   static int get STRINGED_INSTRUMENT_STRING_COUNT =>
       INSTRUMENT_STRING_TUNING.length;
 
-  static List<StringedInstrumentString> get GUITAR_STRINGS {
+  static List<StringedInstrumentString> get STRINGED_INSTRUMENT_STRINGS {
     List<StringedInstrumentString> stringedInstrumentStrings = [];
     for (int i = 0; i < STRINGED_INSTRUMENT_STRING_COUNT; i++) {
       stringedInstrumentStrings

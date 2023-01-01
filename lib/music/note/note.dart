@@ -260,9 +260,9 @@ class Note {
     Map<int,int>? noteCoordinates;
     for (int i = 0; i < StringedInstrument.STRINGED_INSTRUMENT_STRING_COUNT; i++) {
       //print(i.toString());
-      if (StringedInstrument.GUITAR_STRINGS[i].isNoteOnGuitarString(note) == true) {
+      if (StringedInstrument.STRINGED_INSTRUMENT_STRINGS[i].isNoteOnGuitarString(note) == true) {
         // print('\ttT$note');
-        noteCoordinates!.addAll({i:StringedInstrument.GUITAR_STRINGS[i].noteExistsAtFret(note)});
+        noteCoordinates!.addAll({i:StringedInstrument.STRINGED_INSTRUMENT_STRINGS[i].noteExistsAtFret(note)});
       } else {
         // print('\ttF$note');
       }

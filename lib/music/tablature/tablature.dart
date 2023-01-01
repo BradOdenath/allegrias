@@ -3,7 +3,7 @@ import 'dart:collection';
 import '../guitar/stringed_instrument.dart';
 import 'tab_stanza/tab_stanza.dart';
 
-/*  Class:  Tabulature
+/*  Class:  Tablature
 *     Static
 *
 *       String            TAB_STANZAS_TOSTRING
@@ -11,7 +11,7 @@ import 'tab_stanza/tab_stanza.dart';
 *         -Takes in Note parameter and outputs full toString Tabulature
 * -----------------------------------------------------------------------------
 *     Constructor
-*                         Tabulature()
+*                         Tablature()
 *     Attributes
 *       List<TabStanza>   tabs
 *     Accessors
@@ -24,14 +24,18 @@ import 'tab_stanza/tab_stanza.dart';
 *       @override String  toString
 * */
 
-class Tabulature {
+class Tablature {
 
   static String TAB_STANZAS_TOSTRING(List<TabStanza> tabStanzas) {
     //print('TAB_STANZAS_TOSTRING($tabStanzas)');
     String outString = '';
     if (tabStanzas != null && tabStanzas.length > 0) {
-      for (int i = 0; i < StringedInstrument.STRINGED_INSTRUMENT_STRING_COUNT; i++) {
-        outString += '|-' + StringedInstrument.INSTRUMENT_STRING_TUNING[i] + '-|-';
+      for (int i = 0;
+      i < StringedInstrument.STRINGED_INSTRUMENT_STRING_COUNT;
+      i++) {
+        outString += '|-'
+            + StringedInstrument.INSTRUMENT_STRING_TUNING[i]
+            + '-|-';
         for (int j = tabStanzas.length > 10 ? tabStanzas.length-10
             : 0; j < tabStanzas.length; j++) {
           //print(tabStanzas[j].getNotesToTabulature.toString());
@@ -44,14 +48,16 @@ class Tabulature {
     return outString;
   }
 
-  static String NOTE_TO_TABULATURE_TOSTRING(String note) {
-    //print('NOTE_TO_TABULATURE_TOSTRING($note)');
-    int gtrString = 0;
+  static String NOTE_TO_TABLATURE_TOSTRING(String note) {
+    //print('NOTE_TO_TABLATURE_TOSTRING($note)');
+    int sInsStringCounter = 0;
     String out = '';
     if (note != null) {
-      bool gtrbl = true;
-      for (int i = 0; i < StringedInstrument.STRINGED_INSTRUMENT_STRING_COUNT; i++) {
-        var noat = StringedInstrument.GUITAR_STRINGS[i].indexNote;
+      bool sInsBl = true;
+      for (int i = 0;
+      i < StringedInstrument.STRINGED_INSTRUMENT_STRING_COUNT;
+      i++) {
+        var noat = StringedInstrument.STRINGED_INSTRUMENT_STRINGS[i].indexNote;
         if (noat!.length == 3) {
           out += '|-$noat-|-';
         } else if (noat.length == 2) {
@@ -60,38 +66,40 @@ class Tabulature {
           out += '|-$noat---|-';
         }
         for (int j = 0; j < StringedInstrument.FRETBOARD_LENGTH; j++) {
-          if (gtrbl == false) {
+          if (sInsBl == false) {
             out += '---';//+'\n';
             break;
           }
-          var gn_note = StringedInstrument.GUITAR_STRINGS[i].getScale[j];
-          if (gn_note.hashCode == note.hashCode) {
+          var in_note = StringedInstrument
+              .STRINGED_INSTRUMENT_STRINGS[i]
+              .getScale[j];
+          if (in_note.hashCode == note.hashCode) {
             if (j <= 9) {
               out += '$j--';//+'\n';
             } else {
               out += '$j-';//+'\n';
             }
-            gtrbl = false;
+            sInsBl = false;
             break;
           }
         }
-        if (gtrbl == true) {
+        if (sInsBl == true) {
           out += '---';//+'\n';
         }
         out.replaceAll('\n','');
-        // gtrbl = true;
-        gtrString++;
+        // sInsBl = true;
+        sInsStringCounter++;
       }
     } else {
       out += '||';
     }
-    //print('TABULATURE_TOSTRING => $out');
+    //print('TABLATURE_TOSTRING => $out');
     return out;
   }
 
   List<TabStanza> tabs = [];
 
-  Tabulature() {
+  Tablature() {
     this.tabs = [];
   }
   

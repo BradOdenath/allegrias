@@ -55,7 +55,7 @@ class TabStanza {
             out.add('---'/*+'\n'*/);
             break;
           }
-          var gn_note = StringedInstrument.GUITAR_STRINGS[i].getScale[j];
+          var gn_note = StringedInstrument.STRINGED_INSTRUMENT_STRINGS[i].getScale[j];
           if (gn_note.hashCode == note.hashCode) {
             if (j <= 9) {
               out.add('$j--'/*+'\n'*/);
@@ -205,7 +205,7 @@ class TabStanza {
     for (var guitarStringIndex in openStrings) {
       return (StringedInstrumentString.
           IS_EXISTANT_NOTE_ON_STRINGED_INSTRUMENT_STRING(note,
-          StringedInstrument.GUITAR_STRINGS[guitarStringIndex]) > -1);
+          StringedInstrument.STRINGED_INSTRUMENT_STRINGS[guitarStringIndex]) > -1);
     }
     return false;
   }
