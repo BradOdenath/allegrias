@@ -1,4 +1,4 @@
-import 'package:allegrias/music/guitar/guitar.dart';
+import 'package:allegrias/music/guitar/instrument.dart';
 import 'package:allegrias/music/note/note.dart';
 
 /*  Class: GuitarString

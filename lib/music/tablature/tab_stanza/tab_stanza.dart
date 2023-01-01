@@ -1,9 +1,9 @@
 import 'dart:collection';
 import 'dart:math' as Math;
 
-import 'package:allegrias/music/guitar/guitar_string/guitar_string.dart';
+import 'package:allegrias/music/guitar/guitar_string/instrument_string.dart';
 
-import '../../guitar/guitar.dart';
+import '../../guitar/instrument.dart';
 import '../../note/note.dart';
 import '../tablature.dart';
 

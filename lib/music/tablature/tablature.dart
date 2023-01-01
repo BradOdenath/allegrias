@@ -1,6 +1,6 @@
 import 'dart:collection';
 
-import '../guitar/guitar.dart';
+import '../guitar/instrument.dart';
 import 'tab_stanza/tab_stanza.dart';
 
 /*  Class:  Tabulature
@@ -31,7 +31,7 @@ class Tabulature {
     String outString = '';
     if (tabStanzas != null && tabStanzas.length > 0) {
       for (int i = 0; i < Guitar.GUITAR_STRING_COUNT; i++) {
-        outString += '|-' + Guitar.GUITAR_STRING_TUNING[i] + '-|-';
+        outString += '|-' + Guitar.INSTRUMENT_STRING_TUNING[i] + '-|-';
         for (int j = tabStanzas.length > 10 ? tabStanzas.length-10
             : 0; j < tabStanzas.length; j++) {
           //print(tabStanzas[j].getNotesToTabulature.toString());

@@ -1,7 +1,7 @@
 import 'dart:math' as Math;
 
-import 'package:allegrias/music/guitar/guitar.dart';
-import 'package:allegrias/music/guitar/guitar_string/guitar_string.dart';
+import 'package:allegrias/music/guitar/instrument.dart';
+import 'package:allegrias/music/guitar/guitar_string/instrument_string.dart';
 import 'package:allegrias/music/tabulature/tab_stanza/tab_stanza.dart';
 
 /*  Class:  Note

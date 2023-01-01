@@ -1,4 +1,4 @@
-import 'package:allegrias/music/guitar/guitar_string/guitar_string.dart';
+import 'package:allegrias/music/guitar/guitar_string/instrument_string.dart';
 
 import '../note/note.dart';
 
@@ -33,7 +33,7 @@ class Guitar {
   
   static int FRET_RANGE = 5;
   static final int FRETBOARD_LENGTH = 24;
-  static final List<String> GUITAR_STRING_TUNING = [
+  static final List<String> INSTRUMENT_STRING_TUNING = [
     //'D#4', 'A#3', 'F#3', 'C#3', 'G#2', 'D#2', 'A#1', 'F#1', 'C#1', 'G#0'
     'D4', 'A3', 'F3', 'C3', 'G2', 'D2', 'A1', 'F1', 'C1', 'G0'
   ];
@@ -97,9 +97,9 @@ class Guitar {
   }
 
   static List<Note> get GUITAR_STRING_NOTES =>
-      Note.TO_NOTES(GUITAR_STRING_TUNING);
+      Note.TO_NOTES(INSTRUMENT_STRING_TUNING);
 
-  static int get GUITAR_STRING_COUNT => GUITAR_STRING_TUNING.length;
+  static int get GUITAR_STRING_COUNT => INSTRUMENT_STRING_TUNING.length;
 
   static List<GuitarString> get GUITAR_STRINGS {
     List<GuitarString> guitarStrings = [];
