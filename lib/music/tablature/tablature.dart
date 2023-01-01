@@ -1,6 +1,6 @@
 import 'dart:collection';
 
-import '../guitar/instrument.dart';
+import '../guitar/stringed_instrument.dart';
 import 'tab_stanza/tab_stanza.dart';
 
 /*  Class:  Tabulature
@@ -30,8 +30,8 @@ class Tabulature {
     //print('TAB_STANZAS_TOSTRING($tabStanzas)');
     String outString = '';
     if (tabStanzas != null && tabStanzas.length > 0) {
-      for (int i = 0; i < Guitar.GUITAR_STRING_COUNT; i++) {
-        outString += '|-' + Guitar.INSTRUMENT_STRING_TUNING[i] + '-|-';
+      for (int i = 0; i < StringedInstrument.STRINGED_INSTRUMENT_STRING_COUNT; i++) {
+        outString += '|-' + StringedInstrument.INSTRUMENT_STRING_TUNING[i] + '-|-';
         for (int j = tabStanzas.length > 10 ? tabStanzas.length-10
             : 0; j < tabStanzas.length; j++) {
           //print(tabStanzas[j].getNotesToTabulature.toString());
@@ -50,8 +50,8 @@ class Tabulature {
     String out = '';
     if (note != null) {
       bool gtrbl = true;
-      for (int i = 0; i < Guitar.GUITAR_STRING_COUNT; i++) {
-        var noat = Guitar.GUITAR_STRINGS[i].indexNote;
+      for (int i = 0; i < StringedInstrument.STRINGED_INSTRUMENT_STRING_COUNT; i++) {
+        var noat = StringedInstrument.GUITAR_STRINGS[i].indexNote;
         if (noat!.length == 3) {
           out += '|-$noat-|-';
         } else if (noat.length == 2) {
@@ -59,12 +59,12 @@ class Tabulature {
         } else if (noat.length == 1) {
           out += '|-$noat---|-';
         }
-        for (int j = 0; j < Guitar.FRETBOARD_LENGTH; j++) {
+        for (int j = 0; j < StringedInstrument.FRETBOARD_LENGTH; j++) {
           if (gtrbl == false) {
             out += '---';//+'\n';
             break;
           }
-          var gn_note = Guitar.GUITAR_STRINGS[i].getScale[j];
+          var gn_note = StringedInstrument.GUITAR_STRINGS[i].getScale[j];
           if (gn_note.hashCode == note.hashCode) {
             if (j <= 9) {
               out += '$j--';//+'\n';

@@ -1,7 +1,7 @@
 import 'dart:math' as Math;
 
-import 'package:allegrias/music/guitar/instrument.dart';
-import 'package:allegrias/music/guitar/guitar_string/instrument_string.dart';
+import 'package:allegrias/music/guitar/stringed_instrument.dart';
+import 'package:allegrias/music/guitar/guitar_string/stringed_instrument_string.dart';
 import 'package:allegrias/music/tabulature/tab_stanza/tab_stanza.dart';
 
 /*  Class:  Note
@@ -258,11 +258,11 @@ class Note {
   static Map<int,int> NOTE_TO_FRETBOARD_COORDINATES(Note note) {
     //print('NOTE_TO_FRETBOARD_COORDINATES($note)');
     Map<int,int>? noteCoordinates;
-    for (int i = 0; i < Guitar.GUITAR_STRING_COUNT; i++) {
+    for (int i = 0; i < StringedInstrument.STRINGED_INSTRUMENT_STRING_COUNT; i++) {
       //print(i.toString());
-      if (Guitar.GUITAR_STRINGS[i].isNoteOnGuitarString(note) == true) {
+      if (StringedInstrument.GUITAR_STRINGS[i].isNoteOnGuitarString(note) == true) {
         // print('\ttT$note');
-        noteCoordinates!.addAll({i:Guitar.GUITAR_STRINGS[i].noteExistsAtFret(note)});
+        noteCoordinates!.addAll({i:StringedInstrument.GUITAR_STRINGS[i].noteExistsAtFret(note)});
       } else {
         // print('\ttF$note');
       }

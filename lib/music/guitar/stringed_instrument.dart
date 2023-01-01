@@ -1,4 +1,4 @@
-import 'package:allegrias/music/guitar/guitar_string/instrument_string.dart';
+import 'package:allegrias/music/guitar/guitar_string/stringed_instrument_string.dart';
 
 import '../note/note.dart';
 
@@ -29,7 +29,7 @@ import '../note/note.dart';
 *       void                  initializeDefaultValues
 *       void                  addDefaultStrings
  */
-class Guitar {
+class StringedInstrument {
   
   static int FRET_RANGE = 5;
   static final int FRETBOARD_LENGTH = 24;
@@ -40,7 +40,8 @@ class Guitar {
   
   static List<Map<int,int>> FRETBOARD_COORDINATES_TO_FRET_GROUPS(Map<Note,
       Map<int,int>> fretboardCoordinatesNoteMap) {
-    //print('FRETBOARD_COORDINATES_TO_FRET_GROUPS($fretboardCoordinatesNoteMap)');
+    //print('FRETBOARD_COORDINATES_TO_FRET_GROUPS'
+    //    '($fretboardCoordinatesNoteMap)');
     List<Map<int,int>> fretGroups = [];
     if (fretboardCoordinatesNoteMap != null) {
       fretboardCoordinatesNoteMap.forEach((note, fretboardCoordinates) {
@@ -67,7 +68,9 @@ class Guitar {
     return fretGroups;
   }
 
-  static bool? IS_VALID_RANGE_TO_FRET_GROUP(Map<int,int> fretGroup, int fretIndex) {
+  static bool? IS_VALID_RANGE_TO_FRET_GROUP(
+      Map<int,int> fretGroup,
+      int fretIndex) {
     bool out = true;
     //print('IS_VALID_RANGE_TO_FRET_GROUP($fretGroup, $fretIndex)');
     if (fretGroup != null) {
@@ -82,31 +85,34 @@ class Guitar {
     return out;
   }
 
-  static Map<int,int> FRET_GROUPS_TO_GUITAR_CHORD(List<Map<int,int>> fretGroups) {
-    //print('FRET_GROUPS_TO_GUITAR_CHORD($fretGroups)');
-    Map<int,int> guitarChord = {};
+  static Map<int,int> FRET_GROUPS_TO_STRINGED_INSTRUMENT_CHORD(
+      List<Map<int,int>> fretGroups) {
+    print('FRET_GROUPS_TO_STRINGED_INSTRUMENT_CHORD($fretGroups)');
+    Map<int,int> stringedInstrumentChord = {};
     if (fretGroups != null) {
       fretGroups.forEach((map) {
-        if (map.length > guitarChord.length) {
-          guitarChord = map;
+        if (map.length > stringedInstrumentChord.length) {
+          stringedInstrumentChord = map;
         }
       });
     }
-    //print('=> $guitarChord');
-    return guitarChord;
+    //print('=> $stringedInstrumentChord');
+    return stringedInstrumentChord;
   }
 
-  static List<Note> get GUITAR_STRING_NOTES =>
+  static List<Note> get STRINGED_INSTRUMENT_STRING_NOTES =>
       Note.TO_NOTES(INSTRUMENT_STRING_TUNING);
 
-  static int get GUITAR_STRING_COUNT => INSTRUMENT_STRING_TUNING.length;
+  static int get STRINGED_INSTRUMENT_STRING_COUNT =>
+      INSTRUMENT_STRING_TUNING.length;
 
-  static List<GuitarString> get GUITAR_STRINGS {
-    List<GuitarString> guitarStrings = [];
-    for (int i = 0; i < GUITAR_STRING_COUNT; i++) {
-      guitarStrings.add(GuitarString(GUITAR_STRING_NOTES[i]));
+  static List<StringedInstrumentString> get GUITAR_STRINGS {
+    List<StringedInstrumentString> stringedInstrumentStrings = [];
+    for (int i = 0; i < STRINGED_INSTRUMENT_STRING_COUNT; i++) {
+      stringedInstrumentStrings
+          .add(StringedInstrumentString(STRINGED_INSTRUMENT_STRING_NOTES[i]));
     }
-    return guitarStrings;
+    return stringedInstrumentStrings;
   }
 
 }

@@ -2,7 +2,7 @@ import 'theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fft/flutter_fft.dart';
 
-import 'music/guitar/instrument.dart';
+import 'music/guitar/stringed_instrument.dart';
 import 'music/note/note.dart';
 import 'music/tabulature/tablature.dart';
 
