@@ -1,6 +1,6 @@
 import 'dart:collection';
 
-import '../guitar/stringed_instrument.dart';
+import '../chordophone/chordophone.dart';
 import 'tab_stanza/tab_stanza.dart';
 
 /*  Class:  Tablature
@@ -31,15 +31,16 @@ class Tablature {
     String outString = '';
     if (tabStanzas != null && tabStanzas.length > 0) {
       for (int i = 0;
-      i < StringedInstrument.STRINGED_INSTRUMENT_STRING_COUNT;
+      i < Chordophone.CHORDOPHONE_STRING_COUNT;
       i++) {
         outString += '|-'
-            + StringedInstrument.INSTRUMENT_STRING_TUNING[i]
+            + Chordophone.CHORDOPHONE_STRING_TUNING[i]
             + '-|-';
-        for (int j = tabStanzas.length > 10 ? tabStanzas.length-10
-            : 0; j < tabStanzas.length; j++) {
+     for (int j = tabStanzas.length > 10 ? tabStanzas.length-10 : 0;
+        j < tabStanzas.length;
+        j++) {
           //print(tabStanzas[j].getNotesToTabulature.toString());
-          outString += tabStanzas[j].getNotesToTabulature[i];
+          outString += tabStanzas[j].getNotesToTablature[i];
         }
         outString += '\n';
       }
@@ -50,14 +51,14 @@ class Tablature {
 
   static String NOTE_TO_TABLATURE_TOSTRING(String note) {
     //print('NOTE_TO_TABLATURE_TOSTRING($note)');
-    int sInsStringCounter = 0;
+    int chordophoneStringCounter = 0;
     String out = '';
     if (note != null) {
-      bool sInsBl = true;
+      bool chordophoneBool = true;
       for (int i = 0;
-      i < StringedInstrument.STRINGED_INSTRUMENT_STRING_COUNT;
+      i < Chordophone.CHORDOPHONE_STRING_COUNT;
       i++) {
-        var noat = StringedInstrument.STRINGED_INSTRUMENT_STRINGS[i].indexNote;
+        var noat = Chordophone.CHORDOPHONE_STRINGS[i].indexNote;
         if (noat!.length == 3) {
           out += '|-$noat-|-';
         } else if (noat.length == 2) {
@@ -65,13 +66,13 @@ class Tablature {
         } else if (noat.length == 1) {
           out += '|-$noat---|-';
         }
-        for (int j = 0; j < StringedInstrument.FRETBOARD_LENGTH; j++) {
-          if (sInsBl == false) {
+        for (int j = 0; j < Chordophone.FINGERBOARD_LENGTH; j++) {
+          if (chordophoneBool == false) {
             out += '---';//+'\n';
             break;
           }
-          var sin_note = StringedInstrument
-              .STRINGED_INSTRUMENT_STRINGS[i]
+          var sin_note = Chordophone
+              .CHORDOPHONE_STRINGS[i]
               .getScale[j];
           if (sin_note.hashCode == note.hashCode) {
             if (j <= 9) {
@@ -79,16 +80,16 @@ class Tablature {
             } else {
               out += '$j-';//+'\n';
             }
-            sInsBl = false;
+            chordophoneBool = false;
             break;
           }
         }
-        if (sInsBl == true) {
+        if (chordophoneBool == true) {
           out += '---';//+'\n';
         }
         out.replaceAll('\n','');
-        // sInsBl = true;
-        sInsStringCounter++;
+        // chordophoneBool = true;
+        chordophoneStringCounter++;
       }
     } else {
       out += '||';

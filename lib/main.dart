@@ -2,9 +2,9 @@ import 'theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fft/flutter_fft.dart';
 
-import 'music/guitar/stringed_instrument.dart';
+import 'music/chordophone/chordophone.dart';
 import 'music/note/note.dart';
-import 'music/tabulature/tablature.dart';
+import 'music/tablature/tablature.dart';
 
 void main() => runApp(TabApp());
 
@@ -23,7 +23,7 @@ class TabAppState extends State<TabApp> {
   bool? onPitch;
 
   // String tabulatureStr;
-  Tabulature tabulature = new Tabulature();
+  Tablature tabulature = new Tablature();
 
   FlutterFft flutterFft = new FlutterFft();
 

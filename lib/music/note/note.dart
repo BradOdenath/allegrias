@@ -1,8 +1,9 @@
 import 'dart:math' as Math;
 
-import 'package:allegrias/music/guitar/stringed_instrument.dart';
-import 'package:allegrias/music/guitar/guitar_string/stringed_instrument_string.dart';
-import 'package:allegrias/music/tabulature/tab_stanza/tab_stanza.dart';
+import 'package:allegrias/music/chordophone/chordophone.dart';
+import 'package:allegrias/music/chordophone/'
+    'chordophone_string/chordophone_string.dart';
+import 'package:allegrias/music/tablature/tab_stanza/tab_stanza.dart';
 
 /*  Class:  Note
 *     Static
@@ -33,8 +34,8 @@ import 'package:allegrias/music/tabulature/tab_stanza/tab_stanza.dart';
 *                               INCREMENT_NOTE_OCTAVE
 *                               NEXT_NOTE(note)
 *                                 returns next chromatic note
-*                               NOTE_TO_FRETBOARD_COORDINATES
-*                               NOTES_TO_FRETBOARD_COORDINATES_NOTE_MAP
+*                               NOTE_TO_FINGERBOARD_COORDINATES
+*                               NOTES_TO_FINGERBOARD_COORDINATES_NOTE_MAP
 * -----------------------------------------------------------------------------
 *     Constructors
 *       Note({})
@@ -71,7 +72,7 @@ class Note {
 
   static const List<int> SCALE_PATTERN = [
     0,    1,    0,    1,    1,    0,    1,    0,    1,    0,    1,    1
-  ];
+  ]; //WWHWWWH (Whole & Half Steps) https://www.musictheory.net/lessons/21
 
   static final Note A4 = Note(
     noteFrequency: A4_FREQUENCY,
@@ -255,14 +256,18 @@ class Note {
     return note;
   }
 
-  static Map<int,int> NOTE_TO_FRETBOARD_COORDINATES(Note note) {
-    //print('NOTE_TO_FRETBOARD_COORDINATES($note)');
+  static Map<int,int> NOTE_TO_FINGERBOARD_COORDINATES(Note note) {
+    //print('NOTE_TO_FINGERBOARD_COORDINATES($note)');
     Map<int,int>? noteCoordinates;
-    for (int i = 0; i < StringedInstrument.STRINGED_INSTRUMENT_STRING_COUNT; i++) {
+    for (int i = 0; i < Chordophone.CHORDOPHONE_STRING_COUNT; i++) {
       //print(i.toString());
-      if (StringedInstrument.STRINGED_INSTRUMENT_STRINGS[i].isNoteOnGuitarString(note) == true) {
+      if (Chordophone
+          .CHORDOPHONE_STRINGS[i]
+          .isNoteOnGuitarString(note) == true
+      ) {
         // print('\ttT$note');
-        noteCoordinates!.addAll({i:StringedInstrument.STRINGED_INSTRUMENT_STRINGS[i].noteExistsAtFret(note)});
+        noteCoordinates!.addAll(
+            {i:Chordophone.CHORDOPHONE_STRINGS[i].noteExistsAtPosition(note)});
       } else {
         // print('\ttF$note');
       }
@@ -271,12 +276,14 @@ class Note {
     return noteCoordinates!;
   }
 
-  static Map<Note, Map<int, int>> NOTES_TO_FRETBOARD_COORDINATES_NOTE_MAP(List<Note> notes) {
-    //print('NOTE_TO_FRETBOARD_COORDINATES_NOTE_MAP($notes)');
+  static Map<Note, Map<int, int>> NOTES_TO_FINGERBOARD_COORDINATES_NOTE_MAP(
+      List<Note> notes)
+  {
+    //print('NOTE_TO_FINGERBOARD_COORDINATES_NOTE_MAP($notes)');
     Map<Note,Map<int,int>> outCoordinates = {};
     if (notes != null) {
       for (Note note in notes) {
-        outCoordinates.addAll({note:NOTE_TO_FRETBOARD_COORDINATES(note)});
+        outCoordinates.addAll({note:NOTE_TO_FINGERBOARD_COORDINATES(note)});
       }
     }
     //print('=> $outCoordinates');
@@ -289,8 +296,8 @@ class Note {
   
   Note({this.noteFrequency, this.noteNote, this.noteOctave});
 
-  Note.fromString(String inote) {
-    Note note = TO_NOTE(inote)!;
+  Note.fromChordophoneString(String notez) {
+    Note note = TO_NOTE(notez);
     this.noteOctave = note.noteOctave!;
     this.noteNote = note.noteNote!;
   }
@@ -310,6 +317,10 @@ class Note {
       return (this == other);
     }
   }
+
+  @override
+  // TODO: implement hashCode
+  int get hashCode => super.hashCode;
 
   double get getFrequency => noteFrequency!;
   set setFrequency(double frequency) => noteFrequency = frequency;
