@@ -38,7 +38,7 @@ import '../tablature.dart';
 
 class TabStanza {
   static List<String> NOTE_TO_TABLATURE_STANZA_LIST(Note note) {
-    print('NOTE_TO_TABLATURE_STANZA_LIST($note)');
+    //print('NOTE_TO_TABLATURE_STANZA_LIST($note)');
     List<String> out = [];
     if (note != null) {
       bool chordophoneBool = true;
@@ -58,10 +58,16 @@ class TabStanza {
             out.add('---'/*+'\n'*/);
             break;
           }
-          var chordophoneNote = Chordophone
+          Note chordophoneNote = Chordophone
               .CHORDOPHONE_STRINGS[i]
               .getScale[j];
-          if (chordophoneNote.hashCode == note.hashCode) {
+
+          print(chordophoneNote.getNote + ":" + note.getNote);
+          print(chordophoneNote.getOctave.toString()
+              + ":" + note.getOctave.toString());
+
+          if (chordophoneNote.getNote == note.getNote
+              && chordophoneNote.getOctave == note.getOctave) {
             if (j <= 9) {
               out.add('$j--'/*+'\n'*/);
             } else {
@@ -111,7 +117,7 @@ class TabStanza {
     } else if (fretIndex.length == 2) {
       out += '-$fretIndex-';
     } else if (fretIndex.length == 1) {
-      out += '-$fretIndex--'; //why is it 3 - not 4?
+      out += '-$fretIndex--';
     }
     //out.replaceAll('\n','');
     print('TAB_STRING => $out');

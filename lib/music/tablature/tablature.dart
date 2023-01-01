@@ -114,8 +114,14 @@ class Tablature {
   }
   
   List<TabStanza> get getTabs => this.tabs;
-  int get getLastTabStanzaIndex => tabs.length > 0 ? this.tabs.length-1 : 0;
+
+  int get getLastTabStanzaIndex =>
+      (tabs.length > 0)
+          ? this.tabs.length-1
+          : 0;
+
   bool get isNotEmpty => this.tabs.isNotEmpty;
+
   String get tabStanzasToString => TAB_STANZAS_TOSTRING(tabs);
 
   @override
