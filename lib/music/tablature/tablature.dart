@@ -39,7 +39,7 @@ class Tablature {
      for (int j = tabStanzas.length > 10 ? tabStanzas.length-10 : 0;
         j < tabStanzas.length;
         j++) {
-          //print(tabStanzas[j].getNotesToTabulature.toString());
+          //print(tabStanzas[j].getNotesToTablature.toString());
           outString += tabStanzas[j].getNotesToTablature[i];
         }
         outString += '\n';
@@ -71,10 +71,10 @@ class Tablature {
             out += '---';//+'\n';
             break;
           }
-          var sin_note = Chordophone
+          var chordophone_note = Chordophone
               .CHORDOPHONE_STRINGS[i]
               .getScale[j];
-          if (sin_note.hashCode == note.hashCode) {
+          if (chordophone_note.hashCode == note.hashCode) {
             if (j <= 9) {
               out += '$j--';//+'\n';
             } else {
@@ -87,8 +87,8 @@ class Tablature {
         if (chordophoneBool == true) {
           out += '---';//+'\n';
         }
-        out.replaceAll('\n','');
-        // chordophoneBool = true;
+        //out.replaceAll('\n','');
+        //chordophoneBool = true;
         chordophoneStringCounter++;
       }
     } else {

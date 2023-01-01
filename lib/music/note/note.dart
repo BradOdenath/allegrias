@@ -296,8 +296,8 @@ class Note {
   
   Note({this.noteFrequency, this.noteNote, this.noteOctave});
 
-  Note.fromChordophoneString(String notez) {
-    Note note = TO_NOTE(notez);
+  Note.fromChordophoneString(String noat) {
+    Note note = TO_NOTE(noat);
     this.noteOctave = note.noteOctave!;
     this.noteNote = note.noteNote!;
   }
