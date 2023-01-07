@@ -67,6 +67,7 @@ import 'package:allegrias/music/tablature/tab_stanza/tab_stanza.dart';
 class Note {
 
   static const List<String> CHROMATIC_SCALE = [
+    //0   1     2     3     4     5     6     7     8     9     10    11
     'C#', 'D',  'D#', 'E',  'F',  'F#', 'G',  'G#', 'A',  'A#', 'B',  'C'
   ];
 
@@ -76,7 +77,7 @@ class Note {
 
   static final Note A4 = Note(
     noteFrequency: A4_FREQUENCY,
-    noteNote: CHROMATIC_SCALE[CHROMATIC_SCALE.length-1],
+    noteNote: CHROMATIC_SCALE[8],
     noteOctave: 4,
   );
 
@@ -86,12 +87,12 @@ class Note {
 
   static int get MINOR_SCALE_PATTERN_INDEX => SCALE_PATTERN.length-4;
 
-  static List/*<String>*/ get C_MAJOR_STRNOTE_SCALE =>
+  static List<Note>? get C_MAJOR_SCALE =>
       MAJOR_SCALE_FROM_NOTE(CHROMATIC_SCALE[CHROMATIC_SCALE.length-1]);
 
   static double get A4_FREQUENCY => FREQUENCY_EQUATION(0);
 
-  static List MAJOR_SCALE_FROM_NOTE(note) =>
+  static List<Note>? MAJOR_SCALE_FROM_NOTE(note) =>
       SCALE_FROM_NOTE(MAJOR_SCALE_PATTERN_INDEX, note);
 
 
@@ -103,14 +104,14 @@ class Note {
     //print('=> $outNotes');
     return outNotes;
   }
-  
-  static List SCALE_FROM_NOTE(int patternIndex, note) {
+
+  static List<Note>? SCALE_FROM_NOTE(int patternIndex, Note note) {
     //print('SCALE_FROM_NOTE($patternIndex,$note)');
-    List scale = [];
-    var focusNote = note;
+    List<Note> scale = [];
+    var focusNote = (note is Note) ? note : TO_NOTE(note);
     if (note != null) {
-      int noteOctave = NOTE_TO_OCTAVE(note);
-      int startIndex = NOTE_INDEX(note)!;
+      //int noteOctave = NOTE_TO_OCTAVE(note);
+      //int startIndex = NOTE_INDEX(note)!;
       for (int i = patternIndex; i < SCALE_PATTERN.length; i++) {
         if (SCALE_PATTERN[i] == 1) {
           scale.add(focusNote);
@@ -142,7 +143,7 @@ class Note {
     //print('NOTE_VALUE($note)');
     //Index of StrNote + 1 * .01 * IntOctave
     var out = (((NOTE_INDEX(NOTE_NO_OCTAVE(note))! + 1) * 0.01)
-                  + NOTE_TO_OCTAVE(note));
+        + NOTE_TO_OCTAVE(note));
     //print('=> $out');
     return out;
   }
@@ -152,8 +153,7 @@ class Note {
     //print('NOTE_FROM_NOTE_VALUE($value)');
     int noteOctave = (value - value.floor()).toInt();
     int noteIndex = (((value - noteOctave) * 100.0).toInt() - 1);
-    Note outNote = Note(noteNote: CHROMATIC_SCALE[noteIndex],
-      noteOctave: noteOctave);
+    Note outNote = CHROMATIC_SCALE_NOTES[noteIndex];
     //print('=> $outNote');
     return outNote;
   }
@@ -170,12 +170,12 @@ class Note {
 
   static List<Note> TO_NOTES(List<String> strNotes) {
     // print('TO_NOTES($strNotes)');
-    List<Note> guitarTuning = [];
+    List<Note> noteList = [];
     for (String strNote in strNotes) {
-      guitarTuning.add(TO_NOTE(strNote));
+      noteList.add(TO_NOTE(strNote));
     }
-    // print('=> $guitarTuning');
-    return guitarTuning;
+    // print('=> $noteList');
+    return noteList;
 
   }
 
@@ -217,7 +217,7 @@ class Note {
       }
     }
     // if (outNoteOctave != null)
-      outNote += outNoteOctave.toString();
+    outNote += outNoteOctave.toString();
 
     if (note is Note) {
       outNote = TO_NOTE(outNote);
@@ -289,11 +289,11 @@ class Note {
     //print('=> $outCoordinates');
     return outCoordinates;
   }
-  
+
   double? noteFrequency;
   String? noteNote;
   int? noteOctave;
-  
+
   Note({this.noteFrequency, this.noteNote, this.noteOctave});
 
   Note.fromChordophoneString(String noat) {

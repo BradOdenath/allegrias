@@ -58,23 +58,27 @@ class TabStanza {
             out.add('---'/*+'\n'*/);
             break;
           }
+
           Note chordophoneNote = Chordophone
               .CHORDOPHONE_STRINGS[i]
               .getScale[j];
 
-          print(chordophoneNote.getNote + ":" + note.getNote);
-          print(chordophoneNote.getOctave.toString()
-              + ":" + note.getOctave.toString());
-
           if (chordophoneNote.getNote == note.getNote
               && chordophoneNote.getOctave == note.getOctave) {
+
+            print(chordophoneNote.getNote + ":" + note.getNote);
+            print(chordophoneNote.getOctave.toString()
+                + ":" + note.getOctave.toString());
+
             if (j <= 9) {
               out.add('$j--'/*+'\n'*/);
             } else {
               out.add('$j-'/*+'\n'*/);
             }
+
             print('j: $j');
             chordophoneBool = false;
+
             break;
           }
         }
@@ -93,7 +97,7 @@ class TabStanza {
   static bool NOTE_EXISTS(List<Note> noteList, objNote) {
     //print('NOTE_EXISTS($noteList, $objNote)');
     Note focusNote;
-    focusNote = Note.TO_NOTE(objNote);
+    focusNote = Note.TO_NOTE(objNote)!;
     for (Note note in noteList) {
       if (note == focusNote) {
         //print('=> true');

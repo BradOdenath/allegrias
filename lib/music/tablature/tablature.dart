@@ -125,10 +125,6 @@ class Tablature {
   String get tabStanzasToString => TAB_STANZAS_TOSTRING(tabs);
 
   @override
-  String toString() {
-    String out = tabStanzasToString;
-    //print(out);
-    return out;
-  }
+  String toString() => isNotEmpty ? tabStanzasToString : 'Make Notes :)';
 
 }
