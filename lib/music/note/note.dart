@@ -97,10 +97,8 @@ class Note {
 
   static double get A4_FREQUENCY => FREQUENCY_EQUATION(0);
 
-  static List<Note> MAJOR_SCALE_FROM_NOTE(note) {
-    List<Note> ayo = SCALE_FROM_NOTE(MAJOR_SCALE_PATTERN_INDEX, note);
-    return ayo;
-  }
+  static List<Note> MAJOR_SCALE_FROM_NOTE(note) =>
+    SCALE_FROM_NOTE(MAJOR_SCALE_PATTERN_INDEX, note);
 
   static List<Note> SORT_NOTES(List<Note> notes) {
     //print('SORT_NOTES($notes)');
@@ -111,7 +109,7 @@ class Note {
     return outNotes;
   }
 
-  static List<Note> SCALE_FROM_NOTE(int patternIndex, Note note) {
+  static List<Note> SCALE_FROM_NOTE(int patternIndex, note) {
     //print('SCALE_FROM_NOTE($patternIndex,$note)');
     List<Note> scale = [];
     Note focusNote = (note is Note) ? (note) : (TO_NOTE(note));
@@ -131,7 +129,7 @@ class Note {
         focusNote = NEXT_NOTE(focusNote);
       }
     }
-    print('$scale');
+    //print('$scale');
     return scale;
   }
 
