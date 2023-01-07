@@ -64,7 +64,12 @@ import 'package:allegrias/music/tablature/tab_stanza/tab_stanza.dart';
 *       void                    incrementOctave
 * */
 
+void main() {
+  var derp = Note.C_MAJOR_SCALE;
+}
+
 class Note {
+
 
   static const List<String> CHROMATIC_SCALE = [
     //0   1     2     3     4     5     6     7     8     9     10    11
@@ -87,14 +92,15 @@ class Note {
 
   static int get MINOR_SCALE_PATTERN_INDEX => SCALE_PATTERN.length-4;
 
-  static List<Note>? get C_MAJOR_SCALE =>
+  static List<Note> get C_MAJOR_SCALE =>
       MAJOR_SCALE_FROM_NOTE(CHROMATIC_SCALE[CHROMATIC_SCALE.length-1]);
 
   static double get A4_FREQUENCY => FREQUENCY_EQUATION(0);
 
-  static List<Note>? MAJOR_SCALE_FROM_NOTE(note) =>
-      SCALE_FROM_NOTE(MAJOR_SCALE_PATTERN_INDEX, note);
-
+  static List<Note> MAJOR_SCALE_FROM_NOTE(note) {
+    List<Note> ayo = SCALE_FROM_NOTE(MAJOR_SCALE_PATTERN_INDEX, note);
+    return ayo;
+  }
 
   static List<Note> SORT_NOTES(List<Note> notes) {
     //print('SORT_NOTES($notes)');
@@ -105,10 +111,10 @@ class Note {
     return outNotes;
   }
 
-  static List<Note>? SCALE_FROM_NOTE(int patternIndex, Note note) {
+  static List<Note> SCALE_FROM_NOTE(int patternIndex, Note note) {
     //print('SCALE_FROM_NOTE($patternIndex,$note)');
     List<Note> scale = [];
-    var focusNote = (note is Note) ? note : TO_NOTE(note);
+    Note focusNote = (note is Note) ? (note) : (TO_NOTE(note));
     if (note != null) {
       //int noteOctave = NOTE_TO_OCTAVE(note);
       //int startIndex = NOTE_INDEX(note)!;
@@ -125,7 +131,7 @@ class Note {
         focusNote = NEXT_NOTE(focusNote);
       }
     }
-    //print('$scale');
+    print('$scale');
     return scale;
   }
 
@@ -303,9 +309,8 @@ class Note {
   }
 
   @override
-  String toString() {
-    return '$noteNote$noteOctave';
-  }
+  String toString() => '$noteNote$noteOctave';
+
 
   int get length => toString().length;
 
@@ -334,5 +339,4 @@ class Note {
   void incrementOctave() {
     INCREMENT_NOTE_OCTAVE(this);
   }
-
 }
