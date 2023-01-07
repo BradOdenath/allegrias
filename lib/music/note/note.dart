@@ -66,6 +66,7 @@ import 'package:allegrias/music/tablature/tab_stanza/tab_stanza.dart';
 
 void main() {
   var derp = Note.C_MAJOR_SCALE;
+  print(derp);
 }
 
 class Note {
@@ -112,24 +113,26 @@ class Note {
   static List<Note> SCALE_FROM_NOTE(int patternIndex, note) {
     //print('SCALE_FROM_NOTE($patternIndex,$note)');
     List<Note> scale = [];
-    Note focusNote = (note is Note) ? (note) : (TO_NOTE(note));
     if (note != null) {
+      Note focusNote = (note is Note) ? (note) : (TO_NOTE(note));
       //int noteOctave = NOTE_TO_OCTAVE(note);
       //int startIndex = NOTE_INDEX(note)!;
       for (int i = patternIndex; i < SCALE_PATTERN.length; i++) {
         if (SCALE_PATTERN[i] == 1) {
-          scale.add(focusNote);
+          scale.add(Note.fromNote(focusNote));
+          print('Added Note: $focusNote, Scale: $scale');
         }
         focusNote = NEXT_NOTE(focusNote);
       }
       for (int i = 0; i < patternIndex; i++) {
         if (SCALE_PATTERN[i] == 1) {
-          scale.add(focusNote);
+          scale.add(Note.fromNote(focusNote));
+          print('Added Note: $focusNote, Scale: $scale');
         }
         focusNote = NEXT_NOTE(focusNote);
       }
     }
-    //print('$scale');
+    print('$scale');
     return scale;
   }
 
@@ -203,6 +206,23 @@ class Note {
     return note;
   }
 
+  static Note NOTE_CHECK(note) => (note is Note) ? note : TO_NOTE(note);
+
+  static Note NEXT_NOTE(note) {
+    Note focusNote = NOTE_CHECK(note);
+    //print("IN: $focusNote");
+    for (int i = 0; i < CHROMATIC_SCALE.length; i++) {
+      if (CHROMATIC_SCALE[i] == focusNote.getNote) {
+        focusNote.setNote = (i == (CHROMATIC_SCALE.length-1)) ?
+          CHROMATIC_SCALE[0] : CHROMATIC_SCALE[i+1];
+        break;
+      }
+    }
+    //print("OUT: $focusNote");
+    return focusNote;
+  }
+
+  /*
   static NEXT_NOTE(note) {
     //print('NEXT_NOTE($note)');
     dynamic outNote = '';
@@ -229,7 +249,7 @@ class Note {
     //print('=> $outNote');
     return outNote;
   }
-
+   */
   static int NOTE_TO_OCTAVE(note) {
     //print('NOTE_TO_OCTAVE($note)');
     if (note is String) {
@@ -300,6 +320,12 @@ class Note {
 
   Note({this.noteFrequency, this.noteNote, this.noteOctave});
 
+  Note.fromNote(Note noat) {
+    this.noteNote = noat.noteNote;
+    this.noteOctave = noat.noteOctave;
+    this.noteFrequency = noat.noteFrequency;
+  }
+
   Note.fromChordophoneString(String noat) {
     Note note = TO_NOTE(noat);
     this.noteOctave = note.noteOctave!;
@@ -333,7 +359,7 @@ class Note {
   void sharpen() => NEXT_NOTE(this);
 
   int get getOctave => noteOctave!;
-  set setOctave(int octave) => noteOctave = octave;
+  void set setOctave(int octave) => noteOctave = octave;
   void incrementOctave() {
     INCREMENT_NOTE_OCTAVE(this);
   }
