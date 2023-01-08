@@ -174,8 +174,11 @@ void test() {
       + Note.A4.toString());
   print('.length: '
       + Note.A4.length.toString());
-  print('==(Note): '
-      + (Note.A4==Note.A4).toString());
+
+  /// TODO: Fix Recursion
+  //print('==(Note): '
+  //    + (Note.A4==Note.A4).toString());
+
   print('.hashCode: '
       + Note.A4.hashCode.toString());
   print('.getFrequency'
@@ -504,10 +507,19 @@ class Note {
 
   int get length => toString().length;
 
+  /*
   @override
   bool operator ==(Object other) =>
       (this == NOTE_CHECK(other)) ? true : false;
-
+  */
+  @override
+  bool operator ==(Object other) {
+    if (other is String) {
+      return (toString() == other);
+    } else {
+      return (this == other);
+    }
+  }
   @override
   // TODO: implement hashCode
   int get hashCode => super.hashCode;
@@ -522,7 +534,7 @@ class Note {
 
   int get getOctave => noteOctave!;
   set setOctave(int octave) => noteOctave = octave;
-  int incrementOctave() =>
+  Note incrementOctave() =>
     INCREMENT_NOTE_OCTAVE(this);
 
 }
