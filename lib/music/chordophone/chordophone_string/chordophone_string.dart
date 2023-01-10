@@ -1,18 +1,16 @@
 import 'package:allegrias/music/chordophone/chordophone.dart';
 import 'package:allegrias/music/note/note.dart';
 
+/// TODO: Rewrite the data notes
 /*  Class: ChordophoneString
 * -----------------------------------------------------------------------------
 *     Static
-*       String      CHORDOPHONE_STRING_ID
-*                     Creation Time and Day
 *       bool        IS_EXISTANT_NOTE_ON_CHORDOPHONE_STRING
 *                     Checks Chordophone String For Note
 *       List<Note>  CHORDOPHONE_STRING
 *                     Generates Chordophone String Note Scale
 * -----------------------------------------------------------------------------
 *     Attributes
-*       String      id
 *       Note        indexNote
 *                     Tuning of Chordophone String
 * -----------------------------------------------------------------------------
@@ -33,19 +31,21 @@ import 'package:allegrias/music/note/note.dart';
 *       int         noteExistsAtFret
 * */
 
-class ChordophoneString {
+void test() {
 
-  static String get CHORDOPHONE_STRING_ID => DateTime.now()
-      .hashCode
-      .toString();
+}
+
+void main() => test();
+
+class ChordophoneString {
 
   static int // fret
   IS_EXISTANT_NOTE_ON_CHORDOPHONE_STRING(
-      Note note, ChordophoneString stringedInstrumentString) {
+      Note note, ChordophoneString chordophoneString) {
     //print('IS_EXISTANT_NOTE_ON_STRINGED_INSTRUMENT_STRING'
     //    '($note, $stringedInstrumentString)');
     for (int i = 0; i < Chordophone.FINGERBOARD_LENGTH; i++) {
-      if (stringedInstrumentString
+      if (chordophoneString
           .getScale[i]
           .getFrequency == note.getFrequency) {
         //print('=> $i');
@@ -67,20 +67,26 @@ class ChordophoneString {
     return chordophoneString;
   }
 
-  String? id;
-  Note? indexNote;
+  Note? index_note;
+  int? string_length;
 
-  ChordophoneString(Note indexNote) {
-    this.id = CHORDOPHONE_STRING_ID;
-    this.indexNote = indexNote;
+  ChordophoneString(Note index_note, int string_length) {
+    this.index_note = index_note;
+    this.string_length = string_length;
   }
 
-  Note get getIndexNote => this.indexNote!;
-  List<Note> get getScale => CHORDOPHONE_STRING(this.indexNote!);
+  ChordophoneString.fromDefaultFingerboardLength(Note index_note) {
+    this.index_note = index_note;
+    this.string_length = Chordophone.FINGERBOARD_LENGTH;
+  }
 
-  set setIndexNote(Note note) => this.indexNote = note;
+  Note get getIndexNote => this.index_note!;
+  List<Note> get getScale => CHORDOPHONE_STRING(this.index_note!);
 
-  bool isNoteOnGuitarString(Note note) =>
+  set setIndexNote(Note note) => this.index_note = note;
+  set setStringLength(int length) => this.string_length = length;
+
+  bool isNoteOnChordophoneString(Note note) =>
       IS_EXISTANT_NOTE_ON_CHORDOPHONE_STRING(note, this) != -1;
 
   int noteExistsAtPosition(Note note) =>

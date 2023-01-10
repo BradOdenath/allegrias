@@ -1,5 +1,8 @@
 import 'dart:collection';
 
+import 'package:allegrias/music/chordophone/chordophone_string/chordophone_string.dart';
+import 'package:allegrias/music/note/note.dart';
+
 import '../chordophone/chordophone.dart';
 import 'tab_stanza/tab_stanza.dart';
 
@@ -26,7 +29,9 @@ import 'tab_stanza/tab_stanza.dart';
 
 class Tablature {
 
-  static String TAB_STANZAS_TOSTRING(List<TabStanza> tabStanzas) {
+  static String TAB_STANZAS_TOSTRING(
+      Chordophone chordophone, List<TabStanza> tabStanzas)
+  {
     //print('TAB_STANZAS_TOSTRING($tabStanzas)');
     String outString = '';
     if (tabStanzas != null && tabStanzas.length > 0) {
@@ -34,9 +39,9 @@ class Tablature {
       i < Chordophone.CHORDOPHONE_STRING_COUNT;
       i++) {
         outString += '|-'
-            + Chordophone.CHORDOPHONE_STRING_TUNING[i]
+            + Chordophone.DEFAULT_CHORDOPHONE_STRING_TUNING[i]
             + '-|-';
-     for (int j = tabStanzas.length > 10 ? tabStanzas.length-10 : 0;
+      for (int j = tabStanzas.length > 10 ? tabStanzas.length-10 : 0;
         j < tabStanzas.length;
         j++) {
           //print(tabStanzas[j].getNotesToTablature.toString());
@@ -49,7 +54,9 @@ class Tablature {
     return outString;
   }
 
-  static String NOTE_TO_TABLATURE_TOSTRING(String note) {
+  static String NOTE_TO_TABLATURE_TOSTRING(
+      String note, Chordophone chordophone)
+  {
     //print('NOTE_TO_TABLATURE_TOSTRING($note)');
     int chordophoneStringCounter = 0;
     String out = '';
@@ -58,7 +65,7 @@ class Tablature {
       for (int i = 0;
       i < Chordophone.CHORDOPHONE_STRING_COUNT;
       i++) {
-        var noat = Chordophone.CHORDOPHONE_STRINGS[i].indexNote;
+        var noat = chordophone.chordophone_strings![i].index_note;
         if (noat!.length == 3) {
           out += '|-$noat-|-';
         } else if (noat.length == 2) {
@@ -68,63 +75,68 @@ class Tablature {
         }
         for (int j = 0; j < Chordophone.FINGERBOARD_LENGTH; j++) {
           if (chordophoneBool == false) {
-            out += '---';//+'\n';
+            out += ('---');
             break;
           }
-          var chordophone_note = Chordophone
-              .CHORDOPHONE_STRINGS[i]
+          var chordophone_note = chordophone
+              .chordophone_strings![i]
               .getScale[j];
           if (chordophone_note.hashCode == note.hashCode) {
             if (j <= 9) {
-              out += '$j--';//+'\n';
+              out += '$j--';
             } else {
-              out += '$j-';//+'\n';
+              out += '$j-';
             }
             chordophoneBool = false;
             break;
           }
         }
         if (chordophoneBool == true) {
-          out += '---';//+'\n';
+          out += ('---');
         }
-        //out.replaceAll('\n','');
-        //chordophoneBool = true;
         chordophoneStringCounter++;
       }
     } else {
-      out += '||';
+      /// TODO: Delete else clause thanks to null checking
+      out += '|Lol does this code ever even run?|';
     }
     //print('TABLATURE_TOSTRING => $out');
     return out;
   }
 
   List<TabStanza> tabs = [];
+  Chordophone? chordophone =
+      new Chordophone.fromDefaultStringTuning();
 
-  Tablature() {
+  Tablature(Chordophone chordophone) {
     this.tabs = [];
+    this.chordophone = chordophone;
   }
   
   bool addNote(note) {
     if (note == null) {
-      return false;
+      return (false);
     } else {
-      tabs.add(TabStanza());
-      return tabs[getLastTabStanzaIndex].addNote(note)!;
+      tabs.add(TabStanza(chordophone!));
+      return (tabs[getLastTabStanzaIndex]
+          .addNote(note)!);
     }
   }
   
-  List<TabStanza> get getTabs => this.tabs;
+  List<TabStanza> get getTabs => (this.tabs);
 
   int get getLastTabStanzaIndex =>
       (tabs.length > 0)
-          ? this.tabs.length-1
-          : 0;
+          ? (this.tabs.length-1)
+          : (0);
 
   bool get isNotEmpty => this.tabs.isNotEmpty;
 
-  String get tabStanzasToString => TAB_STANZAS_TOSTRING(tabs);
+  String get tabStanzasToString =>
+      TAB_STANZAS_TOSTRING(chordophone!, tabs);
 
   @override
-  String toString() => isNotEmpty ? tabStanzasToString : 'Make Notes :)';
+  String toString() =>
+      isNotEmpty ? tabStanzasToString : 'Make Notes :)';
 
 }

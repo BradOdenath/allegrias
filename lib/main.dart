@@ -22,8 +22,15 @@ class TabAppState extends State<TabApp> {
   int? octave;
   bool? onPitch;
 
+
   // String tabulatureStr;
-  Tablature tabulature = new Tablature();
+  Tablature tabulature =
+      new Tablature(
+          Chordophone(
+              Chordophone
+                  .DEFAULT_CHORDOPHONE_STRING_TUNING
+          )
+      );
 
   FlutterFft flutterFft = new FlutterFft();
 

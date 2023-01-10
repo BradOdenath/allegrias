@@ -34,7 +34,7 @@ class Chordophone {
   
   static int POSITION_RANGE = 5;
   static final int FINGERBOARD_LENGTH = 24;
-  static final List<String> CHORDOPHONE_STRING_TUNING = [
+  static final List<String> DEFAULT_CHORDOPHONE_STRING_TUNING = [
     //'D#4', 'A#3', 'F#3', 'C#3', 'G#2', 'D#2', 'A#1', 'F#1', 'C#1', 'G#0'
     'D4', 'A3', 'F3', 'C3', 'G2', 'D2', 'A1', 'F1', 'C1', 'G0'
   ];
@@ -103,19 +103,45 @@ class Chordophone {
     return chordophoneChord;
   }
 
-  static List<Note> get CHORDOPHONE_STRING_NOTES =>
-      Note.TO_NOTES(CHORDOPHONE_STRING_TUNING);
+  static List<Note> CHORDOPHONE_STRING_TUNING_NOTES_GENERATOR(
+      List<String> chordophone_string_tuning) =>
+      Note.TO_NOTES(chordophone_string_tuning);
 
   static int get CHORDOPHONE_STRING_COUNT =>
-      CHORDOPHONE_STRING_TUNING.length;
+      DEFAULT_CHORDOPHONE_STRING_TUNING.length;
 
-  static List<ChordophoneString> get CHORDOPHONE_STRINGS {
+  static List<ChordophoneString>? GENERATE_CHORDOPHONE_STRINGS(
+      List<Note> chordophone_string_tuning,
+      int chordophone_string_count)
+  {
     List<ChordophoneString> chordophoneStrings = [];
-    for (int i = 0; i < CHORDOPHONE_STRING_COUNT; i++) {
+    for (int i = 0; i < chordophone_string_count; i++) {
       chordophoneStrings
-          .add(ChordophoneString(CHORDOPHONE_STRING_NOTES[i]));
+          .add(ChordophoneString
+          .fromDefaultFingerboardLength(chordophone_string_tuning[i]));
     }
     return chordophoneStrings;
+
   }
+
+
+  List<String>? string_tuning = [];
+  int get string_count => string_tuning!.length;
+
+  Chordophone(List<String> string_tuning) {
+    this.string_tuning = string_tuning;
+  }
+
+  Chordophone.fromDefaultStringTuning() {
+    this.string_tuning = DEFAULT_CHORDOPHONE_STRING_TUNING;
+  }
+
+  List<Note> get chordophone_string_tuning_notes =>
+      CHORDOPHONE_STRING_TUNING_NOTES_GENERATOR(string_tuning!);
+
+  List<ChordophoneString>? get chordophone_strings =>
+      GENERATE_CHORDOPHONE_STRINGS(
+          chordophone_string_tuning_notes,
+          string_count);
 
 }

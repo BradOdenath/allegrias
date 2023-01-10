@@ -37,7 +37,10 @@ import '../tablature.dart';
 * */
 
 class TabStanza {
-  static List<String> NOTE_TO_TABLATURE_STANZA_LIST(Note note) {
+  static List<String> NOTE_TO_TABLATURE_STANZA_LIST(
+      Chordophone chordophone,
+      Note note)
+  {
     //print('NOTE_TO_TABLATURE_STANZA_LIST($note)');
     List<String> out = [];
     if (note != null) {
@@ -45,22 +48,14 @@ class TabStanza {
       for (int i = 0;
       i < Chordophone.CHORDOPHONE_STRING_COUNT;
       i++) {
-        /* var noat = Guitar.GUITAR_STRINGS[i].indexNote;
-        if (noat.length == 3) {
-          out.add('-$noat-');
-        } else if (noat.length == 2) {
-          out.add('-$noat--');
-        } else if (noat.length == 1) {
-          out.add('-$noat---');
-        } */
         for (int j = 0; j < Chordophone.FINGERBOARD_LENGTH; j++) {
           if (chordophoneBool == false) {
             out.add('---'/*+'\n'*/);
             break;
           }
 
-          Note chordophoneNote = Chordophone
-              .CHORDOPHONE_STRINGS[i]
+          Note chordophoneNote = chordophone
+              .chordophone_strings![i]
               .getScale[j];
 
           if (chordophoneNote.getNote == note.getNote
@@ -108,10 +103,12 @@ class TabStanza {
     return false;
   }
 
-  static Map<int,int> NOTES_TO_TABSTANZA_MAP(List<Note> notes) =>
+  static Map<int,int> NOTES_TO_TABSTANZA_MAP(
+      Chordophone chordophone, List<Note> notes) =>
       Chordophone.POSITION_GROUPS_TO_CHORDOPHONE_CHORD(
           Chordophone.FINGERBOARD_COORDINATES_TO_POSITION_GROUPS(
-              Note.NOTES_TO_FINGERBOARD_COORDINATES_NOTE_MAP(notes)));
+              Note.NOTES_TO_FINGERBOARD_COORDINATES_NOTE_MAP(
+                  chordophone, notes)));
 
   static String TAB_STRING(String fretIndex) {
     print('TAB_STRING(String $fretIndex)');
@@ -145,10 +142,20 @@ class TabStanza {
     return tabStanza;
   }
 
-  List<String> noteToTabStanzaChordophoneStringList(Note note) {
+  List<Note>? notes;
+  Chordophone? chordophone =
+      new Chordophone.fromDefaultStringTuning();
+
+  TabStanza(Chordophone chordophone) {
+    notes = [];
+    this.chordophone = chordophone;
+  }
+
+  List<String> noteToTabStanzaChordophoneStringList(Note note)
+  {
     //print('noteToTabStanzaStringList($note)');
     Map<int,int> fingerboardCoordinates = Note
-        .NOTE_TO_FINGERBOARD_COORDINATES(note);
+        .NOTE_TO_FINGERBOARD_COORDINATES(chordophone!, note);
     //print('$Note: $fingerboardCoordinates');
     List<String> outStrList = [];
     int stringIndex, fretIndex;
@@ -164,12 +171,6 @@ class TabStanza {
     }
     //print('=> $outStrList');
     return outStrList;
-  }
-  
-  List<Note>? notes;
-
-  TabStanza() {
-    notes = [];
   }
 
   List<Note> get getNotes => notes!;
@@ -198,47 +199,20 @@ class TabStanza {
           getOfficialTabStanzaChordophoneStringMap);
     } else if (notes!.length == 1){
       // print('gntt'+notes.first.toString());
-      return NOTE_TO_TABLATURE_STANZA_LIST(notes!.first);
+      return NOTE_TO_TABLATURE_STANZA_LIST(chordophone!,notes!.first);
     } else {
       // print('gntt');
-      return NOTE_TO_TABLATURE_STANZA_LIST(Note.A4);
+      return NOTE_TO_TABLATURE_STANZA_LIST(chordophone!,Note.A4);
     }
   }
 
-  Map<int,int> get getOfficialTabStanzaChordophoneStringMap =>
-      NOTES_TO_TABSTANZA_MAP(this.notes!);
-
-  List<int> get openStrings {
-    List<int> openStrings = [];
-    bool isOpen;
-    if (getOfficialTabStanzaChordophoneStringMap != null) {
-      for (int i = 0; i < Chordophone.CHORDOPHONE_STRING_NOTES.length; i++) {
-        isOpen = true;
-        if (getOfficialTabStanzaChordophoneStringMap.containsKey(i)) {
-          isOpen = false;
-        }
-        isOpen == true ? openStrings.add((i)) : print('$isOpen');
-      }
-    }
-    return openStrings;
-  }
-
-  bool? isThereAvailableChordophoneString(Note note) {
-    for (var chordophoneStringIndex in openStrings) {
-      return (ChordophoneString.
-          IS_EXISTANT_NOTE_ON_CHORDOPHONE_STRING(note,
-          Chordophone
-              .CHORDOPHONE_STRINGS[chordophoneStringIndex]) > -1);
-    }
-    return false;
-  }
 
   @override
   String toString() {
-    return getChordophoneStringTabsToString;
+    return chordophoneStringTabsToString;
   }
 
-  String get getChordophoneStringTabsToString {
+  String get chordophoneStringTabsToString {
     String tablatureStanza = '';
     for (String chordophoneString in getNotesToTablature) {
       tablatureStanza += chordophoneString;// + '\n';
@@ -250,7 +224,6 @@ class TabStanza {
     if (note is String) {
       return isValidNoteAddition(Note.TO_NOTE(note));
     } else {
-      //print('asdf');
       return (note != null
           && notes!.length <= 1 == true);
           //&& notes.length <= Chordophone.CHORDOPHONE_STRING_COUNT == true);
@@ -258,6 +231,39 @@ class TabStanza {
           //&& isThereAvailableChordophoneString(note) == true);
     }
   }
+  Map<int,int> get getOfficialTabStanzaChordophoneStringMap =>
+      NOTES_TO_TABSTANZA_MAP(chordophone!, this.notes!);
+
+  List<int>? get openStrings {
+    List<int> openStrings = [];
+    bool isOpen;
+    if (getOfficialTabStanzaChordophoneStringMap != null) {
+      for (
+      int i = 0;
+      i < chordophone!.chordophone_string_tuning_notes.length;
+      i++) {
+        isOpen = true;
+        if (getOfficialTabStanzaChordophoneStringMap.containsKey(i))
+        {
+          isOpen = false;
+        }
+        isOpen == true ? openStrings.add((i)) : print('$isOpen');
+      }
+    }
+    return openStrings;
+  }
+
+  bool? isThereAvailableChordophoneString(Note note)
+  {
+    for (var chordophoneStringIndex in openStrings!) {
+      return (ChordophoneString.
+      IS_EXISTANT_NOTE_ON_CHORDOPHONE_STRING(note,
+          chordophone!
+              .chordophone_strings![chordophoneStringIndex]) > -1);
+    }
+    return false;
+  }
+
 
 }
 

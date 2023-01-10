@@ -47,3 +47,4 @@ app.*.map.json
 
 #Depricated Chordophone Tabbing Methodology
 /lib/music/chordophone/tabbl.dart
+#/lib/test
