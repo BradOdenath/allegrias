@@ -444,20 +444,22 @@ class Note {
   static Note INCREMENT_NOTE_OCTAVE(note) =>
       NOTE_CHECK(note)..setOctave = (note.getOctave+1);
 
-  static Map<int,int> NOTE_TO_FINGERBOARD_COORDINATES(Note note) {
+  static Map<int,int> NOTE_TO_FINGERBOARD_COORDINATES(
+      Chordophone chordophone, Note note)
+  {
     //print('NOTE_TO_FINGERBOARD_COORDINATES($note)');
     Map<int,int>? noteCoordinates;
     for (int i = 0; i < Chordophone.CHORDOPHONE_STRING_COUNT; i++) {
-      //print(i.toString());
-      if (Chordophone
-          .CHORDOPHONE_STRINGS[i]
+      if (chordophone
+          .chordophone_strings![i]
           .isNoteOnChordophoneString(note) == true
       ) {
-        // print('\ttT$note');
         noteCoordinates!.addAll(
-            {i:Chordophone.CHORDOPHONE_STRINGS[i].noteExistsAtPosition(note)});
+            {i:chordophone
+                .chordophone_strings![i]
+                .noteExistsAtPosition(note)
+            });
       } else {
-        // print('\ttF$note');
       }
     }
     //print('=> $noteCoordinates');
@@ -465,13 +467,16 @@ class Note {
   }
 
   static Map<Note, Map<int, int>> NOTES_TO_FINGERBOARD_COORDINATES_NOTE_MAP(
+      Chordophone chordophone,
       List<Note> notes)
   {
     //print('NOTE_TO_FINGERBOARD_COORDINATES_NOTE_MAP($notes)');
     Map<Note,Map<int,int>> outCoordinates = {};
     if (notes != null) {
       for (Note note in notes) {
-        outCoordinates.addAll({note:NOTE_TO_FINGERBOARD_COORDINATES(note)});
+        outCoordinates.addAll({
+          note:NOTE_TO_FINGERBOARD_COORDINATES(chordophone, note)
+        });
       }
     }
     //print('=> $outCoordinates');
@@ -482,7 +487,11 @@ class Note {
   String? noteNote;
   int? noteOctave;
 
-  Note({this.noteFrequency, this.noteNote, this.noteOctave});
+  Note({
+    this.noteFrequency,
+    this.noteNote,
+    this.noteOctave
+  });
 
   Note.fromNote(Note noat) {
     this.noteNote = noat.noteNote;
@@ -501,21 +510,11 @@ class Note {
 
   int get length => toString().length;
 
-
   @override
   bool operator ==(Object other) =>
-      (toString() == NOTE_CHECK(other).toString()) ? true : false;
-
-  /*
-  @override
-  bool operator ==(Object other) {
-    if (other is String) {
-      return (toString() == other);
-    } else {
-      return (toString() == other.toString());
-    }
-  }
-  */
+      (toString() == NOTE_CHECK(other).toString())
+          ? (true)
+          : (false);
 
   @override
   // TODO: implement hashCode
