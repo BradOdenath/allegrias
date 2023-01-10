@@ -132,9 +132,8 @@ void test() {
   print('TO_NOTES(CHROMATIC_SCALE): '
       + Note.TO_NOTES(Note.CHROMATIC_SCALE).toString());
 
-  /// TODO: Fix this madness oi vey
   print('FREQUENCY_EQUATION(1): '
-      + Note.FREQUENCY_EQUATION(1).toString());
+      + Note.FREQUENCY_EQUATION(0).toString());
 
   print('NOTE_NO_OCTAVE(A4): '
       + Note.NOTE_NO_OCTAVE(Note.A4).toString());
@@ -170,39 +169,41 @@ void test() {
   print('Note.fromChordophoneString(C#): '
       + Note.fromChordophoneString(Note.CHROMATIC_SCALE[0]).toString());
 
-  print('toString(): '
+  print('.toString(): '
       + Note.A4.toString());
   print('.length: '
       + Note.A4.length.toString());
 
   /// TODO: Fix Recursion
-  //print('==(Note): '
-  //    + (Note.A4==Note.A4).toString());
+  print('A4==(A5): '
+      + (Note.A4==Note.A4.incrementOctave()).toString());
 
   print('.hashCode: '
       + Note.A4.hashCode.toString());
-  print('.getFrequency'
+  print('.getFrequency: '
       + Note.A4.getFrequency.toString());
-  print('.setFrequency = A4_FREQUNENCY'
+  print('.setFrequency = A4_FREQUNENCY: '
       + (Note.A4.setFrequency = Note.A4_FREQUENCY).toString());
-  print('.getNote'
+  print('.getNote: '
       + Note.A4.getNote.toString());
-  print('.setNote = Note.A4.getNote'
+  print('.setNote = Note.A4.getNote: '
       + (Note.A4.setNote = Note.A4.getNote).toString());
   print('.sharpen(): '
       + Note.A4.sharpen().toString());
-  print('.getOctave'
+  print('.getOctave: '
       + Note.A4.getOctave.toString());
-  print('.setOctave = Note.A4.getOctave'
+  print('.setOctave = Note.A4.getOctave: '
       + (Note.A4.setOctave = Note.A4.getOctave).toString());
   print('.incrementOctave(): '
       + Note.A4.incrementOctave().toString());
+  print('A4: '
+      + Note.A4.toString());
+  print(Note(noteNote: 'B', noteOctave: 1).sharpen());
 }
 
 void main() => test();
 
 class Note {
-
 
   static const List<String> CHROMATIC_SCALE = [
     //0   1     2     3     4     5     6     7     8     9     10    11
@@ -219,7 +220,7 @@ class Note {
   //      W           W     H           W           W           W     H
   ]; //WWHWWWH (Whole & Half Steps) https://www.musictheory.net/lessons/21
 
-  static final Note A4 = Note(
+  static Note get A4 => Note(
     noteFrequency: A4_FREQUENCY,
     noteNote: CHROMATIC_SCALE[8],
     noteOctave: 4,
@@ -354,14 +355,13 @@ class Note {
 
   }
 
-  /// TODO: Fix this madness
   static double FREQUENCY_EQUATION(double n) {
-    return (A4.getFrequency*Math.pow(2.0,n/12.0));
+    return (A4.getFrequency*Math.pow(2.0,(n-8)/12.0));
   }
 
   // Note Frequencies: https://pages.mtu.edu/~suits/notefreqs.html
   static double NOTE_TO_FREQUENCY(note) {
-    double noteVal = (note is Note) ? note.getNoteValue : NOTE_VALUE(note);
+    double noteVal = NOTE_VALUE(NOTE_CHECK(note));
     return (A4.getFrequency*noteVal/A4.getNoteValue);
   }
 
@@ -379,7 +379,7 @@ class Note {
   static Note NOTE_CHECK(note) => (note is Note) ? note : TO_NOTE(note);
 
   static Note NEXT_NOTE(note) {
-    Note focusNote = NOTE_CHECK(note);
+    Note focusNote = Note.fromNote(NOTE_CHECK(note));
     //print("IN: $focusNote");
     for (int i = 0; i < CHROMATIC_SCALE.length; i++) {
       if (CHROMATIC_SCALE[i] == focusNote.getNote) {
@@ -389,6 +389,9 @@ class Note {
       }
     }
     //print("OUT: $focusNote");
+    if (focusNote.getNote == CHROMATIC_SCALE[11]) {
+      focusNote.incrementOctave();
+    }
     return focusNote;
   }
 
@@ -438,17 +441,8 @@ class Note {
     return 0;
   }
 
-  static INCREMENT_NOTE_OCTAVE(note) {
-    //print('INCREMENT_NOTE_OCTAVE($note)');
-    if (note is String) {
-      TO_NOTE(NOTE_NO_OCTAVE(note)
-          +(NOTE_TO_OCTAVE(note)+1).toString());
-    } else if (note is Note) {
-      note.setOctave = note.getOctave+1;
-    }
-    //print('=> $note');
-    return note;
-  }
+  static Note INCREMENT_NOTE_OCTAVE(note) =>
+      NOTE_CHECK(note)..setOctave = (note.getOctave+1);
 
   static Map<int,int> NOTE_TO_FINGERBOARD_COORDINATES(Note note) {
     //print('NOTE_TO_FINGERBOARD_COORDINATES($note)');
@@ -507,19 +501,22 @@ class Note {
 
   int get length => toString().length;
 
-  /*
+
   @override
   bool operator ==(Object other) =>
-      (this == NOTE_CHECK(other)) ? true : false;
-  */
+      (toString() == NOTE_CHECK(other).toString()) ? true : false;
+
+  /*
   @override
   bool operator ==(Object other) {
     if (other is String) {
       return (toString() == other);
     } else {
-      return (this == other);
+      return (toString() == other.toString());
     }
   }
+  */
+
   @override
   // TODO: implement hashCode
   int get hashCode => super.hashCode;
