@@ -90,7 +90,7 @@ class Chordophone {
 
   static Map<int,int> POSITION_GROUPS_TO_CHORDOPHONE_CHORD(
       List<Map<int,int>> positionGroups) {
-    print('POSITION_GROUPS_TO_CHORDOPHONE_CHORD($positionGroups)');
+    //print('POSITION_GROUPS_TO_CHORDOPHONE_CHORD($positionGroups)');
     Map<int,int> chordophoneChord = {};
     if (positionGroups != null) {
       positionGroups.forEach((map) {

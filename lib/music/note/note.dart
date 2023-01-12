@@ -340,7 +340,7 @@ class Note {
     Note outNote = Note(
         noteNote: NOTE_NO_OCTAVE(note),
         noteOctave: NOTE_TO_OCTAVE(note));
-    // print('=> $outNote');
+    //print('=> $outNote');
     return outNote;
   }
 
@@ -368,7 +368,10 @@ class Note {
   static String NOTE_NO_OCTAVE(note) {
     //print('NOTE_NO_OCTAVE($note)');
     if (note is String) {
-      return note.trimRight();
+      return note.replaceAll(
+          NOTE_TO_OCTAVE(note).toString(),
+          ''
+      );
     } else if (note is Note) {
       return note.getNote;
     }
@@ -426,13 +429,13 @@ class Note {
   static int NOTE_TO_OCTAVE(note) {
     //print('NOTE_TO_OCTAVE($note)');
     if (note is String) {
-      if (note.length > 2) {
+      //if (note.length > 2) {
         var check = int.parse(note[note.length-1]);
         if (check is int) {
           //print('=> $check');
           return check;
         }
-      }
+      //}
     } else if (note is Note) {
       //print('=> '+note.getOctave.toString());
       return note.getOctave;

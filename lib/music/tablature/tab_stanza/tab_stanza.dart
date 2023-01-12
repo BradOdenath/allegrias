@@ -45,25 +45,30 @@ class TabStanza {
     List<String> out = [];
     if (note != null) {
       bool chordophoneBool = true;
-      for (int i = 0;
-      i < Chordophone.CHORDOPHONE_STRING_COUNT;
-      i++) {
-        for (int j = 0; j < Chordophone.FINGERBOARD_LENGTH; j++) {
+      for (ChordophoneString chordophone_string
+      in chordophone.chordophone_strings!) {
+        //for (Note chordophoneNote
+        //in chordophone_string.getScale) {
+        List<Note> chordophone_string_scale =
+            chordophone_string.getScale;
+        for (int j = 0;
+        j < chordophone_string_scale.length; j++)
+        {
+          Note chordophoneNote =
+          chordophone_string_scale[j];
           if (chordophoneBool == false) {
             out.add('---'/*+'\n'*/);
             break;
           }
 
-          Note chordophoneNote = chordophone
-              .chordophone_strings![i]
-              .getScale[j];
 
-          if (chordophoneNote.getNote == note.getNote
-              && chordophoneNote.getOctave == note.getOctave) {
+          if (chordophoneNote.toString() == note.toString()) {
+            //print(chordophoneNote.toString()
+            //    + ":" + note.toString());
 
-            print(chordophoneNote.getNote + ":" + note.getNote);
-            print(chordophoneNote.getOctave.toString()
-                + ":" + note.getOctave.toString());
+            //int j = ChordophoneString
+            //    .IS_EXISTANT_NOTE_ON_CHORDOPHONE_STRING(
+            //    chordophoneNote, chordophone_string);
 
             if (j <= 9) {
               out.add('$j--'/*+'\n'*/);
@@ -71,7 +76,7 @@ class TabStanza {
               out.add('$j-'/*+'\n'*/);
             }
 
-            print('j: $j');
+            //print('j: $j');
             chordophoneBool = false;
 
             break;
@@ -111,7 +116,7 @@ class TabStanza {
                   chordophone, notes)));
 
   static String TAB_STRING(String fretIndex) {
-    print('TAB_STRING(String $fretIndex)');
+    //print('TAB_STRING(String $fretIndex)');
     String out = '';
     if (fretIndex.length == 3) {
       out += '-$fretIndex';
@@ -121,7 +126,7 @@ class TabStanza {
       out += '-$fretIndex--';
     }
     //out.replaceAll('\n','');
-    print('TAB_STRING => $out');
+    //print('TAB_STRING => $out');
     return out;
   }
 
@@ -179,7 +184,7 @@ class TabStanza {
     if (isValidNoteAddition(note)) {
       if (note is Note) {
         notes?.add(note);
-        print('Note: $note, Notes: $notes');
+        //print('Note: $note, Notes: $notes');
         return true;
       } else if (note is String) {
         return addNote(Note.TO_NOTE(note));

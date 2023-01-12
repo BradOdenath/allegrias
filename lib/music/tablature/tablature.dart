@@ -75,13 +75,15 @@ class Tablature {
         }
         for (int j = 0; j < Chordophone.FINGERBOARD_LENGTH; j++) {
           if (chordophoneBool == false) {
-            out += ('---');
+            out += ('wat');
             break;
           }
           var chordophone_note = chordophone
               .chordophone_strings![i]
               .getScale[j];
-          if (chordophone_note.hashCode == note.hashCode) {
+          print(chordophone_note.toString()
+              + ':' + note.toString());
+          if (chordophone_note.toString() == note.toString()) {
             if (j <= 9) {
               out += '$j--';
             } else {

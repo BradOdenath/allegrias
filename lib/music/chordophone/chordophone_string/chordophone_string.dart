@@ -39,7 +39,7 @@ void main() => test();
 
 class ChordophoneString {
 
-  static int // fret
+  static int // fingerboard note/fret
   IS_EXISTANT_NOTE_ON_CHORDOPHONE_STRING(
       Note note, ChordophoneString chordophoneString) {
     //print('IS_EXISTANT_NOTE_ON_STRINGED_INSTRUMENT_STRING'
@@ -47,7 +47,7 @@ class ChordophoneString {
     for (int i = 0; i < Chordophone.FINGERBOARD_LENGTH; i++) {
       if (chordophoneString
           .getScale[i]
-          .getFrequency == note.getFrequency) {
+          .toString() == note.toString()) {
         //print('=> $i');
         return i;
       }
@@ -56,15 +56,17 @@ class ChordophoneString {
     return -1;
   }
 
-  static List<Note> CHORDOPHONE_STRING(Note note) {
-    //print('CHORDOPHONE_STRING($note)');
-    List<Note> chordophoneString = [];
-    for (int j = 0; j < Chordophone.FINGERBOARD_LENGTH; j++) {
-      chordophoneString.add(note);
-      note.sharpen();
+  static List<Note> CHORDOPHONE_STRING(
+      int string_length, Note note)
+  {
+    List<Note> chordophone_string = [];
+    Note focusNote = note;
+    for (int i = 0; i < string_length; i++) {
+      chordophone_string.add(Note.fromNote(focusNote));
+      focusNote = focusNote.sharpen();
     }
-    //print('=> $chordophoneString');
-    return chordophoneString;
+    //print('Chordophone String: $chordophone_string');
+    return chordophone_string;
   }
 
   Note? index_note;
@@ -81,7 +83,8 @@ class ChordophoneString {
   }
 
   Note get getIndexNote => this.index_note!;
-  List<Note> get getScale => CHORDOPHONE_STRING(this.index_note!);
+  List<Note> get getScale => CHORDOPHONE_STRING(
+      this.string_length!, this.index_note!);
 
   set setIndexNote(Note note) => this.index_note = note;
   set setStringLength(int length) => this.string_length = length;

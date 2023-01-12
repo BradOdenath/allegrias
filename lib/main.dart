@@ -24,7 +24,7 @@ class TabAppState extends State<TabApp> {
 
 
   // String tabulatureStr;
-  Tablature tabulature =
+  Tablature tablature =
       new Tablature(
           Chordophone(
               Chordophone
@@ -59,7 +59,7 @@ class TabAppState extends State<TabApp> {
             children: [
               Text(
                   isRecording! ?
-                  this.tabulature.toString()
+                  this.tablature.toString()
                   : 'Not Recording',
                   style: ApplicationTheme.TXTSTYLE
               )
@@ -91,7 +91,7 @@ class TabAppState extends State<TabApp> {
             octave = data[5] as int,
             // tabulatureStr = Guitar.NOTE_TO_TABULATURE_STANZA_TOSTRING(note),
             if (note != null) {
-              tabulature.addNote(
+              tablature.addNote(
                 Note(
                   noteOctave: octave,
                   noteNote: note,
@@ -104,9 +104,10 @@ class TabAppState extends State<TabApp> {
           flutterFft.setOctave = octave!,
           flutterFft.setNote = note!,
           flutterFft.setFrequency = frequency!,
-          print("Note Frequency: " + flutterFft.getFrequency.toString()),
-          print("Note: " + flutterFft.getNote.toString()
-              + flutterFft.getOctave.toString()),
+          print(tablature.chordophone!.chordophone_string_tuning_notes),
+          //print("Note Frequency: " + flutterFft.getFrequency.toString()),
+          //print("Note: " + flutterFft.getNote.toString()
+          //    + flutterFft.getOctave.toString()),
         },
         onError: (err) => print("Error: $err"),
         onDone: () => print("Is done")
