@@ -1,4 +1,5 @@
 import 'dart:math' as Math;
+import 'dart:math';
 
 import 'package:allegrias/music/chordophone/chordophone.dart';
 import 'package:allegrias/music/chordophone/'
@@ -66,9 +67,9 @@ import 'package:allegrias/music/tablature/tab_stanza/tab_stanza.dart';
 
 void test() {
   print('CHROMATIC_SCALE: '
-      + Note.CHROMATIC_SCALE.toString());
+      + Note.chromaticScale.toString());
   print('SCALE_PATTERN: '
-      + Note.SCALE_PATTERN.toString());
+      + Note.scalePattern.toString());
   print('A4: '
       + Note.A4.toString());
   print('CHROMATIC_SCALE_NOTES: '
@@ -89,27 +90,27 @@ void test() {
 
   //Ionian
   print('MAJOR_SCALE_FROM_NOTE(C):       '
-      + Note.MAJOR_SCALE_FROM_NOTE(Note.CHROMATIC_SCALE[11]).toString());
+      + Note.MAJOR_SCALE_FROM_NOTE(Note.chromaticScale[0]).toString());
   print('DORIAN_SCALE_FROM_NOTE(D):      '
-      + Note.DORIAN_SCALE_FROM_NOTE(Note.CHROMATIC_SCALE[1]).toString());
+      + Note.DORIAN_SCALE_FROM_NOTE(Note.chromaticScale[2]).toString());
   print('PHRYGIAN_SCALE_FROM_NOTE(E):    '
-      + Note.PHRYGIAN_SCALE_FROM_NOTE(Note.CHROMATIC_SCALE[3]).toString());
+      + Note.PHRYGIAN_SCALE_FROM_NOTE(Note.chromaticScale[4]).toString());
   print('LYDIAN_SCALE_FROM_NOTE(F):      '
-      + Note.LYDIAN_SCALE_FROM_NOTE(Note.CHROMATIC_SCALE[4]).toString());
+      + Note.LYDIAN_SCALE_FROM_NOTE(Note.chromaticScale[5]).toString());
   print('MIXOLYDIAN_SCALE_FROM_NOTE(G):  '
-      + Note.MIXOLYDIAN_SCALE_FROM_NOTE(Note.CHROMATIC_SCALE[6]).toString());
+      + Note.MIXOLYDIAN_SCALE_FROM_NOTE(Note.chromaticScale[7]).toString());
   //AEOLIAN
   print('MINOR_SCALE_FROM_NOTE(A):       '
-      + Note.MINOR_SCALE_FROM_NOTE(Note.CHROMATIC_SCALE[8]).toString());
+      + Note.MINOR_SCALE_FROM_NOTE(Note.chromaticScale[9]).toString());
   print('LOCRIAN_SCALE_FROM_NOTE(B):     '
-      + Note.LOCRIAN_SCALE_FROM_NOTE(Note.CHROMATIC_SCALE[10]).toString());
+      + Note.LOCRIAN_SCALE_FROM_NOTE(Note.chromaticScale[11]).toString());
 
   /// TODO: Fix SORT_NOTES(notes)
   print('SORT_NOTES(CHROMATIC_SCALE): '
       + Note.SORT_NOTES(Note.CHROMATIC_SCALE_NOTES).toString());
 
   print('NOTE_INDEX(D#): '
-      + Note.NOTE_INDEX(Note.CHROMATIC_SCALE[2]).toString());
+      + Note.NOTE_INDEX(Note.chromaticScale[3]).toString());
   print('SCALE_FROM_NOTE(Lydian, A)'
       + Note.SCALE_FROM_NOTE(
           Note.LYDIAN_SCALE_PATTERN_INDEX,
@@ -130,10 +131,7 @@ void test() {
   print('TO_NOTE(A): '
       + Note.TO_NOTE(Note.A4).toString());
   print('TO_NOTES(CHROMATIC_SCALE): '
-      + Note.TO_NOTES(Note.CHROMATIC_SCALE).toString());
-
-  print('FREQUENCY_EQUATION(1): '
-      + Note.FREQUENCY_EQUATION(0).toString());
+      + Note.TO_NOTES(Note.chromaticScale).toString());
 
   print('NOTE_NO_OCTAVE(A4): '
       + Note.NOTE_NO_OCTAVE(Note.A4).toString());
@@ -167,7 +165,7 @@ void test() {
   print('Note.fromNote(noat): '
       + Note.fromNote(Note.A4).toString());
   print('Note.fromChordophoneString(C#): '
-      + Note.fromChordophoneString(Note.CHROMATIC_SCALE[0]).toString());
+      + Note.fromChordophoneString(Note.chromaticScale[0]).toString());
 
   print('.toString(): '
       + Note.A4.toString());
@@ -205,47 +203,54 @@ void main() => test();
 
 class Note {
 
-  static const List<String> CHROMATIC_SCALE = [
+  static const List<String> chromaticScale = [
     //0   1     2     3     4     5     6     7     8     9     10    11
-    'C#', 'D',  'D#', 'E',  'F',  'F#', 'G',  'G#', 'A',  'A#', 'B',  'C'
+    'C',  'C#', 'D',  'D#', 'E',  'F',  'F#', 'G',  'G#', 'A',  'A#', 'B'
 
     /// TODO: Fix offsets all over the file
     //'A',  'A#', 'B',  'C',  'C#', 'D',  'D#', 'E',  'F',  'F#', 'G',  'G#'
   ];
 
-  static const List<int> SCALE_PATTERN = [
+  static const List<int> scalePattern = [
   //-12   -11   -10   -9    -8    -7    -6   -5    -4    -3    -2    -1
   //0     1     2     3     4     5     6     7     8     9     10    11
-    0,    1,    0,    1,    1,    0,    1,    0,    1,    0,    1,    1
-  //      W           W     H           W           W           W     H
+    1,    0,    1,    0,    1,    1,    0,    1,    0,    1,    0,    1
+  //H           W           W     H           W           W           W
   ]; //WWHWWWH (Whole & Half Steps) https://www.musictheory.net/lessons/21
+
+  static Note get C0 => Note(
+    noteFrequency: C0_FREQUENCY,
+    noteNote: chromaticScale[0],
+    noteOctave: 0,
+  );
 
   static Note get A4 => Note(
     noteFrequency: A4_FREQUENCY,
-    noteNote: CHROMATIC_SCALE[8],
+    noteNote: chromaticScale[9],
     noteOctave: 4,
   );
 
-  static List<Note> get CHROMATIC_SCALE_NOTES => TO_NOTES(CHROMATIC_SCALE);
+  static List<Note> get CHROMATIC_SCALE_NOTES => TO_NOTES(chromaticScale);
 
-  static int get MAJOR_SCALE_PATTERN_INDEX => SCALE_PATTERN.length-1;
+  static int get MAJOR_SCALE_PATTERN_INDEX => scalePattern.length-12;
 
-  static int get MINOR_SCALE_PATTERN_INDEX => SCALE_PATTERN.length-4;
+  static int get MINOR_SCALE_PATTERN_INDEX => scalePattern.length-3;
 
-  static int get DORIAN_SCALE_PATTERN_INDEX => SCALE_PATTERN.length-11;
+  static int get DORIAN_SCALE_PATTERN_INDEX => scalePattern.length-10;
 
-  static int get PHRYGIAN_SCALE_PATTERN_INDEX => SCALE_PATTERN.length-9;
+  static int get PHRYGIAN_SCALE_PATTERN_INDEX => scalePattern.length-8;
 
-  static int get LOCRIAN_SCALE_PATTERN_INDEX => SCALE_PATTERN.length-2;
+  static int get LOCRIAN_SCALE_PATTERN_INDEX => scalePattern.length-1;
 
-  static int get LYDIAN_SCALE_PATTERN_INDEX => SCALE_PATTERN.length-8;
+  static int get LYDIAN_SCALE_PATTERN_INDEX => scalePattern.length-7;
 
-  static int get MIXOLYDIAN_SCALE_PATTERN_INDEX => SCALE_PATTERN.length-6;
+  static int get MIXOLYDIAN_SCALE_PATTERN_INDEX => scalePattern.length-5;
 
   static List<Note> get C_MAJOR_SCALE =>
-      MAJOR_SCALE_FROM_NOTE(CHROMATIC_SCALE[CHROMATIC_SCALE.length-1]);
+      MAJOR_SCALE_FROM_NOTE(chromaticScale[chromaticScale.length-12]);
 
   static double get A4_FREQUENCY => (440.0);
+  static double get C0_FREQUENCY => (16.35);
 
   static List<Note> MAJOR_SCALE_FROM_NOTE(note) =>
       SCALE_FROM_NOTE(MAJOR_SCALE_PATTERN_INDEX, note);
@@ -284,15 +289,15 @@ class Note {
       Note focusNote = (note is Note) ? (note) : (TO_NOTE(note));
       //int noteOctave = NOTE_TO_OCTAVE(note);
       //int startIndex = NOTE_INDEX(note)!;
-      for (int i = patternIndex; i < SCALE_PATTERN.length; i++) {
-        if (SCALE_PATTERN[i] == 1) {
+      for (int i = patternIndex; i < scalePattern.length; i++) {
+        if (scalePattern[i] == 1) {
           scale.add(Note.fromNote(focusNote));
           //print('Added Note: $focusNote, Scale: $scale');
         }
         focusNote = NEXT_NOTE(focusNote);
       }
       for (int i = 0; i < patternIndex; i++) {
-        if (SCALE_PATTERN[i] == 1) {
+        if (scalePattern[i] == 1) {
           scale.add(Note.fromNote(focusNote));
           //print('Added Note: $focusNote, Scale: $scale');
         }
@@ -307,8 +312,8 @@ class Note {
 
   static int? NOTE_INDEX(note) {
     //print('NOTE_INDEX($note)');
-    for (int i = 0; i < CHROMATIC_SCALE.length; i++) {
-      if (CHROMATIC_SCALE[i] == NOTE_NO_OCTAVE(note)) {
+    for (int i = 0; i < chromaticScale.length; i++) {
+      if (chromaticScale[i] == NOTE_NO_OCTAVE(note)) {
         return i;
       }
     }
@@ -345,25 +350,57 @@ class Note {
   }
 
   static List<Note> TO_NOTES(List<String> strNotes) {
-    // print('TO_NOTES($strNotes)');
+    print('TO_NOTES($strNotes)');
     List<Note> noteList = [];
     for (String strNote in strNotes) {
       noteList.add(TO_NOTE(strNote));
     }
-    // print('=> $noteList');
+    print('=> $noteList');
     return noteList;
 
   }
 
-  static double FREQUENCY_EQUATION(double n) {
-    return (A4.getFrequency*Math.pow(2.0,(n-8)/12.0));
+  static double frequency(n) =>
+      (C0.noteFrequency!
+          *pow(2,(n/12)));
+
+  static int n(frequency) =>
+      (17.3123*log(0.06116207951070336*frequency)).round();
+
+  static Note getNoteFromIndex(int index) {
+    int trueIndex = (index+1);
+
+    int octave = (
+        trueIndex/chromaticScale.length
+    ).floor();
+
+    int noteIndex = ((
+        trueIndex%chromaticScale.length
+    )-1);
+
+    Note outNote = Note(
+        noteFrequency: frequency(index),
+        noteOctave: octave,
+        noteNote: chromaticScale[noteIndex]
+    );
+
+    return (outNote);
+  }
+
+  static Note getNoteFromFrequency(frequency) {
+    int index = n(frequency);
+    print("index: $index");
+    Note note = getNoteFromIndex(index);
+    return(note);
   }
 
   // Note Frequencies: https://pages.mtu.edu/~suits/notefreqs.html
+  /*
   static double NOTE_TO_FREQUENCY(note) {
     double noteVal = NOTE_VALUE(NOTE_CHECK(note));
     return (A4.getFrequency*noteVal/A4.getNoteValue);
   }
+  */
 
   static String NOTE_NO_OCTAVE(note) {
     //print('NOTE_NO_OCTAVE($note)');
@@ -384,58 +421,30 @@ class Note {
   static Note NEXT_NOTE(note) {
     Note focusNote = Note.fromNote(NOTE_CHECK(note));
     //print("IN: $focusNote");
-    for (int i = 0; i < CHROMATIC_SCALE.length; i++) {
-      if (CHROMATIC_SCALE[i] == focusNote.getNote) {
-        focusNote.setNote = (i == (CHROMATIC_SCALE.length-1)) ?
-          CHROMATIC_SCALE[0] : CHROMATIC_SCALE[i+1];
+    for (int i = 0; i < chromaticScale.length; i++) {
+      if (chromaticScale[i] == focusNote.getNote) {
+        focusNote.setNote = (i == (chromaticScale.length-1)) ?
+          chromaticScale[0] : chromaticScale[i+1];
         break;
       }
     }
     //print("OUT: $focusNote");
-    if (focusNote.getNote == CHROMATIC_SCALE[11]) {
+    if (focusNote.getNote == chromaticScale[0]) {
       focusNote.incrementOctave();
     }
     return focusNote;
   }
 
-  /*
-  static NEXT_NOTE(note) {
-    //print('NEXT_NOTE($note)');
-    dynamic outNote = '';
-    int outNoteOctave = 0;
-    if (note != null) {
-      outNoteOctave = NOTE_TO_OCTAVE(note);
-      for (int i = 0; i < CHROMATIC_SCALE.length; i++) {
-        if (NOTE_NO_OCTAVE(note) == CHROMATIC_SCALE[i]) {
-          if (i == CHROMATIC_SCALE.length-1) {
-            outNote = CHROMATIC_SCALE[0];
-            outNoteOctave += 1;
-          } else {
-            outNote = CHROMATIC_SCALE[i+1];
-          }
-        }
-      }
-    }
-    // if (outNoteOctave != null)
-    outNote += outNoteOctave.toString();
-
-    if (note is Note) {
-      outNote = TO_NOTE(outNote);
-    }
-    //print('=> $outNote');
-    return outNote;
-  }
-   */
   static int NOTE_TO_OCTAVE(note) {
     //print('NOTE_TO_OCTAVE($note)');
     if (note is String) {
-      //if (note.length > 2) {
-        var check = int.parse(note[note.length-1]);
+      if (note.length > 2) {
+        int check = int.parse(note[note.length-1]);
         if (check is int) {
           //print('=> $check');
           return check;
         }
-      //}
+      }
     } else if (note is Note) {
       //print('=> '+note.getOctave.toString());
       return note.getOctave;
@@ -506,6 +515,13 @@ class Note {
     Note note = TO_NOTE(noat);
     this.noteOctave = note.noteOctave!;
     this.noteNote = note.noteNote!;
+  }
+
+  Note.fromFrequency(double frequency) {
+    Note note = getNoteFromFrequency(frequency);
+    this.noteFrequency = note.getFrequency;
+    this.noteNote = note.getNote;
+    this.noteOctave = note.getOctave;
   }
 
   @override

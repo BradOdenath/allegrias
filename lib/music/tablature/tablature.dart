@@ -54,6 +54,7 @@ class Tablature {
     return outString;
   }
 
+  /*
   static String NOTE_TO_TABLATURE_TOSTRING(
       String note, Chordophone chordophone)
   {
@@ -105,6 +106,7 @@ class Tablature {
     //print('TABLATURE_TOSTRING => $out');
     return out;
   }
+  */
 
   List<TabStanza> tabs = [];
   Chordophone? chordophone =

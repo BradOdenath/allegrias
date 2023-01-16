@@ -52,12 +52,13 @@ class TabStanza {
         List<Note> chordophone_string_scale =
             chordophone_string.getScale;
         for (int j = 0;
-        j < chordophone_string_scale.length; j++)
+        j < chordophone_string_scale.length; 
+        j++)
         {
           Note chordophoneNote =
           chordophone_string_scale[j];
           if (chordophoneBool == false) {
-            out.add('---'/*+'\n'*/);
+            out.add('---');
             break;
           }
 
