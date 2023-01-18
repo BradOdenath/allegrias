@@ -109,9 +109,10 @@ class TabAppState extends State<TabApp> {
           //flutterFft.setOctave = octave!,
           //flutterFft.setNote = note!,
           flutterFft.setFrequency = frequency!,
-          print("Note: "+flutterFft.getNote+flutterFft.getOctave.toString()
-              +"("+flutterFft.getFrequency.toString()+"): "
-              +flutterFft.getIsOnPitch.toString()),
+          print(noat.toDisplayString()),
+          //print("Note: "+flutterFft.getNote+flutterFft.getOctave.toString()
+          //    +"("+flutterFft.getFrequency.toString()+"): "
+          //    +flutterFft.getIsOnPitch.toString()),
           //print(tablature.chordophone!.chordophone_string_tuning_notes),
           //print("Note Frequency: " + flutterFft.getFrequency.toString()),
           //print("Note: " + flutterFft.getNote.toString()

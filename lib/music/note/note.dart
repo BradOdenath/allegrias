@@ -66,6 +66,7 @@ import 'package:allegrias/music/tablature/tab_stanza/tab_stanza.dart';
 * */
 
 void test() {
+  /*
   print('CHROMATIC_SCALE: '
       + Note.chromaticScale.toString());
   print('SCALE_PATTERN: '
@@ -104,10 +105,6 @@ void test() {
       + Note.MINOR_SCALE_FROM_NOTE(Note.chromaticScale[9]).toString());
   print('LOCRIAN_SCALE_FROM_NOTE(B):     '
       + Note.LOCRIAN_SCALE_FROM_NOTE(Note.chromaticScale[11]).toString());
-
-  /// TODO: Fix SORT_NOTES(notes)
-  print('SORT_NOTES(CHROMATIC_SCALE): '
-      + Note.SORT_NOTES(Note.CHROMATIC_SCALE_NOTES).toString());
 
   print('NOTE_INDEX(D#): '
       + Note.NOTE_INDEX(Note.chromaticScale[3]).toString());
@@ -197,6 +194,13 @@ void test() {
   print('A4: '
       + Note.A4.toString());
   print(Note(noteNote: 'B', noteOctave: 1).sharpen());
+  */
+  /// TODO: Fix SORT_NOTES(notes)
+  print('SORT_NOTES(CHROMATIC_SCALE): '
+      + Note.SORT_NOTES(Note.CHROMATIC_SCALE_NOTES).toString());
+
+  print(int.tryParse("D#4"[2]));
+  print(Note.NOTE_TO_OCTAVE('D#333'));
 }
 
 void main() => test();
@@ -274,11 +278,11 @@ class Note {
       SCALE_FROM_NOTE(LOCRIAN_SCALE_PATTERN_INDEX, note);
 
   static List<Note> SORT_NOTES(List<Note> notes) {
-    //print('SORT_NOTES($notes)');
+    print('SORT_NOTES($notes)');
     List<Note> outNotes = notes;
-    outNotes.sort((a,b) => a.getNoteValue.compareTo(b.getNoteValue));
-    outNotes = List.from(outNotes.reversed);
-    //print('=> $outNotes');
+    outNotes.sort((a,b) => a.getFrequency.compareTo(b.getFrequency));
+    //outNotes = List.from(outNotes.reversed);
+    print('=> $outNotes');
     return outNotes;
   }
 
@@ -320,25 +324,6 @@ class Note {
   }
   int get getNoteIndex => NOTE_INDEX(this)!;
 
-  static double NOTE_VALUE(note) {
-    //print('NOTE_VALUE($note)');
-    //Index of StrNote + 1 * .01 * IntOctave
-    var out = (((NOTE_INDEX(NOTE_NO_OCTAVE(note))! + 1) * 0.01)
-        + NOTE_TO_OCTAVE(note));
-    //print('=> $out');
-    return out;
-  }
-  double get getNoteValue => NOTE_VALUE(this);
-
-  static Note NOTE_FROM_NOTE_VALUE(double value) {
-    //print('NOTE_FROM_NOTE_VALUE($value)');
-    int noteOctave = (value - value.floor()).toInt();
-    int noteIndex = (((value - noteOctave) * 100.0).toInt() - 1);
-    Note outNote = CHROMATIC_SCALE_NOTES[noteIndex];
-    //print('=> $outNote');
-    return outNote;
-  }
-
   static Note TO_NOTE(note) {
     // print('$TO_NOTE($note)');
     if (note is Note) return note;
@@ -350,14 +335,13 @@ class Note {
   }
 
   static List<Note> TO_NOTES(List<String> strNotes) {
-    print('TO_NOTES($strNotes)');
+    //print('TO_NOTES($strNotes)');
     List<Note> noteList = [];
     for (String strNote in strNotes) {
       noteList.add(TO_NOTE(strNote));
     }
-    print('=> $noteList');
+    //print('=> $noteList');
     return noteList;
-
   }
 
   static double frequency(n) =>
@@ -438,13 +422,20 @@ class Note {
   static int NOTE_TO_OCTAVE(note) {
     //print('NOTE_TO_OCTAVE($note)');
     if (note is String) {
-      if (note.length > 2) {
-        int check = int.parse(note[note.length-1]);
-        if (check is int) {
-          //print('=> $check');
-          return check;
+      int octaveInt;
+      String octaveString = '';
+      for (int i = note.length-1; i > 0; i--) {
+        var numberCheck = int.tryParse(note[i]);
+        if (numberCheck != null) {
+          octaveString = (note[i] + octaveString);
+        } else {
+          break;
         }
       }
+      octaveInt = ((octaveString != '')
+          ? int.parse(octaveString)
+          : (0));
+      return (octaveInt);
     } else if (note is Note) {
       //print('=> '+note.getOctave.toString());
       return note.getOctave;
@@ -461,7 +452,11 @@ class Note {
   {
     //print('NOTE_TO_FINGERBOARD_COORDINATES($note)');
     Map<int,int>? noteCoordinates;
-    for (int i = 0; i < Chordophone.CHORDOPHONE_STRING_COUNT; i++) {
+    for (
+    int i = 0;
+    i < Chordophone.CHORDOPHONE_STRING_COUNT;
+    i++
+    ) {
       if (chordophone
           .chordophone_strings![i]
           .isNoteOnChordophoneString(note) == true
@@ -525,9 +520,15 @@ class Note {
   }
 
   @override
-  String toString() => '$noteNote$noteOctave';
+  String toString() =>
+      '$noteNote$noteOctave';
 
-  int get length => toString().length;
+  String toDisplayString() =>
+      '$noteNote$noteOctave'
+          ' ($noteFrequency)';
+
+  int get length =>
+      toString().length;
 
   @override
   bool operator ==(Object other) =>

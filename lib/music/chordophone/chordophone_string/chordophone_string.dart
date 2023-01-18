@@ -44,7 +44,10 @@ class ChordophoneString {
       Note note, ChordophoneString chordophoneString) {
     //print('IS_EXISTANT_NOTE_ON_STRINGED_INSTRUMENT_STRING'
     //    '($note, $stringedInstrumentString)');
-    for (int i = 0; i < Chordophone.FINGERBOARD_LENGTH; i++) {
+    for (
+    int i = 0;
+    i < Chordophone.DEFAULT_FINGERBOARD_LENGTH;
+    i++) {
       if (chordophoneString
           .getScale[i]
           .toString() == note.toString()) {
@@ -79,15 +82,20 @@ class ChordophoneString {
 
   ChordophoneString.fromDefaultFingerboardLength(Note index_note) {
     this.index_note = index_note;
-    this.string_length = Chordophone.FINGERBOARD_LENGTH;
+    this.string_length = Chordophone.DEFAULT_FINGERBOARD_LENGTH;
   }
 
-  Note get getIndexNote => this.index_note!;
+  Note get getIndexNote =>
+      this.index_note!;
+
   List<Note> get getScale => CHORDOPHONE_STRING(
       this.string_length!, this.index_note!);
 
-  set setIndexNote(Note note) => this.index_note = note;
-  set setStringLength(int length) => this.string_length = length;
+  set setIndexNote(Note note) =>
+      this.index_note = note;
+
+  set setStringLength(int length) =>
+      this.string_length = length;
 
   bool isNoteOnChordophoneString(Note note) =>
       IS_EXISTANT_NOTE_ON_CHORDOPHONE_STRING(note, this) != -1;

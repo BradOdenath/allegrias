@@ -32,15 +32,20 @@ import '../note/note.dart';
  */
 class Chordophone {
   
-  static int POSITION_RANGE = 5;
-  static final int FINGERBOARD_LENGTH = 24;
+  static final int DEFAULT_FINGERBOARD_LENGTH = 24;
   static final List<String> DEFAULT_CHORDOPHONE_STRING_TUNING = [
     //'D#4', 'A#3', 'F#3', 'C#3', 'G#2', 'D#2', 'A#1', 'F#1', 'C#1', 'G#0'
-    'D4', 'A3', 'F3', 'C3', 'G2', 'D2', 'A1', 'F1', 'C1', 'G0'
+    'D4', 'A3', 'F3', 'C3', 'G2', 'D2'//, 'A1', 'F1', 'C1', 'G0'
   ];
-  
-  static List<Map<int,int>> FINGERBOARD_COORDINATES_TO_POSITION_GROUPS(Map<Note,
-      Map<int,int>> fingerboardCoordinatesNoteMap) {
+
+  /// TODO: Implement this to writing efficient tablature.
+  static int POSITION_RANGE = 5;
+
+  static List<Map<int,int>> FINGERBOARD_COORDINATES_TO_POSITION_GROUPS(
+      Map<Note,
+      Map<int,int>> fingerboardCoordinatesNoteMap
+      )
+  {
     //print('FINGERBOARD_COORDINATES_TO_FRET_GROUPS'
     //    '($positionCoordinatesNoteMap)');
     List<Map<int,int>> positionGroups = [];
@@ -52,7 +57,8 @@ class Chordophone {
               if (!positionGroup.containsKey(stringIndex)) {
                 if (IS_VALID_RANGE_TO_POSITION_GROUP(
                     positionGroup,
-                    positionIndex)!) {
+                    positionIndex)!
+                ) {
                   positionGroup.addAll({stringIndex:positionIndex});
                 } else {
                   positionGroups.add({stringIndex:positionIndex});
@@ -123,7 +129,6 @@ class Chordophone {
     return chordophoneStrings;
 
   }
-
 
   List<String>? string_tuning = [];
   int get string_count => string_tuning!.length;
