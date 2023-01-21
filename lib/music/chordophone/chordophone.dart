@@ -35,7 +35,8 @@ class Chordophone {
   static final int DEFAULT_FINGERBOARD_LENGTH = 24;
   static final List<String> DEFAULT_CHORDOPHONE_STRING_TUNING = [
     //'D#4', 'A#3', 'F#3', 'C#3', 'G#2', 'D#2', 'A#1', 'F#1', 'C#1', 'G#0'
-    'D4', 'A3', 'F3', 'C3', 'G2', 'D2'//, 'A1', 'F1', 'C1', 'G0'
+    //'D4', 'A3', 'F3', 'C3', 'G2', 'D2'//, 'A1', 'F1', 'C1', 'G0'
+    'E4', 'B3', 'G3', 'D3', 'A2', 'E2'
   ];
 
   /// TODO: Implement this to writing efficient tablature.

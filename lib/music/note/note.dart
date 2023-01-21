@@ -201,6 +201,7 @@ void test() {
 
   print(int.tryParse("D#4"[2]));
   print(Note.NOTE_TO_OCTAVE('D#333'));
+  print(Note.getNoteFromIndex(47).toString());
 }
 
 void main() => test();
@@ -360,7 +361,7 @@ class Note {
 
     int noteIndex = ((
         trueIndex%chromaticScale.length
-    )-1);
+    ));
 
     Note outNote = Note(
         noteFrequency: frequency(index),

@@ -1,12 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.slins.flutterfft.flutter_fft_example">
+    package="com.bradodenath.allegrias.allegrias">
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <uses-permission android:name="android.permission.INTERNET"/>
-   <application
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+    <application
         android:label="Chordi"
         android:icon="@mipmap/chordi_icon">
         <activity
             android:name=".MainActivity"
+            android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"

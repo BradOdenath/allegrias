@@ -53,6 +53,7 @@ class TabAppState extends State<TabApp> {
       title: 'Guitar Tabber',
       theme: ThemeData.light(),
       color: Colors.blue,
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Center(
           child: Column(
