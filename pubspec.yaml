@@ -1,5 +1,5 @@
 name: allegrias
-description: Utilizes the flutter_fft plugin to generate chordophone tablature.
+description: Utilizes the flutter_fft plugin to generate chordophone tablature. 
 version: 1.0.2+2
 
 # The following line prevents the package from being accidentally published to
