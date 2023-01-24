@@ -1,4 +1,4 @@
-package com.slins.flutterfft.flutter_fft_example;
+package com.bradodenath.allegrias.allegrias;
 
 import io.flutter.embedding.android.FlutterActivity;
 
