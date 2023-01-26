@@ -52,31 +52,37 @@ class Chordophone {
     //    '($positionCoordinatesNoteMap)');
     List<Map<int,int>> positionGroups = [];
     if (fingerboardCoordinatesNoteMap != null) {
-      fingerboardCoordinatesNoteMap.forEach((note, fingerboardCoordinates) {
-        fingerboardCoordinates.forEach((stringIndex, positionIndex) {
-          if (positionGroups.length > 0) {
-            for (var positionGroup in positionGroups) {
-              if (!positionGroup.containsKey(stringIndex)) {
-                if (IS_VALID_RANGE_TO_POSITION_GROUP(
-                    positionGroup,
-                    positionIndex)!
-                ) {
-                  positionGroup.addAll({stringIndex:positionIndex});
-                } else {
-                  positionGroups.add({stringIndex:positionIndex});
-                }
-              } else {
-                positionGroups.add({stringIndex:positionIndex});
-              }
-            }
-          } else {
-            positionGroups.add({stringIndex:positionIndex});
-          }
-        });
-      });
+      fingerboardCoordinatesNoteMap
+          .forEach((note, fingerboardCoordinates) {
+            fingerboardCoordinates
+                .forEach((stringIndex, positionIndex) {
+                  if (positionGroups.length > 0) {
+                    for (var positionGroup in positionGroups) {
+                      if (!positionGroup.containsKey(stringIndex)) {
+                        if (IS_VALID_RANGE_TO_POSITION_GROUP(
+                            positionGroup,
+                            positionIndex
+                        )!) {
+                          positionGroup.addAll(
+                              {stringIndex:positionIndex}
+                          );
+                        } else {
+                          positionGroups.add(
+                              {stringIndex:positionIndex}
+                          );
+                        }
+                      } else {
+                        positionGroups.add({stringIndex:positionIndex});
+                      }
+                    }
+                  } else {
+                    positionGroups.add({stringIndex:positionIndex});
+                  }
+                });
+          });
     }
     //print('=> $positionGroups');
-    return positionGroups;
+    return (positionGroups);
   }
 
   static bool? IS_VALID_RANGE_TO_POSITION_GROUP(
@@ -93,7 +99,7 @@ class Chordophone {
       });
     }
     //print('=> $out');
-    return out;
+    return (out);
   }
 
   static Map<int,int> POSITION_GROUPS_TO_CHORDOPHONE_CHORD(

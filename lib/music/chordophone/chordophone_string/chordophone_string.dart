@@ -76,31 +76,34 @@ class ChordophoneString {
   int? string_length;
 
   ChordophoneString(Note index_note, int string_length) {
-    this.index_note = index_note;
-    this.string_length = string_length;
+    this.index_note = (index_note);
+    this.string_length = (string_length);
   }
 
   ChordophoneString.fromDefaultFingerboardLength(Note index_note) {
-    this.index_note = index_note;
-    this.string_length = Chordophone.DEFAULT_FINGERBOARD_LENGTH;
+    this.index_note = (index_note);
+    this.string_length = (Chordophone.DEFAULT_FINGERBOARD_LENGTH);
   }
 
   Note get getIndexNote =>
-      this.index_note!;
+      (this.index_note!);
 
-  List<Note> get getScale => CHORDOPHONE_STRING(
-      this.string_length!, this.index_note!);
+  List<Note> get getScale =>
+      (CHORDOPHONE_STRING(
+          this.string_length!,
+          this.index_note!
+      ));
 
   set setIndexNote(Note note) =>
-      this.index_note = note;
+      this.index_note = (note);
 
   set setStringLength(int length) =>
-      this.string_length = length;
+      this.string_length = (length);
 
   bool isNoteOnChordophoneString(Note note) =>
-      IS_EXISTANT_NOTE_ON_CHORDOPHONE_STRING(note, this) != -1;
+      (IS_EXISTANT_NOTE_ON_CHORDOPHONE_STRING(note, this) != -1);
 
   int noteExistsAtPosition(Note note) =>
-      IS_EXISTANT_NOTE_ON_CHORDOPHONE_STRING(note, this);
+      (IS_EXISTANT_NOTE_ON_CHORDOPHONE_STRING(note, this));
 
 }

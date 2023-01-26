@@ -208,123 +208,185 @@ void test() {
 void main() => test();
 
 class Note {
-
-  static const List<String> chromaticScale = [
-    //0   1     2     3     4     5     6     7     8     9     10    11
-    'C',  'C#', 'D',  'D#', 'E',  'F',  'F#', 'G',  'G#', 'A',  'A#', 'B'
-
-    /// TODO: Fix offsets all over the file
-    //'A',  'A#', 'B',  'C',  'C#', 'D',  'D#', 'E',  'F',  'F#', 'G',  'G#'
+  // Half Step Notes in Chromatic Order
+  static const List<String> CHROMATIC_SCALE = [
+    //0    1
+    'C',  'C#',
+    //2    3
+    'D',  'D#',
+    //4
+    'E',
+    //5    6
+    'F',  'F#',
+    //7    8
+    'G',  'G#',
+    //9    10
+    'A',  'A#',
+    //11
+    'B'
   ];
 
-  static const List<int> scalePattern = [
+  // Scale Pattern of Whole and Half Steps
+  // Based on the Major Scale Pattern
+  // Represented with Binary Bits
+  // WWHWWWH (Whole & Half Steps) https://www.musictheory.net/lessons/21
+  static const List<int> SCALE_PATTERN = [
   //-12   -11   -10   -9    -8    -7    -6   -5    -4    -3    -2    -1
   //0     1     2     3     4     5     6     7     8     9     10    11
     1,    0,    1,    0,    1,    1,    0,    1,    0,    1,    0,    1
   //H           W           W     H           W           W           W
-  ]; //WWHWWWH (Whole & Half Steps) https://www.musictheory.net/lessons/21
+  ];
 
+  // Frequency for Note C0
+  static const double C0_FREQUENCY = (16.35);
+
+  // Object for Note C0
+  // footnote: non_modifiable as if const
+  // ignore: non_constant_identifier_names
   static Note get C0 => Note(
     noteFrequency: C0_FREQUENCY,
-    noteNote: chromaticScale[0],
+    noteNote: CHROMATIC_SCALE[0],
     noteOctave: 0,
   );
 
-  static Note get A4 => Note(
-    noteFrequency: A4_FREQUENCY,
-    noteNote: chromaticScale[9],
-    noteOctave: 4,
-  );
+  // Object List of Octave 0 Notes
+  // footnote: non_modifiable as if const
+  // ignore: non_constant_identifier_names
+  static List<Note> get CHROMATIC_SCALE_NOTES =>
+      (TO_NOTES(CHROMATIC_SCALE));
 
-  static List<Note> get CHROMATIC_SCALE_NOTES => TO_NOTES(chromaticScale);
+  // footnote: Scale pattern index
+  // Offset by -1 for octave detection
+  // (Octave increases every C note)
 
-  static int get MAJOR_SCALE_PATTERN_INDEX => scalePattern.length-12;
+  // Major/Ionian Scale Pattern Index
+  // footnote: non_modifiable as if const
+  // ignore: non_constant_identifier_names
+  static int get MAJOR_SCALE_PATTERN_INDEX =>
+      (SCALE_PATTERN.length-12);
 
-  static int get MINOR_SCALE_PATTERN_INDEX => scalePattern.length-3;
+  // Minor/Aeolian Scale Pattern Index
+  // footnote: non_modifiable as if const
+  // ignore: non_constant_identifier_names
+  static int get MINOR_SCALE_PATTERN_INDEX =>
+      (SCALE_PATTERN.length-3);
 
-  static int get DORIAN_SCALE_PATTERN_INDEX => scalePattern.length-10;
+  // footnote: non_modifiable as if const
+  // ignore: non_constant_identifier_names
+  static int get DORIAN_SCALE_PATTERN_INDEX =>
+      (SCALE_PATTERN.length-10);
 
-  static int get PHRYGIAN_SCALE_PATTERN_INDEX => scalePattern.length-8;
+  // footnote: non_modifiable as if const
+  // ignore: non_constant_identifier_names
+  static int get PHRYGIAN_SCALE_PATTERN_INDEX =>
+      (SCALE_PATTERN.length-8);
 
-  static int get LOCRIAN_SCALE_PATTERN_INDEX => scalePattern.length-1;
+  // footnote: non_modifiable as if const
+  // ignore: non_constant_identifier_names
+  static int get LOCRIAN_SCALE_PATTERN_INDEX =>
+      (SCALE_PATTERN.length-1);
 
-  static int get LYDIAN_SCALE_PATTERN_INDEX => scalePattern.length-7;
+  // footnote: non_modifiable as if const
+  // ignore: non_constant_identifier_names
+  static int get LYDIAN_SCALE_PATTERN_INDEX =>
+      (SCALE_PATTERN.length-7);
 
-  static int get MIXOLYDIAN_SCALE_PATTERN_INDEX => scalePattern.length-5;
+  // footnote: non_modifiable as if const
+  // ignore: non_constant_identifier_names
+  static int get MIXOLYDIAN_SCALE_PATTERN_INDEX =>
+      (SCALE_PATTERN.length-5);
 
+  // footnote: non_modifiable as if const
+  // ignore: non_constant_identifier_names
   static List<Note> get C_MAJOR_SCALE =>
-      MAJOR_SCALE_FROM_NOTE(chromaticScale[chromaticScale.length-12]);
+      (MAJOR_SCALE_FROM_NOTE(
+          SCALE_FROM_NOTE(
+            MAJOR_SCALE_PATTERN_INDEX,
+            C0.getNote
+          )));
 
-  static double get A4_FREQUENCY => (440.0);
-  static double get C0_FREQUENCY => (16.35);
-
+  // footnote: non_modifiable as if const
+  // ignore: non_constant_identifier_names
   static List<Note> MAJOR_SCALE_FROM_NOTE(note) =>
-      SCALE_FROM_NOTE(MAJOR_SCALE_PATTERN_INDEX, note);
+      (SCALE_FROM_NOTE(MAJOR_SCALE_PATTERN_INDEX, note));
 
+  // footnote: non_modifiable as if const
+  // ignore: non_constant_identifier_names
   static List<Note> MINOR_SCALE_FROM_NOTE(note) =>
-      SCALE_FROM_NOTE(MINOR_SCALE_PATTERN_INDEX, note);
+      (SCALE_FROM_NOTE(MINOR_SCALE_PATTERN_INDEX, note));
 
+  // footnote: non_modifiable as if const
+  // ignore: non_constant_identifier_names
   static List<Note> DORIAN_SCALE_FROM_NOTE(note) =>
-      SCALE_FROM_NOTE(DORIAN_SCALE_PATTERN_INDEX, note);
+      (SCALE_FROM_NOTE(DORIAN_SCALE_PATTERN_INDEX, note));
 
+  // footnote: non_modifiable as if const
+  // ignore: non_constant_identifier_names
   static List<Note> PHRYGIAN_SCALE_FROM_NOTE(note) =>
-      SCALE_FROM_NOTE(PHRYGIAN_SCALE_PATTERN_INDEX, note);
+      (SCALE_FROM_NOTE(PHRYGIAN_SCALE_PATTERN_INDEX, note));
 
+  // footnote: non_modifiable as if const
+  // ignore: non_constant_identifier_names
   static List<Note> LYDIAN_SCALE_FROM_NOTE(note) =>
-      SCALE_FROM_NOTE(LYDIAN_SCALE_PATTERN_INDEX, note);
+      (SCALE_FROM_NOTE(LYDIAN_SCALE_PATTERN_INDEX, note));
 
+  // footnote: non_modifiable as if const
+  // ignore: non_constant_identifier_names
   static List<Note> MIXOLYDIAN_SCALE_FROM_NOTE(note) =>
-      SCALE_FROM_NOTE(MIXOLYDIAN_SCALE_PATTERN_INDEX, note);
+      (SCALE_FROM_NOTE(MIXOLYDIAN_SCALE_PATTERN_INDEX, note));
 
+  // footnote: non_modifiable as if const
+  // ignore: non_constant_identifier_names
   static List<Note> LOCRIAN_SCALE_FROM_NOTE(note) =>
-      SCALE_FROM_NOTE(LOCRIAN_SCALE_PATTERN_INDEX, note);
+      (SCALE_FROM_NOTE(LOCRIAN_SCALE_PATTERN_INDEX, note));
 
   static List<Note> SORT_NOTES(List<Note> notes) {
-    print('SORT_NOTES($notes)');
-    List<Note> outNotes = notes;
-    outNotes.sort((a,b) => a.getFrequency.compareTo(b.getFrequency));
-    //outNotes = List.from(outNotes.reversed);
-    print('=> $outNotes');
-    return outNotes;
+    //print('SORT_NOTES($notes)');
+    List<Note> outNotes = (notes);
+    outNotes.sort((a,b) => a
+        .getFrequency
+        .compareTo(b.getFrequency)
+    );
+    //print('=> $outNotes');
+    return (outNotes);
   }
 
   static List<Note> SCALE_FROM_NOTE(int patternIndex, note) {
     //print('SCALE_FROM_NOTE($patternIndex,$note)');
     List<Note> scale = [];
     if (note != null) {
-      Note focusNote = (note is Note) ? (note) : (TO_NOTE(note));
-      //int noteOctave = NOTE_TO_OCTAVE(note);
-      //int startIndex = NOTE_INDEX(note)!;
-      for (int i = patternIndex; i < scalePattern.length; i++) {
-        if (scalePattern[i] == 1) {
+      Note focusNote = ((note is Note)
+          ? (note)
+          : (TO_NOTE(note))
+      );
+      for (int i = patternIndex; i < SCALE_PATTERN.length; i++) {
+        if (SCALE_PATTERN[i] == 1) {
           scale.add(Note.fromNote(focusNote));
-          //print('Added Note: $focusNote, Scale: $scale');
         }
         focusNote = NEXT_NOTE(focusNote);
       }
       for (int i = 0; i < patternIndex; i++) {
-        if (scalePattern[i] == 1) {
+        if (SCALE_PATTERN[i] == 1) {
           scale.add(Note.fromNote(focusNote));
-          //print('Added Note: $focusNote, Scale: $scale');
         }
-        focusNote = NEXT_NOTE(focusNote);
+        focusNote = (NEXT_NOTE(focusNote));
       }
     }
     // TODO: Add or Remove this line
     scale.add(scale[0]);
     //print('$scale');
-    return scale;
+    return (scale);
   }
 
   static int? NOTE_INDEX(note) {
     //print('NOTE_INDEX($note)');
-    for (int i = 0; i < chromaticScale.length; i++) {
-      if (chromaticScale[i] == NOTE_NO_OCTAVE(note)) {
-        return i;
+    for (int i = 0; i < CHROMATIC_SCALE.length; i++) {
+      if (CHROMATIC_SCALE[i] == NOTE_NO_OCTAVE(note)) {
+        return (i);
       }
     }
   }
-  int get getNoteIndex => NOTE_INDEX(this)!;
+  int get getNoteIndex => (NOTE_INDEX(this)!);
 
   static Note TO_NOTE(note) {
     // print('$TO_NOTE($note)');
@@ -333,7 +395,7 @@ class Note {
         noteNote: NOTE_NO_OCTAVE(note),
         noteOctave: NOTE_TO_OCTAVE(note));
     //print('=> $outNote');
-    return outNote;
+    return (outNote);
   }
 
   static List<Note> TO_NOTES(List<String> strNotes) {
@@ -343,7 +405,7 @@ class Note {
       noteList.add(TO_NOTE(strNote));
     }
     //print('=> $noteList');
-    return noteList;
+    return (noteList);
   }
 
   static double frequency(n) =>
@@ -355,38 +417,18 @@ class Note {
 
   static Note getNoteFromIndex(int index) {
     int trueIndex = (index+1);
-
-    int octave = (
-        trueIndex/chromaticScale.length
-    ).floor();
-
-    int noteIndex = ((
-        trueIndex%chromaticScale.length
-    ));
-
+    int octave = ((trueIndex/CHROMATIC_SCALE.length).floor());
+    int noteIndex = (trueIndex%CHROMATIC_SCALE.length);
     Note outNote = Note(
-        noteFrequency: frequency(index),
-        noteOctave: octave,
-        noteNote: chromaticScale[noteIndex]
+        noteFrequency: (frequency(index)),
+        noteOctave: (octave),
+        noteNote: (CHROMATIC_SCALE[noteIndex])
     );
-
     return (outNote);
   }
 
-  static Note getNoteFromFrequency(frequency) {
-    int index = n(frequency);
-    print("index: $index");
-    Note note = getNoteFromIndex(index);
-    return(note);
-  }
-
-  // Note Frequencies: https://pages.mtu.edu/~suits/notefreqs.html
-  /*
-  static double NOTE_TO_FREQUENCY(note) {
-    double noteVal = NOTE_VALUE(NOTE_CHECK(note));
-    return (A4.getFrequency*noteVal/A4.getNoteValue);
-  }
-  */
+  static Note getNoteFromFrequency(frequency) =>
+      (getNoteFromIndex(n(frequency)));
 
   static String NOTE_NO_OCTAVE(note) {
     //print('NOTE_NO_OCTAVE($note)');
@@ -399,26 +441,26 @@ class Note {
       return note.getNote;
     }
     //print('=> $note');
-    return note;
+    return (note);
   }
 
-  static Note NOTE_CHECK(note) => (note is Note) ? note : TO_NOTE(note);
+  static Note NOTE_CHECK(note) => (note is Note)
+      ? (note)
+      : (TO_NOTE(note));
 
   static Note NEXT_NOTE(note) {
     Note focusNote = Note.fromNote(NOTE_CHECK(note));
-    //print("IN: $focusNote");
-    for (int i = 0; i < chromaticScale.length; i++) {
-      if (chromaticScale[i] == focusNote.getNote) {
-        focusNote.setNote = (i == (chromaticScale.length-1)) ?
-          chromaticScale[0] : chromaticScale[i+1];
+    for (int i = 0; i < CHROMATIC_SCALE.length; i++) {
+      if (CHROMATIC_SCALE[i] == focusNote.getNote) {
+        focusNote.setNote = (i == (CHROMATIC_SCALE.length-1)) ?
+          CHROMATIC_SCALE[0] : CHROMATIC_SCALE[i+1];
         break;
       }
     }
-    //print("OUT: $focusNote");
-    if (focusNote.getNote == chromaticScale[0]) {
+    if (focusNote.getNote == CHROMATIC_SCALE[0]) {
       focusNote.incrementOctave();
     }
-    return focusNote;
+    return (focusNote);
   }
 
   static int NOTE_TO_OCTAVE(note) {
@@ -443,11 +485,11 @@ class Note {
       return note.getOctave;
     }
     //print('=> 0');
-    return 0;
+    return (0);
   }
 
   static Note INCREMENT_NOTE_OCTAVE(note) =>
-      NOTE_CHECK(note)..setOctave = (note.getOctave+1);
+      (NOTE_CHECK(note)..setOctave = (note.getOctave+1));
 
   static Map<int,int> NOTE_TO_FINGERBOARD_COORDINATES(
       Chordophone chordophone, Note note)
@@ -461,7 +503,7 @@ class Note {
     ) {
       if (chordophone
           .chordophone_strings![i]
-          .isNoteOnChordophoneString(note) == true
+          .isNoteOnChordophoneString(note)
       ) {
         noteCoordinates!.addAll(
             {i:chordophone
@@ -472,7 +514,7 @@ class Note {
       }
     }
     //print('=> $noteCoordinates');
-    return noteCoordinates!;
+    return (noteCoordinates!);
   }
 
   static Map<Note, Map<int, int>> NOTES_TO_FINGERBOARD_COORDINATES_NOTE_MAP(
@@ -489,7 +531,7 @@ class Note {
       }
     }
     //print('=> $outCoordinates');
-    return outCoordinates;
+    return (outCoordinates);
   }
 
   double? noteFrequency;
@@ -502,57 +544,55 @@ class Note {
     this.noteOctave
   });
 
-  Note.fromNote(Note noat) {
-    this.noteNote = noat.noteNote;
-    this.noteOctave = noat.noteOctave;
-    this.noteFrequency = noat.noteFrequency;
+  Note.fromNote(Note note) {
+    this.noteNote = (note.noteNote);
+    this.noteOctave = (note.noteOctave);
+    this.noteFrequency = (note.noteFrequency);
   }
 
-  Note.fromChordophoneString(String noat) {
-    Note note = TO_NOTE(noat);
-    this.noteOctave = note.noteOctave!;
-    this.noteNote = note.noteNote!;
+  Note.fromChordophoneString(String note) {
+    Note noat = (TO_NOTE(note));
+    this.noteOctave = (noat.noteOctave!);
+    this.noteNote = (noat.noteNote!);
   }
 
   Note.fromFrequency(double frequency) {
-    Note note = getNoteFromFrequency(frequency);
-    this.noteFrequency = note.getFrequency;
-    this.noteNote = note.getNote;
-    this.noteOctave = note.getOctave;
+    Note note = (getNoteFromFrequency(frequency));
+    this.noteFrequency = (note.getFrequency);
+    this.noteNote = (note.getNote);
+    this.noteOctave = (note.getOctave);
   }
 
   @override
-  String toString() =>
-      '$noteNote$noteOctave';
+  String toString() => ('$noteNote$noteOctave');
 
   String toDisplayString() =>
-      '$noteNote$noteOctave'
-          ' ($noteFrequency)';
+      (this.toString() + ' ($noteFrequency)');
 
-  int get length =>
-      toString().length;
+  int get length => (toString().length);
 
   @override
-  bool operator ==(Object other) =>
+  bool operator == (Object other) =>
       (toString() == NOTE_CHECK(other).toString())
           ? (true)
           : (false);
 
   @override
   // TODO: implement hashCode
-  int get hashCode => super.hashCode;
+  int get hashCode => (super.hashCode);
 
   double get getFrequency =>
-      (noteFrequency != null) ? noteFrequency! : (0.0);
-  set setFrequency(double frequency) => noteFrequency = frequency;
+      (noteFrequency != null)
+          ? (noteFrequency!)
+          : (0.0);
+  set setFrequency(double frequency) => noteFrequency = (frequency);
 
-  String get getNote => noteNote!;
-  set setNote(String note) => noteNote = note;
-  Note sharpen() => NEXT_NOTE(this);
+  String get getNote => (noteNote!);
+  set setNote(String note) => noteNote = (note);
+  Note sharpen() => (NEXT_NOTE(this));
 
-  int get getOctave => noteOctave!;
-  set setOctave(int octave) => noteOctave = octave;
-  Note incrementOctave() =>
-    INCREMENT_NOTE_OCTAVE(this);
+  int get getOctave => (noteOctave!);
+  set setOctave(int octave) => noteOctave = (octave);
+  Note incrementOctave() => (INCREMENT_NOTE_OCTAVE(this));
 
 }

@@ -29,7 +29,6 @@ import 'tab_stanza/tab_stanza.dart';
 * */
 
 class Tablature {
-
   static String TAB_STANZAS_TOSTRING(
       Chordophone chordophone, List<TabStanza> tabStanzas)
   {
@@ -42,7 +41,8 @@ class Tablature {
       i++
       ) {
         outString += '|-'
-            + Chordophone.DEFAULT_CHORDOPHONE_STRING_TUNING[i]
+            + Chordophone
+                .DEFAULT_CHORDOPHONE_STRING_TUNING[i]
             + '-|-';
 
         for (
@@ -72,13 +72,12 @@ class Tablature {
   }
   
   bool addNote(note) {
-    if (note == null) {
-      return (false);
-    } else {
+    if (note != null) {
       tabs.add(TabStanza(chordophone!));
       return (tabs[getLastTabStanzaIndex]
           .addNote(note)!);
     }
+    return (false);
   }
   
   List<TabStanza> get getTabs => (this.tabs);
@@ -94,7 +93,8 @@ class Tablature {
       TAB_STANZAS_TOSTRING(chordophone!, tabs);
 
   @override
-  String toString() =>
-      isNotEmpty ? tabStanzasToString : 'Make Notes :)';
+  String toString() => (isNotEmpty)
+          ? tabStanzasToString
+          : 'Make Notes :)';
 
 }
