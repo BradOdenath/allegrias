@@ -6,7 +6,7 @@ import 'package:allegrias/music/note/note.dart';
 import '../chordophone/chordophone.dart';
 import 'tab_stanza/tab_stanza.dart';
 
-/// TODO: Rewrite the notes
+/// TODO: Rewrite the data notes
 /*  Class:  Tablature
 *     Static
 *
@@ -36,14 +36,19 @@ class Tablature {
     //print('TAB_STANZAS_TOSTRING($tabStanzas)');
     String outString = '';
     if (tabStanzas != null && tabStanzas.length > 0) {
-      for (int i = 0;
+      for (
+      int i = 0;
       i < Chordophone.CHORDOPHONE_STRING_COUNT;
-      i++) {
+      i++
+      ) {
         outString += '|-'
             + Chordophone.DEFAULT_CHORDOPHONE_STRING_TUNING[i]
             + '-|-';
 
-        for (int j = tabStanzas.length > 10 ? tabStanzas.length-10 : 0;
+        for (
+        int j = tabStanzas.length > 10
+            ? tabStanzas.length-10
+            : 0;
         j < tabStanzas.length;
         j++
         ) {

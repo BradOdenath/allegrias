@@ -8,6 +8,7 @@ import '../../chordophone/chordophone.dart';
 import '../../note/note.dart';
 import '../tablature.dart';
 
+/// TODO: Rewrite the data notes
 /*  Class:  TabStanza
 *     Static
 *       bool        NOTE_EXISTS(List<Note> noteList, Note note)

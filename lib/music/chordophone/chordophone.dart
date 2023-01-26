@@ -3,6 +3,7 @@ import 'package:allegrias/music/chordophone/'
     'chordophone_string/chordophone_string.dart';
 import '../note/note.dart';
 
+///TODO: Rewrite the data notes
 /*  Class:  Chordophone
 * -----------------------------------------------------------------------------
 *     Static

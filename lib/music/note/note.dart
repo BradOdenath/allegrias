@@ -6,6 +6,7 @@ import 'package:allegrias/music/chordophone/'
     'chordophone_string/chordophone_string.dart';
 import 'package:allegrias/music/tablature/tab_stanza/tab_stanza.dart';
 
+///TODO: Rewrite the data notes
 /*  Class:  Note
 *     Static
 *       Attributes
