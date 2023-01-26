@@ -1,7 +1,6 @@
 import 'theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fft/flutter_fft.dart';
-
 import 'music/chordophone/chordophone.dart';
 import 'music/note/note.dart';
 import 'music/tablature/tablature.dart';
@@ -14,15 +13,13 @@ class TabApp extends StatefulWidget {
 }
 
 class TabAppState extends State<TabApp> {
-
   // Flutterfft Data
   double? frequency;
-  //String? note;
   bool? isRecording;
-  //int? octave;
   bool? onPitch;
 
-  Note noat = Note.C0;
+  //Current note data
+  Note note = Note.C0;
 
   // String tabulatureStr;
   Tablature tablature =
@@ -39,8 +36,6 @@ class TabAppState extends State<TabApp> {
   void initState() {
     isRecording = flutterFft.getIsRecording;
     frequency = flutterFft.getFrequency;
-    //note = flutterFft.getNote;
-    //octave = flutterFft.getOctave;
     onPitch = flutterFft.getIsOnPitch;
 
     super.initState();
@@ -73,7 +68,6 @@ class TabAppState extends State<TabApp> {
   }
 
   _initialize() async {
-
     print("Starting recorder...");
 
     while (!(await(flutterFft.checkPermission()))) {
@@ -89,35 +83,14 @@ class TabAppState extends State<TabApp> {
           setState(() => {
             onPitch = data[10] as bool,
             frequency = data[1] as double,
-            // note = data[2] as String,
-            // octave = data[5] as int,
-            // tabulatureStr = Guitar.NOTE_TO_TABULATURE_STANZA_TOSTRING(note),
             if (frequency != null) {
-              noat = Note.fromFrequency(frequency!),
-              tablature.addNote(
-                  /*
-                  Note(
-                    noteOctave: octave,
-                    noteNote: note,
-                    noteFrequency: frequency,
-                  )
-                  */
-                  noat,
-              )
+              note = Note.fromFrequency(frequency!),
+              tablature.addNote(note)
             },
           }),
           flutterFft.setIsOnPitch = onPitch!,
-          //flutterFft.setOctave = octave!,
-          //flutterFft.setNote = note!,
           flutterFft.setFrequency = frequency!,
-          print(noat.toDisplayString()),
-          //print("Note: "+flutterFft.getNote+flutterFft.getOctave.toString()
-          //    +"("+flutterFft.getFrequency.toString()+"): "
-          //    +flutterFft.getIsOnPitch.toString()),
-          //print(tablature.chordophone!.chordophone_string_tuning_notes),
-          //print("Note Frequency: " + flutterFft.getFrequency.toString()),
-          //print("Note: " + flutterFft.getNote.toString()
-          //    + flutterFft.getOctave.toString()),
+          print(note.toDisplayString()),
         },
         onError: (err) => print("Error: $err"),
         onDone: () => print("Is done")
