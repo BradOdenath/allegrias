@@ -71,10 +71,10 @@ void test() {
       + Note.LOCRIAN_SCALE_FROM_NOTE(
           Note.CHROMATIC_SCALE_NOTES[6]).toString());
 
-  print('Note.sortNotes(Note.C_MAJOR_SCALE) =>'
+  print('Note.sortNotes(Note.C_MAJOR_SCALE) => '
       + Note.sortNotes(Note.C_MAJOR_SCALE).toString());
 
-  print('Note.scaleFromNote(5, Note.CHROMATIC_SCALE_NOTES[3] => '
+  print('Note.scaleFromNote(5, Note.CHROMATIC_SCALE_NOTES[3]) => '
       + Note.scaleFromNote(5, Note.CHROMATIC_SCALE_NOTES[3]).toString());
 
   print('Note.chromaticScaleIndex(Note.CHROMATIC_SCALE_NOTES[5]) => '
@@ -102,7 +102,7 @@ void test() {
   print('Note.noteFromFrequency(440.0) => '
       + Note.noteFromFrequency(440.0).toString());
 
-  print('Note.noteNoOctave(Note.CHROMATIC_SCALE[7])'
+  print('Note.noteNoOctave(Note.CHROMATIC_SCALE[7]) => '
       + Note.noteNoOctave(Note.CHROMATIC_SCALE[7]).toString());
 
   print('Note.nextNote("B3") => '

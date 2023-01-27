@@ -161,7 +161,9 @@ class Note {
       }
       focusNote = (nextNote(focusNote));
     }
-    scale.add(nextNote(focusNote)); // 7 Note Scale is 8 Note Scale (H)
+    scale.add(Note.fromNote(
+        noteNoOctave(scale[0]) + noteToOctave(nextNote(focusNote)).toString()
+    )); // 7 Note Scale is 8 Note Scale (H)
     print_debug('Note.scaleFromNote($patternIndex,$note) => $scale');
     return (scale);
   }
