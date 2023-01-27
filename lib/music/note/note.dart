@@ -124,10 +124,8 @@ class Note {
   // ignore: non_constant_identifier_names
   static List<Note> get C_MAJOR_SCALE =>
       (MAJOR_SCALE_FROM_NOTE(
-          scaleFromNote(
-            MAJOR_SCALE_PATTERN_INDEX,
             C0.getNote
-          )));
+          ));
 
   // footnote: non_modifiable as if const
   // ignore: non_constant_identifier_names
@@ -269,7 +267,7 @@ class Note {
   }
 
   static String noteNoOctave(note) {
-    String out = note;
+    var out = note;
     if (note is String) {
       out = note.replaceAll(
           noteToOctave(note).toString(),
@@ -277,9 +275,11 @@ class Note {
       );
     } else if (note is Note) {
       out = note.getNote;
+    } else if (note is List<Note>) {
+      print_debug('uw0tm8');
     }
-    print('Note.noteNoOctave($note) => $out');
-    return (note);
+    print_debug('Note.noteNoOctave($note) => $out');
+    return (out);
   }
 
   static Note nextNote(note) {
@@ -294,7 +294,7 @@ class Note {
     if (focusNote.getNote == CHROMATIC_SCALE[0]) {
       focusNote.incrementOctave();
     }
-    print('Note.nextNote($note) => $focusNote');
+    print_debug('Note.nextNote($note) => $focusNote');
     return (focusNote);
   }
 
@@ -318,7 +318,7 @@ class Note {
     } else if (note is Note) {
       out = note.getOctave;
     }
-    print('Note.noteToOctave($note) => $out');
+    print_debug('Note.noteToOctave($note) => $out');
     return (out);
   }
 
