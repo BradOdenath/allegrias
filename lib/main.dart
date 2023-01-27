@@ -90,7 +90,7 @@ class TabAppState extends State<TabApp> {
           }),
           flutterFft.setIsOnPitch = onPitch!,
           flutterFft.setFrequency = frequency!,
-          print(note.toDisplayString()),
+          print(note.toStringFrequency()),
         },
         onError: (err) => print("Error: $err"),
         onDone: () => print("Is done")
