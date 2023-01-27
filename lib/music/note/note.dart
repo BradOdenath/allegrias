@@ -125,7 +125,7 @@ class Note {
   static List<Note> get C_MAJOR_SCALE =>
       (MAJOR_SCALE_FROM_NOTE(
             C0.getNote
-          ));
+      ));
 
   // footnote: non_modifiable as if const
   // ignore: non_constant_identifier_names
