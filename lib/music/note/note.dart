@@ -1,11 +1,34 @@
 import 'dart:math';
+import 'package:allegrias/commons.dart';
 import 'package:allegrias/music/chordophone/chordophone.dart';
 
 void test() {
-  print("TODO: assert()");
+  print(Note.CHROMATIC_SCALE.toString());
+  print(Note.SCALE_PATTERN.toString());
+  print(Note.C0_FREQUENCY.toString());
+  print(Note.C0.toString());
+  print(Note.CHROMATIC_SCALE_NOTES.toString());
+  print(Note.MAJOR_SCALE_PATTERN_INDEX.toString());
+  print(Note.MINOR_SCALE_PATTERN_INDEX.toString());
+  print(Note.DORIAN_SCALE_PATTERN_INDEX.toString());
+  print(Note.LOCRIAN_SCALE_PATTERN_INDEX.toString());
+  print(Note.LYDIAN_SCALE_PATTERN_INDEX.toString());
+  print(Note.MIXOLYDIAN_SCALE_PATTERN_INDEX.toString());
+  print('Note.C_MAJOR_SCALE: ' + Note.C_MAJOR_SCALE.toString());
+  print(Note.MAJOR_SCALE_FROM_NOTE(Note.CHROMATIC_SCALE_NOTES[0]).toString());
+  print(Note.MINOR_SCALE_FROM_NOTE(Note.CHROMATIC_SCALE_NOTES[1]).toString());
+  print(Note.DORIAN_SCALE_FROM_NOTE(Note.CHROMATIC_SCALE_NOTES[2]).toString());
+  print(Note.PHRYGIAN_SCALE_FROM_NOTE(Note.CHROMATIC_SCALE_NOTES[3]).toString());
+  print(Note.LYDIAN_SCALE_FROM_NOTE(Note.CHROMATIC_SCALE_NOTES[4]).toString());
+  print(Note.MIXOLYDIAN_SCALE_FROM_NOTE(Note.CHROMATIC_SCALE_NOTES[5]).toString());
+  print(Note.LOCRIAN_SCALE_FROM_NOTE(Note.CHROMATIC_SCALE_NOTES[6]).toString());
+  print(Note.sortNotes(Note.C_MAJOR_SCALE).toString());
+  print(Note.scaleFromNote(5,Note.CHROMATIC_SCALE_NOTES[3]));
   print(Note.frequencyFromMidiIndex(0));
   print(Note.midiIndexFromFrequency(Note.C0_FREQUENCY));
+  print("TODO: assert()");
 }
+
 void main() => test();
 
 class Note {
@@ -147,6 +170,7 @@ class Note {
         .getFrequency
         .compareTo(b.getFrequency)
     );
+    print_debug('Note.sortNotes($notes) => $outNotes');
     return (outNotes);
   }
 
@@ -169,17 +193,22 @@ class Note {
       focusNote = (nextNote(focusNote));
     }
     scale.add(scale[0]); // 7 Note Scale is 8 Note Scale (H)
+    print_debug('Note.scaleFromNote($patternIndex,$note) => $scale');
     return (scale);
   }
 
-  static int chromaticScaleIndex(note) =>
-      CHROMATIC_SCALE.indexOf(toNote(note).getNote);
+  static int chromaticScaleIndex(note) {
+    int out = CHROMATIC_SCALE.indexOf(toNote(note).getNote);
+    print_debug('Note.chromaticScaleIndex($note) => $out');
+    return (out);
+  }
 
   static Note toNote(note) {
     if (note is Note) return note; // Silly Goose
     Note outNote = Note(
         noteNote: noteNoOctave(note),
         noteOctave: noteToOctave(note));
+    print_debug('Note.toNote($note) => $outNote');
     return (outNote);
   }
 
@@ -188,14 +217,21 @@ class Note {
     for (String strNote in strNotes) {
       noteList.add(toNote(strNote));
     }
+    print_debug('Note.toNotes($strNotes) => $noteList');
     return (noteList);
   }
 
-  static double frequencyFromMidiIndex(n) =>
-      (C0.noteFrequency! * pow(2,(n/12)));
+  static double frequencyFromMidiIndex(n) {
+    double out = (C0.noteFrequency! * pow(2, (n / 12)));
+    print_debug('Note.frequencyFromMidiIndex($n) => $out');
+    return (out);
+  }
 
-  static int midiIndexFromFrequency(frequency) =>
-      (17.3123*log(0.06116207951070336*frequency)).round();
+  static int midiIndexFromFrequency(frequency) {
+    int out = (17.3123 * log(0.06116207951070336 * frequency)).round();
+    print_debug('Note.midiIndexFromFrequency($frequency) => out');
+    return (out);
+  }
 
   static int midiIndexFromNote(note) {
     Note _note = toNote(note);
@@ -203,11 +239,15 @@ class Note {
         ((_note.getChromaticScaleIndex + 1)
             * (_note.getOctave + 1)) - (1)
     );
+    print_debug('Note.midiIndexFromNote($note) => $index');
     return (index);
   }
 
-  static double frequencyFromNote(note) =>
-      (frequencyFromMidiIndex(midiIndexFromNote(note)));
+  static double frequencyFromNote(note) {
+    double out = (frequencyFromMidiIndex(midiIndexFromNote(note)));
+    print_debug('Note.frequencyFromNote($note) => $out');
+    return (out);
+  }
 
   static Note noteFromMidiIndex(int index) {
     int trueIndex = (index+1);
@@ -218,23 +258,27 @@ class Note {
         noteOctave: (octave),
         noteNote: (CHROMATIC_SCALE[noteIndex])
     );
+    print_debug('Note.noteFromMidiIndex($index) => $outNote');
     return (outNote);
   }
 
-  static Note noteFromFrequency(frequency) =>
-      (noteFromMidiIndex(midiIndexFromFrequency(frequency)));
+  static Note noteFromFrequency(frequency) {
+    Note out = (noteFromMidiIndex(midiIndexFromFrequency(frequency)));
+    print_debug('Note.noteFromFrequency($frequency) => $out');
+    return (out);
+  }
 
   static String noteNoOctave(note) {
-    //print('NOTE_NO_OCTAVE($note)');
+    String out = note;
     if (note is String) {
-      return note.replaceAll(
+      out = note.replaceAll(
           noteToOctave(note).toString(),
           ''
       );
     } else if (note is Note) {
-      return note.getNote;
+      out = note.getNote;
     }
-    //print('=> $note');
+    print('Note.noteNoOctave($note) => $out');
     return (note);
   }
 
@@ -250,11 +294,12 @@ class Note {
     if (focusNote.getNote == CHROMATIC_SCALE[0]) {
       focusNote.incrementOctave();
     }
+    print('Note.nextNote($note) => $focusNote');
     return (focusNote);
   }
 
   static int noteToOctave(note) {
-    //print('NOTE_TO_OCTAVE($note)');
+    int out = (0);
     if (note is String) {
       int octaveInt;
       String octaveString = ('');
@@ -269,17 +314,19 @@ class Note {
       octaveInt = ((octaveString != '')
           ? int.parse(octaveString)
           : (0));
-      return (octaveInt);
+      out = (octaveInt);
     } else if (note is Note) {
-      //print('=> '+note.getOctave.toString());
-      return note.getOctave;
+      out = note.getOctave;
     }
-    //print('=> 0');
-    return (0);
+    print('Note.noteToOctave($note) => $out');
+    return (out);
   }
 
-  static Note incrementNoteOctave(note) =>
-      (toNote(note)..setOctave = (note.getOctave+1));
+  static Note incrementNoteOctave(note) {
+    Note out = (toNote(note)..setOctave = (note.getOctave + 1));
+    print_debug('Note.incrementNoteOctave($note) => $out');
+    return (out);
+  }
 
   static Map<int,int> fingerboardCoordinates(
       Chordophone chordophone, Note note)
