@@ -23,6 +23,9 @@ void test() {
   print('Note.DORIAN_SCALE_PATTERN_INDEX => '
       + Note.DORIAN_SCALE_PATTERN_INDEX.toString());
 
+  print('Note.PHRYGIAN_SCALE_PATTERN_INDEX => '
+      + Note.PHRYGIAN_SCALE_PATTERN_INDEX.toString());
+
   print('Note.LOCRIAN_SCALE_PATTERN_INDEX => '
       + Note.LOCRIAN_SCALE_PATTERN_INDEX.toString());
 
@@ -117,10 +120,6 @@ void test() {
       + Note.fingerboardCoordinates(
           Chordophone.fromDefaultChordophoneStringTuning(),
           "C#5").toString());
-
-  var ntfc = Note.notesToFingerboardCoordinates(
-      Chordophone.fromDefaultChordophoneStringTuning(),
-      ["E4","D#4","B3","G#3","B2","E2"]);
 
   print('Note.notesToFingerboardCoordinates('
       'Chordophone.fromDefaultChordophoneStringTuning(), '
