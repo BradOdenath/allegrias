@@ -3,6 +3,8 @@ import 'package:allegrias/music/chordophone/chordophone.dart';
 
 void test() {
   print("TODO: assert()");
+  print(Note.frequencyFromMidiIndex(0));
+  print(Note.midiIndexFromFrequency(Note.C0_FREQUENCY));
 }
 void main() => test();
 
@@ -140,58 +142,44 @@ class Note {
       (scaleFromNote(LOCRIAN_SCALE_PATTERN_INDEX, note));
 
   static List<Note> sortNotes(List<Note> notes) {
-    //print('SORT_NOTES($notes)');
     List<Note> outNotes = (notes);
     outNotes.sort((a,b) => a
         .getFrequency
         .compareTo(b.getFrequency)
     );
-    //print('=> $outNotes');
     return (outNotes);
   }
 
   static List<Note> scaleFromNote(int patternIndex, note) {
-    //print('SCALE_FROM_NOTE($patternIndex,$note)');
     List<Note> scale = [];
-    if (note != null) {
-      Note focusNote = ((note is Note)
-          ? (note)
-          : (toNote(note))
-      );
-      for (int i = patternIndex; i < SCALE_PATTERN.length; i++) {
-        if (SCALE_PATTERN[i] == 1) {
-          scale.add(Note.fromNote(focusNote));
-        }
-        focusNote = nextNote(focusNote);
+    Note focusNote = ((note is Note)
+        ? (note)
+        : (toNote(note))
+    );
+    for (int i = patternIndex; i < SCALE_PATTERN.length; i++) {
+      if (SCALE_PATTERN[i] == 1) {
+        scale.add(Note.fromNote(focusNote));
       }
-      for (int i = 0; i < patternIndex; i++) {
-        if (SCALE_PATTERN[i] == 1) {
-          scale.add(Note.fromNote(focusNote));
-        }
-        focusNote = (nextNote(focusNote));
+      focusNote = nextNote(focusNote);
+    }
+    for (int i = 0; i < patternIndex; i++) {
+      if (SCALE_PATTERN[i] == 1) {
+        scale.add(Note.fromNote(focusNote));
       }
+      focusNote = (nextNote(focusNote));
     }
     scale.add(scale[0]); // 7 Note Scale is 8 Note Scale (H)
-    //print('$scale');
     return (scale);
   }
 
-  static int? noteIndex(note) {
-    int out = -1;
-    for (int i = 0; (i < CHROMATIC_SCALE.length); i++) {
-      if (CHROMATIC_SCALE[i] == noteNoOctave(note)) {
-        out = (i);
-      }
-    }
-    return (out);
-  }
-  int get getNoteIndex => (noteIndex(this)!);
+  static int chromaticScaleIndex(note) =>
+      CHROMATIC_SCALE.indexOf(toNote(note).getNote);
 
   static Note toNote(note) {
     if (note is Note) return note; // Silly Goose
     Note outNote = Note(
         noteNote: noteNoOctave(note),
-        noteOctave: octave(note));
+        noteOctave: noteToOctave(note));
     return (outNote);
   }
 
@@ -203,18 +191,30 @@ class Note {
     return (noteList);
   }
 
-  static double frequency(n) =>
+  static double frequencyFromMidiIndex(n) =>
       (C0.noteFrequency! * pow(2,(n/12)));
 
-  static int indexFromFrequency(frequency) =>
+  static int midiIndexFromFrequency(frequency) =>
       (17.3123*log(0.06116207951070336*frequency)).round();
 
-  static Note noteFromIndex(int index) {
+  static int midiIndexFromNote(note) {
+    Note _note = toNote(note);
+    int index = (
+        ((_note.getChromaticScaleIndex + 1)
+            * (_note.getOctave + 1)) - (1)
+    );
+    return (index);
+  }
+
+  static double frequencyFromNote(note) =>
+      (frequencyFromMidiIndex(midiIndexFromNote(note)));
+
+  static Note noteFromMidiIndex(int index) {
     int trueIndex = (index+1);
     int octave = ((trueIndex/CHROMATIC_SCALE.length).floor());
     int noteIndex = (trueIndex%CHROMATIC_SCALE.length);
     Note outNote = Note(
-        noteFrequency: (frequency(index)),
+        noteFrequency: (frequencyFromMidiIndex(index)),
         noteOctave: (octave),
         noteNote: (CHROMATIC_SCALE[noteIndex])
     );
@@ -222,13 +222,13 @@ class Note {
   }
 
   static Note noteFromFrequency(frequency) =>
-      (noteFromIndex(indexFromFrequency(frequency)));
+      (noteFromMidiIndex(midiIndexFromFrequency(frequency)));
 
   static String noteNoOctave(note) {
     //print('NOTE_NO_OCTAVE($note)');
     if (note is String) {
       return note.replaceAll(
-          octave(note).toString(),
+          noteToOctave(note).toString(),
           ''
       );
     } else if (note is Note) {
@@ -253,12 +253,12 @@ class Note {
     return (focusNote);
   }
 
-  static int octave(note) {
+  static int noteToOctave(note) {
     //print('NOTE_TO_OCTAVE($note)');
     if (note is String) {
       int octaveInt;
-      String octaveString = '';
-      for (int i = note.length-1; i > 0; i--) {
+      String octaveString = ('');
+      for (int i = (note.length-1); (i > 0); i--) {
         var numberCheck = int.tryParse(note[i]);
         if (numberCheck != null) {
           octaveString = (note[i] + octaveString);
@@ -334,7 +334,7 @@ class Note {
     this.noteFrequency = (note.noteFrequency);
   }
 
-  Note.fromChordophoneString(String note) {
+  Note.fromNoteString(String note) {
     Note _note = (toNote(note));
     this.noteOctave = (_note.noteOctave!);
     this.noteNote = (_note.noteNote!);
@@ -377,6 +377,9 @@ class Note {
   String get getNote => (noteNote!);
 
   int get getOctave => (noteOctave!);
+
+  int get getChromaticScaleIndex =>
+      (chromaticScaleIndex(this));
 
   // Mutators
 
