@@ -389,15 +389,16 @@ class Note {
   static int midiIndexFromNote(note) {
     Note _note = toNote(note);
     int index = (
-        ((_note.getChromaticScaleIndex + 1)
-            * (_note.getOctave + 1)) - (1)
+        ((_note.getChromaticScaleIndex)
+            + (_note.getOctave * 12))
     );
     print_debug('Note.midiIndexFromNote($note) => $index');
     return (index);
   }
 
   static double frequencyFromNote(note) {
-    double out = (frequencyFromMidiIndex(midiIndexFromNote(note)));
+    int index = midiIndexFromNote(note);
+    double out = (frequencyFromMidiIndex(index));
     print_debug('Note.frequencyFromNote($note) => $out');
     return (out);
   }
