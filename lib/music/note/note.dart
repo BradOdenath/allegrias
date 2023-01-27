@@ -109,8 +109,8 @@ void test() {
   print('Note.noteToOctave("G#5") => '
       + Note.noteToOctave("G#5").toString());
 
-  print('Note.incrementNoteOctave("A10") => '
-      + Note.incrementNoteOctave("A10").toString());
+  print('Note.incrementNoteOctave(Note.toNote("A10")) => '
+      + Note.incrementNoteOctave(Note.toNote("A10")).toString());
 
   print('Note.fingerboardCoordinates('
       'Chordophone.fromDefaultChordophoneStringTuning(),"C#5") => '
@@ -360,8 +360,8 @@ class Note {
     Note outNote = Note(
       noteNote: noteNoOctave(note),
       noteOctave: noteToOctave(note),
-      noteFrequency: frequencyFromNote(note)
     );
+    outNote.setFrequency = frequencyFromNote(outNote);
     print_debug('Note.toNote($note) => $outNote');
     return (outNote);
   }
