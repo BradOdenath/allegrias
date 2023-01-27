@@ -121,7 +121,7 @@ void test() {
           "C#5").toString());
 
   /// TODO: FIX THIS
-  /// print("TODO: FIX THIS");
+  print("TODO: FIX THIS");
   print('Note.notesToFingerboardCoordinates('
       'Chordophone.fromDefaultChordophoneStringTuning(), '
       '["E4","D#4","B3","G#3","B2","E2"]) => \n\t'
