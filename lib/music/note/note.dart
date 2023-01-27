@@ -123,7 +123,7 @@ void test() {
 
   print('Note.notesToFingerboardCoordinates('
       'Chordophone.fromDefaultChordophoneStringTuning(), '
-      '["E4","D#4","B3","G#3","B2","E2"])'
+      '["E4","D#4","B3","G#3","B2","E2"]) => \n\t'
       + Note.notesToFingerboardCoordinates(
           Chordophone.fromDefaultChordophoneStringTuning(),
           ["E4","D#4","B3","G#3","B2","E2"]).toString());
@@ -343,7 +343,7 @@ class Note {
       }
       focusNote = (nextNote(focusNote));
     }
-    scale.add(scale[0]); // 7 Note Scale is 8 Note Scale (H)
+    scale.add(nextNote(focusNote)); // 7 Note Scale is 8 Note Scale (H)
     print_debug('Note.scaleFromNote($patternIndex,$note) => $scale');
     return (scale);
   }
