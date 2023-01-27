@@ -332,23 +332,17 @@ class Note {
       Chordophone chordophone, Note note)
   {
     Map<int,int>? noteCoordinates;
-    for (
-    int i = 0;
-    (i < Chordophone.chordophoneStringCount);
-    i++
-    ) {
-      if (chordophone
-          .getStrings![i]
-          .noteExistsOnString(note)
-      ) {
+    for (int i = 0; (i < Chordophone.chordophoneStringCount); i++) {
+      if (chordophone.getStrings![i].noteExistsOnString(note)) {
         noteCoordinates!.addAll(
-            {i:chordophone
+            {i: chordophone
                 .getStrings![i]
                 .noteExistsAtPosition(note)
             });
-      } else {
       }
     }
+    print_debug('Note.fingerboardCoordinates($chordophone,$note)'
+        ' => $noteCoordinates');
     return (noteCoordinates!);
   }
 
@@ -362,6 +356,8 @@ class Note {
         note:fingerboardCoordinates(chordophone, note)
       });
     }
+    print_debug('Note.notesToFingerboardCoordinates($chordophone,$notes)'
+        ' => $outCoordinates');
     return (outCoordinates);
   }
 
@@ -405,8 +401,11 @@ class Note {
   String toString() => ('$noteNote$noteOctave');
 
   @override
-  bool operator == (Object other) =>
-      (toString() == toNote(other).toString());
+  bool operator == (Object other) {
+    bool out = (toString() == toNote(other).toString());
+    print_debug('Note ==($other) => $out');
+    return (out);
+  }
 
   // Accessors
 
