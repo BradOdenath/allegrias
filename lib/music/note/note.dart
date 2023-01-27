@@ -486,11 +486,11 @@ class Note {
   static Map<int,int> fingerboardCoordinates(
       Chordophone chordophone, note)
   {
-    Map<int,int>? noteCoordinates;
+    Map<int,int> noteCoordinates = {};
     Note _note = toNote(note);
     for (int i = 0; (i < Chordophone.chordophoneStringCount); i++) {
       if (chordophone.getStrings![i].noteExistsOnString(_note)) {
-        noteCoordinates!.addAll(
+        noteCoordinates.addAll(
             {i: chordophone
                 .getStrings![i]
                 .noteExistsAtPosition(_note)
@@ -499,7 +499,7 @@ class Note {
     }
     print_debug('Note.fingerboardCoordinates($chordophone,$_note)'
         ' => $noteCoordinates');
-    return (noteCoordinates!);
+    return (noteCoordinates);
   }
 
   static Map<Note, Map<int, int>> notesToFingerboardCoordinates(
