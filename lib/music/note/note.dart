@@ -3,29 +3,183 @@ import 'package:allegrias/commons.dart';
 import 'package:allegrias/music/chordophone/chordophone.dart';
 
 void test() {
-  print(Note.CHROMATIC_SCALE.toString());
-  print(Note.SCALE_PATTERN.toString());
-  print(Note.C0_FREQUENCY.toString());
-  print(Note.C0.toString());
-  print(Note.CHROMATIC_SCALE_NOTES.toString());
-  print(Note.MAJOR_SCALE_PATTERN_INDEX.toString());
-  print(Note.MINOR_SCALE_PATTERN_INDEX.toString());
-  print(Note.DORIAN_SCALE_PATTERN_INDEX.toString());
-  print(Note.LOCRIAN_SCALE_PATTERN_INDEX.toString());
-  print(Note.LYDIAN_SCALE_PATTERN_INDEX.toString());
-  print(Note.MIXOLYDIAN_SCALE_PATTERN_INDEX.toString());
-  print('Note.C_MAJOR_SCALE: ' + Note.C_MAJOR_SCALE.toString());
-  print(Note.MAJOR_SCALE_FROM_NOTE(Note.CHROMATIC_SCALE_NOTES[0]).toString());
-  print(Note.MINOR_SCALE_FROM_NOTE(Note.CHROMATIC_SCALE_NOTES[1]).toString());
-  print(Note.DORIAN_SCALE_FROM_NOTE(Note.CHROMATIC_SCALE_NOTES[2]).toString());
-  print(Note.PHRYGIAN_SCALE_FROM_NOTE(Note.CHROMATIC_SCALE_NOTES[3]).toString());
-  print(Note.LYDIAN_SCALE_FROM_NOTE(Note.CHROMATIC_SCALE_NOTES[4]).toString());
-  print(Note.MIXOLYDIAN_SCALE_FROM_NOTE(Note.CHROMATIC_SCALE_NOTES[5]).toString());
-  print(Note.LOCRIAN_SCALE_FROM_NOTE(Note.CHROMATIC_SCALE_NOTES[6]).toString());
-  print(Note.sortNotes(Note.C_MAJOR_SCALE).toString());
-  print(Note.scaleFromNote(5,Note.CHROMATIC_SCALE_NOTES[3]));
-  print(Note.frequencyFromMidiIndex(0));
-  print(Note.midiIndexFromFrequency(Note.C0_FREQUENCY));
+  print('Note.CHROMATIC_SCALE => ' + Note.CHROMATIC_SCALE.toString());
+
+  print('Note.SCALE_PATTERN => ' + Note.SCALE_PATTERN.toString());
+
+  print('Note.C0_FREQUENCY => ' + Note.C0_FREQUENCY.toString());
+
+  print('Note.C0 => ' + Note.C0.toString());
+
+  print('Note.CHROMATIC_SCALE_NOTES => '
+      + Note.CHROMATIC_SCALE_NOTES.toString());
+
+  print('Note.MAJOR_SCALE_PATTERN_INDEX => '
+      + Note.MAJOR_SCALE_PATTERN_INDEX.toString());
+
+  print('Note.MINOR_SCALE_PATTERN_INDEX => '
+      + Note.MINOR_SCALE_PATTERN_INDEX.toString());
+
+  print('Note.DORIAN_SCALE_PATTERN_INDEX => '
+      + Note.DORIAN_SCALE_PATTERN_INDEX.toString());
+
+  print('Note.LOCRIAN_SCALE_PATTERN_INDEX => '
+      + Note.LOCRIAN_SCALE_PATTERN_INDEX.toString());
+
+  print('Note.LYDIAN_SCALE_PATTERN_INDEX => '
+      + Note.LYDIAN_SCALE_PATTERN_INDEX.toString());
+
+  print('Note.MIXOLYDIAN_SCALE_PATTERN_INDEX => '
+      + Note.MIXOLYDIAN_SCALE_PATTERN_INDEX.toString());
+
+  print('Note.C_MAJOR_SCALE => ' + Note.C_MAJOR_SCALE.toString());
+
+  print('Note.MAJOR_SCALE_FROM_NOTE('
+      + Note.CHROMATIC_SCALE_NOTES[0].toString() + ') => '
+      + Note.MAJOR_SCALE_FROM_NOTE(
+          Note.CHROMATIC_SCALE_NOTES[0]).toString());
+
+  print('Note.MINOR_SCALE_FROM_NOTE('
+      + Note.CHROMATIC_SCALE_NOTES[1].toString() + ') => '
+      + Note.MINOR_SCALE_FROM_NOTE(
+          Note.CHROMATIC_SCALE_NOTES[1]).toString());
+
+  print('Note.DORIAN_SCALE_FROM_NOTE('
+      + Note.CHROMATIC_SCALE_NOTES[2].toString() + ') => '
+      + Note.DORIAN_SCALE_FROM_NOTE(
+          Note.CHROMATIC_SCALE_NOTES[2]).toString());
+
+  print('Note.PHRYGIAN_SCALE_FROM_NOTE('
+      + Note.CHROMATIC_SCALE_NOTES[3].toString() + ') => '
+      + Note.PHRYGIAN_SCALE_FROM_NOTE(
+          Note.CHROMATIC_SCALE_NOTES[3]).toString());
+
+  print('Note.LYDIAN_SCALE_FROM_NOTE('
+      + Note.CHROMATIC_SCALE_NOTES[4].toString() + ') => '
+      + Note.LYDIAN_SCALE_FROM_NOTE(
+          Note.CHROMATIC_SCALE_NOTES[4]).toString());
+
+  print('Note.MIXOLYDIAN_SCALE_FROM_NOTE('
+      + Note.CHROMATIC_SCALE_NOTES[5].toString() + ') => '
+      + Note.MIXOLYDIAN_SCALE_FROM_NOTE(
+          Note.CHROMATIC_SCALE_NOTES[5]).toString());
+
+  print('Note.LOCRIAN_SCALE_FROM_NOTE('
+      + Note.CHROMATIC_SCALE_NOTES[6].toString() + ') => '
+      + Note.LOCRIAN_SCALE_FROM_NOTE(
+          Note.CHROMATIC_SCALE_NOTES[6]).toString());
+
+  print('Note.sortNotes(Note.C_MAJOR_SCALE) =>'
+      + Note.sortNotes(Note.C_MAJOR_SCALE).toString());
+
+  print('Note.scaleFromNote(5, Note.CHROMATIC_SCALE_NOTES[3] => '
+      + Note.scaleFromNote(5, Note.CHROMATIC_SCALE_NOTES[3]).toString());
+
+  print('Note.chromaticScaleIndex(Note.CHROMATIC_SCALE_NOTES[5]) => '
+      + Note.chromaticScaleIndex(
+          Note.CHROMATIC_SCALE_NOTES[5]).toString());
+
+  print('Note.toNote(Note.CHROMATIC_SCALE[3]) => '
+      + Note.toNote(Note.CHROMATIC_SCALE[3]).toString());
+
+  print('Note.toNotes(Note.CHROMATIC_SCALE) => '
+      + Note.toNotes(Note.CHROMATIC_SCALE).toString());
+
+  print('Note.frequencyFromMidiIndex(0) => '
+      + Note.frequencyFromMidiIndex(0).toString());
+
+  print('Note.midiIndexFromFrequency(44) => '
+      + Note.midiIndexFromFrequency(44).toString());
+
+  print('Note.frequencyFromNote("C#5") => '
+      + Note.frequencyFromNote('C#5').toString());
+
+  print('Note.noteFromMidiIndex(33) => '
+      + Note.noteFromMidiIndex(33).toString());
+
+  print('Note.noteFromFrequency(440.0) => '
+      + Note.noteFromFrequency(440.0).toString());
+
+  print('Note.noteNoOctave(Note.CHROMATIC_SCALE[7])'
+      + Note.noteNoOctave(Note.CHROMATIC_SCALE[7]).toString());
+
+  print('Note.nextNote("B3") => '
+      + Note.nextNote("B3").toString());
+
+  print('Note.noteToOctave("G#5") => '
+      + Note.noteToOctave("G#5").toString());
+
+  print('Note.incrementNoteOctave("A10") => '
+      + Note.incrementNoteOctave("A10").toString());
+
+  print('Note.fingerboardCoordinates('
+      'Chordophone.fromDefaultChordophoneStringTuning(),"C#5") => '
+      + Note.fingerboardCoordinates(
+          Chordophone.fromDefaultChordophoneStringTuning(),
+          "C#5").toString());
+
+  var ntfc = Note.notesToFingerboardCoordinates(
+      Chordophone.fromDefaultChordophoneStringTuning(),
+      ["E4","D#4","B3","G#3","B2","E2"]);
+
+  print('Note.notesToFingerboardCoordinates('
+      'Chordophone.fromDefaultChordophoneStringTuning(), '
+      '["E4","D#4","B3","G#3","B2","E2"])'
+      + Note.notesToFingerboardCoordinates(
+          Chordophone.fromDefaultChordophoneStringTuning(),
+          ["E4","D#4","B3","G#3","B2","E2"]).toString());
+
+  print(
+      'Note('
+        'noteFrequency: Note.C0.getFrequency,'
+        'noteNote: Note.C0.getNote,'
+        'noteOctave: Note.C0.getOctave'
+      ') => ' + Note(
+          noteFrequency: Note.C0.getFrequency,
+          noteNote: Note.C0.getNote,
+          noteOctave: Note.C0.getOctave
+      ).toString()
+  );
+
+  print('Note.fromNote("E3") => '
+      + Note.fromNote("E3").toString());
+
+  print('Note.fromFrequency(440.0) => '
+      + Note.fromFrequency(440.0).toString());
+
+  print('Note.C0.sharpen() => '
+      + Note.C0.sharpen().toString());
+
+  print('Note.C0.incrementOctave() => '
+      + Note.C0.incrementOctave().toString());
+
+  print('Note.C0.toStringFrequency() => '
+      + Note.C0.toStringFrequency());
+
+  print('Note.C0.toString() => '
+      + Note.C0.toString());
+
+  print('Note.C0 == Note.C0 => '
+      + (Note.C0 == Note.C0).toString());
+
+  print('Note.C0.hashCode => '
+      + Note.C0.hashCode.toString());
+
+  print('Note.C0.length => '
+      + Note.C0.length.toString());
+
+  print('Note.C0.getFrequency => '
+      + Note.C0.getFrequency.toString());
+
+  print('Note.C0.getNote => '
+      + Note.C0.getNote.toString());
+
+  print('Note.C0.getOctave => '
+      + Note.C0.getOctave.toString());
+
+  print('Note.C0.getChromaticScaleIndex => '
+      + Note.C0.getChromaticScaleIndex.toString());
+
   print("TODO: assert()");
 }
 
@@ -204,18 +358,20 @@ class Note {
   static Note toNote(note) {
     if (note is Note) return note; // Silly Goose
     Note outNote = Note(
-        noteNote: noteNoOctave(note),
-        noteOctave: noteToOctave(note));
+      noteNote: noteNoOctave(note),
+      noteOctave: noteToOctave(note),
+      noteFrequency: frequencyFromNote(note)
+    );
     print_debug('Note.toNote($note) => $outNote');
     return (outNote);
   }
 
-  static List<Note> toNotes(List<String> strNotes) {
+  static List<Note> toNotes(List notes) {
     List<Note> noteList = [];
-    for (String strNote in strNotes) {
-      noteList.add(toNote(strNote));
+    for (var note in notes) {
+      noteList.add(toNote(note));
     }
-    print_debug('Note.toNotes($strNotes) => $noteList');
+    print_debug('Note.toNotes($notes) => $noteList');
     return (noteList);
   }
 
@@ -329,34 +485,36 @@ class Note {
   }
 
   static Map<int,int> fingerboardCoordinates(
-      Chordophone chordophone, Note note)
+      Chordophone chordophone, note)
   {
     Map<int,int>? noteCoordinates;
+    Note _note = toNote(note);
     for (int i = 0; (i < Chordophone.chordophoneStringCount); i++) {
-      if (chordophone.getStrings![i].noteExistsOnString(note)) {
+      if (chordophone.getStrings![i].noteExistsOnString(_note)) {
         noteCoordinates!.addAll(
             {i: chordophone
                 .getStrings![i]
-                .noteExistsAtPosition(note)
+                .noteExistsAtPosition(_note)
             });
       }
     }
-    print_debug('Note.fingerboardCoordinates($chordophone,$note)'
+    print_debug('Note.fingerboardCoordinates($chordophone,$_note)'
         ' => $noteCoordinates');
     return (noteCoordinates!);
   }
 
   static Map<Note, Map<int, int>> notesToFingerboardCoordinates(
       Chordophone chordophone,
-      List<Note> notes)
+      List notes)
   {
+    List<Note> _notes = toNotes(notes);
     Map<Note,Map<int,int>> outCoordinates = {};
-    for (Note note in notes) {
-      outCoordinates.addAll({
-        note:fingerboardCoordinates(chordophone, note)
-      });
+    for (Note note in _notes) {
+      outCoordinates.addAll(
+          {note:fingerboardCoordinates(chordophone, note)}
+      );
     }
-    print_debug('Note.notesToFingerboardCoordinates($chordophone,$notes)'
+    print_debug('Note.notesToFingerboardCoordinates($chordophone,$_notes)'
         ' => $outCoordinates');
     return (outCoordinates);
   }
@@ -371,16 +529,11 @@ class Note {
     this.noteOctave
   });
 
-  Note.fromNote(Note note) {
-    this.noteNote = (note.noteNote);
-    this.noteOctave = (note.noteOctave);
-    this.noteFrequency = (note.noteFrequency);
-  }
-
-  Note.fromNoteString(String note) {
+  Note.fromNote(note) {
     Note _note = (toNote(note));
-    this.noteOctave = (_note.noteOctave!);
+    this.noteFrequency = (_note.noteFrequency!);
     this.noteNote = (_note.noteNote!);
+    this.noteOctave = (_note.noteOctave!);
   }
 
   Note.fromFrequency(double frequency) {
@@ -416,23 +569,26 @@ class Note {
   int get length => (toString().length);
 
   double get getFrequency =>
-      (noteFrequency != null)
+      (this.noteFrequency != null)
           ? (noteFrequency!)
           : (0.0);
 
-  String get getNote => (noteNote!);
+  String get getNote => (this.noteNote!);
 
-  int get getOctave => (noteOctave!);
+  int get getOctave => (this.noteOctave!);
 
   int get getChromaticScaleIndex =>
       (chromaticScaleIndex(this));
 
   // Mutators
 
-  set setFrequency(double frequency) => noteFrequency = (frequency);
+  set setFrequency(double frequency) =>
+      this.noteFrequency = (frequency);
 
-  set setNote(String note) => noteNote = (note);
+  set setNote(String note) =>
+      this.noteNote = (note);
 
-  set setOctave(int octave) => noteOctave = (octave);
+  set setOctave(int octave) =>
+      this.noteOctave = (octave);
 
 }
