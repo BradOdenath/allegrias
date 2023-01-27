@@ -1,3 +1,4 @@
+import 'package:allegrias/music/chordophone/chordophone.dart';
 import 'package:allegrias/music/note/note.dart';
 
 void test() {
