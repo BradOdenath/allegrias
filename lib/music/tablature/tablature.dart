@@ -13,10 +13,10 @@ class Tablature {
     String outChordophoneString = '';
     if (tabStanzas.length > 0) {
       for (int i = 0;
-      (i < Chordophone.chordophoneStringCount);
+      (i < chordophone.getChordophoneStringCount);
       i++) {
         outChordophoneString += '|-'
-            + Chordophone.DEFAULT_CHORDOPHONE_STRING_TUNING[i]
+            + chordophone.getChordophoneStringTuning[i].toString()
             + '-|-';
         for (int j = (tabStanzas.length > 10)
             ? (tabStanzas.length-10)
@@ -35,7 +35,7 @@ class Tablature {
 
   List<TabStanza> tabs = [];
   Chordophone? chordophone =
-      new Chordophone.fromDefaultChordophoneStringTuning();
+      new Chordophone.fromStandardGuitarTuning();
 
   Tablature(Chordophone chordophone) {
     this.tabs = [];

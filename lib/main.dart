@@ -24,10 +24,7 @@ class TabAppState extends State<TabApp> {
   // String tabulatureStr;
   Tablature tablature =
       new Tablature(
-          Chordophone(
-              Chordophone
-                  .DEFAULT_CHORDOPHONE_STRING_TUNING
-          )
+          Chordophone.fromStandardGuitarTuning()
       );
 
   FlutterFft flutterFft = new FlutterFft();

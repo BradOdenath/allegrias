@@ -2,6 +2,7 @@ import 'package:allegrias/music/chordophone/chordophone.dart';
 import 'package:allegrias/music/note/note.dart';
 
 void test() {
+
   print("TODO: assert()");
 }
 void main() => test();
@@ -9,12 +10,12 @@ void main() => test();
 class ChordophoneString {
 
   // fingerboard note/fret
-  static int noteTabIndex(
+  static int? noteTabIndex(
       Note note,
       ChordophoneString chordophoneString
       )
   {
-    int out = -1;
+    int? out;
     for (
     int i = 0;
     (i < Chordophone.DEFAULT_FINGERBOARD_LENGTH);
@@ -31,11 +32,11 @@ class ChordophoneString {
   }
 
   static List<Note> fingerboardPositionNotes(
-      int stringLength, Note note)
+      int chordophoneStringLength, Note note)
   {
     List<Note> chordophoneString = [];
     Note focusNote = note;
-    for (int i = 0; (i < stringLength); i++) {
+    for (int i = 0; (i < chordophoneStringLength); i++) {
       chordophoneString.add(Note.fromNote(focusNote));
       focusNote = (focusNote.sharpen());
     }
@@ -44,37 +45,37 @@ class ChordophoneString {
   }
 
   Note? indexNote;
-  int? stringLength;
+  int? chordophoneStringLength;
 
-  ChordophoneString(Note indexNote, int stringLength) {
+  ChordophoneString(Note indexNote, int chordophoneStringLength) {
     this.indexNote = (indexNote);
-    this.stringLength = (stringLength);
+    this.chordophoneStringLength = (chordophoneStringLength);
   }
 
   ChordophoneString.fromDefaultFingerboardLength(Note indexNote) {
     this.indexNote = (indexNote);
-    this.stringLength = (Chordophone.DEFAULT_FINGERBOARD_LENGTH);
+    this.chordophoneStringLength = (Chordophone.DEFAULT_FINGERBOARD_LENGTH);
   }
+
+  int? noteExistsOnChordophoneString(Note note) =>
+      (noteTabIndex(note, this));
+
+  int? noteExistsAtPosition(Note note) =>
+      (noteTabIndex(note, this));
 
   Note get getIndexNote =>
       (this.indexNote!);
 
   List<Note> get getScale =>
       (fingerboardPositionNotes(
-          this.stringLength!,
+          this.chordophoneStringLength!,
           this.indexNote!
       ));
 
   set setIndexNote(Note note) =>
       this.indexNote = (note);
 
-  set setStringLength(int length) =>
-      this.stringLength = (length);
-
-  bool noteExistsOnString(Note note) =>
-      (noteTabIndex(note, this) != -1);
-
-  int noteExistsAtPosition(Note note) =>
-      (noteTabIndex(note, this));
+  set setChordophoneStringLength(int length) =>
+      this.chordophoneStringLength = (length);
 
 }
