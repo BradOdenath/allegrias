@@ -24,8 +24,8 @@ void tablature_string_test() {
       + Tablature(Chordophone.fromStandardGuitarTuning())
           .getTabs.toString());
 
-  print_test('Tablature(Chordophone.fromStandardGuitarTuning()) => '
-      '.isNotEmpty.toString()'
+  print_test('Tablature(Chordophone.fromStandardGuitarTuning())'
+      '.isNotEmpty.toString() => '
       + Tablature(Chordophone.fromStandardGuitarTuning())
           .isNotEmpty.toString());
 
