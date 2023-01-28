@@ -1,11 +1,6 @@
 import 'package:allegrias/music/chordophone/chordophone.dart';
 import 'package:allegrias/music/note/note.dart';
 
-void test() {
-
-  print("TODO: assert()");
-}
-void main() => test();
 
 class ChordophoneString {
 
@@ -47,10 +42,10 @@ class ChordophoneString {
   Note? indexNote;
   int? chordophoneStringLength;
 
-  ChordophoneString(Note indexNote, int chordophoneStringLength) {
-    this.indexNote = (indexNote);
-    this.chordophoneStringLength = (chordophoneStringLength);
-  }
+  ChordophoneString({
+    this.indexNote,
+    this.chordophoneStringLength
+  });
 
   ChordophoneString.fromDefaultFingerboardLength(Note indexNote) {
     this.indexNote = (indexNote);

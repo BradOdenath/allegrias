@@ -4,11 +4,6 @@ import 'package:allegrias/music/chordophone/'
     'chordophone_string/chordophone_string.dart';
 import 'package:allegrias/music/note/note.dart';
 
-void test() {
-  print("TODO: assert()");
-}
-void main() => test();
-
 class TabStanza {
   static List<String> noteToTabStanzaList(
       Chordophone chordophone,
@@ -36,19 +31,6 @@ class TabStanza {
       }
       if (chordophoneBool == true) {
         out.add('---');
-      }
-    }
-    return (out);
-  }
-
-  static bool noteExists(List<Note> noteList, objNote) {
-    //print('NOTE_EXISTS($noteList, $objNote)');
-    bool out = false;
-    Note focusNote;
-    focusNote = (Note.toNote(objNote));
-    for (Note note in noteList) {
-      if (note == focusNote) {
-        out = true;
       }
     }
     return (out);
@@ -124,7 +106,7 @@ class TabStanza {
     return (out);
   }
 
-  bool isExistentNote(note) => (noteExists(notes!, note));
+  bool isExistentNote(note) => (Note.noteExists(notes!, note));
 
   List<String> get getNotesToTablature {
     List<String> out;

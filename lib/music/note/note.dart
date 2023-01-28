@@ -150,6 +150,20 @@ class Note {
     return outNotes;
   }
 
+  static bool noteExists(List<Note> noteList, objNote) {
+    bool out = false;
+    Note focusNote;
+    focusNote = (Note.toNote(objNote));
+    for (Note note in noteList) {
+      if (note == focusNote) {
+        out = true;
+      }
+    }
+    print_debug('Note.noteExists($noteList, $objNote) => $out');
+    return (out);
+  }
+
+
   static List<Note> scaleFromNote(int patternIndex, note) {
     List<Note> scale = [];
     Note focusNote = ((note is Note)

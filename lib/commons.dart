@@ -2,9 +2,12 @@
 
 bool debug = false;
 bool test = true;
+bool time = true;
+
+String get time_stamp => ((time) ? (DateTime.now().toString() + ': ') : '');
 
 void print_debug(statement) =>
-    ((debug) ? print(statement) : null);
+    ((debug) ? print(time_stamp + statement.toString()) : null);
 
 void print_test(statement) =>
-    ((test) ? print(statement) : null);
+    ((test) ? print(time_stamp + statement.toString()) : null);

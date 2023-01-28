@@ -79,6 +79,10 @@ void test_note() {
   print_test('Note.sortNotesBackwards(Note.CHROMATIC_SCALE) => '
       + Note.sortNotesBackwards(Note.CHROMATIC_SCALE).toString());
 
+  print_test('Note.noteExists(Note.CHROMATIC_SCALE_NOTES, Note.C0) => '
+      + Note.noteExists(Note.CHROMATIC_SCALE_NOTES, Note.C0)
+          .toString());
+
   print_test('Note.scaleFromNote(5, Note.CHROMATIC_SCALE_NOTES[3]) => '
       + Note.scaleFromNote(5, Note.CHROMATIC_SCALE_NOTES[3]).toString());
 
