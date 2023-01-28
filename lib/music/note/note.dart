@@ -209,7 +209,7 @@ class Note {
 
   static int midiIndexFromFrequency(frequency) {
     int out = (17.3123 * log(0.06116207951070336 * frequency)).round();
-    print_debug('Note.midiIndexFromFrequency($frequency) => out');
+    print_debug('Note.midiIndexFromFrequency($frequency) => $out');
     return (out);
   }
 
@@ -231,7 +231,14 @@ class Note {
   }
 
   static Note noteFromMidiIndex(int index) {
-    Note outNote = Note.fromFrequency(frequencyFromMidiIndex(index));
+    int trueIndex = (index+1);
+    int octave = ((trueIndex/CHROMATIC_SCALE.length).floor());
+    int noteIndex = (trueIndex%CHROMATIC_SCALE.length);
+    Note outNote = Note(
+        noteFrequency: (frequencyFromMidiIndex(index)),
+        noteOctave: (octave),
+        noteNote: (CHROMATIC_SCALE[noteIndex])
+    );
     print_debug('Note.noteFromMidiIndex($index) => $outNote');
     return (outNote);
   }
@@ -427,30 +434,31 @@ class Note {
 
   int get getOctave {
     int out = (this.noteOctave!);
-    print_debug('$this.getOctave => $out');
+    print_debug('$toStringObject().getOctave => $out');
     return (out);
   }
 
   int get getChromaticScaleIndex {
     int out = (chromaticScaleIndex(this));
-    print_debug('$this.getChromaticScale => $out');
+    print_debug('$toStringObject().getChromaticScale => $out');
     return (out);
   }
 
   // Mutators
 
   set setFrequency(double frequency) {
-    print_debug('$this.setFrequency = $frequency');
+    print_debug('$toStringObject().setFrequency = $frequency');
     this.noteFrequency = (frequency);
   }
 
   set setNote(String note) {
-    print_debug('$this.setNote = $note');
+    print_debug('$toStringObject().setNote = $note');
     this.noteNote = (note);
   }
 
   set setOctave(int octave) {
-    print_debug('$this.setOctave = $octave');
+    print_debug('$toStringObject().setOctave = $octave');
     this.noteOctave = (octave);
   }
+
 }

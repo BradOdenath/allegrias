@@ -2,7 +2,7 @@ import 'package:allegrias/commons.dart';
 import 'package:allegrias/music/chordophone/chordophone.dart';
 import 'package:allegrias/music/note/note.dart';
 
-void test() {
+void test_chordophone() {
 
   print_test('Chordophone.DEFAULT_FINGERBOARD_LENGTH => '
       + Chordophone.DEFAULT_FINGERBOARD_LENGTH.toString());
@@ -59,4 +59,8 @@ void test() {
   print_test("TODO: assert()");
 }
 
-void main() => test();
+void main() => test_chordophone();
+
+class ChordophoneTesting {
+  static void test() => test_chordophone();
+}
