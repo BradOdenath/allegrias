@@ -27,6 +27,7 @@ class Chordophone {
   /// TODO: Implement this to writing efficient tablature.
   static const int DEFAULT_POSITION_RANGE = 5;
 
+
   static List<Map<int, int>> fingerboardCoordinatesToPositions(
       Map<Note, Map<int, int>> fingerboardCoordinatesNoteMap) {
     List<Map<int, int>> positionGroups = [];
@@ -34,13 +35,10 @@ class Chordophone {
         .forEach((note, fingerboardCoordinates) {
       fingerboardCoordinates
           .forEach((chordophoneStringIndex, positionIndex) {
-        if (positionGroups.length > 0) {
+        //if (positionGroups.length > 0) {
           for (var positionGroup in positionGroups) {
             if (!positionGroup.containsKey(chordophoneStringIndex)) {
-              if (indexInRangeOfPositions(
-                  positionGroup,
-                  positionIndex
-              )!) {
+              if (indexInRangeOfPositions(positionGroup, positionIndex)!) {
                 positionGroup
                     .addAll({chordophoneStringIndex: positionIndex});
               } else {
@@ -52,10 +50,10 @@ class Chordophone {
                   .add({chordophoneStringIndex: positionIndex});
             }
           }
-        } else {
+        /* } else {
           positionGroups
               .add({chordophoneStringIndex: positionIndex});
-        }
+        }*/
       });
     });
     print_debug('Chordophone.fingerboardCoordinatesToPositions'
@@ -132,7 +130,7 @@ class Chordophone {
 
   int get getChordophoneStringCount {
     int out = (chordophoneStringTuning!.length);
-    print('$this.getChordophoneStringCount => $out');
+    print_debug('$this.getChordophoneStringCount => $out');
     return (out);
   }
 
