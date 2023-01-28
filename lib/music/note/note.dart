@@ -182,12 +182,15 @@ class Note {
   }
 
   static Note toNote(note) {
-    if (note is Note) return note; // Silly Goose
-    Note outNote = Note(
-      noteNote: noteNoOctave(note),
-      noteOctave: noteToOctave(note),
-    );
-    outNote.setFrequency = frequencyFromNote(outNote);
+    Note outNote;
+    if (note is Note) {
+      outNote = note; // Silly Goose
+    } else {
+      outNote = Note(
+          noteNote: noteNoOctave(note),
+          noteOctave: noteToOctave(note));
+      outNote.setFrequency = frequencyFromNote(outNote);
+    }
     print_debug('Note.toNote($note) => $outNote');
     return (outNote);
   }
@@ -355,17 +358,17 @@ class Note {
 
   Note.fromNote(note) {
     Note _note = (toNote(note));
-    this.noteFrequency = (_note.noteFrequency!);
-    this.noteNote = (_note.noteNote!);
-    this.noteOctave = (_note.noteOctave!);
+    this.setFrequency = (_note.noteFrequency!);
+    this.setNote = (_note.noteNote!);
+    this.setOctave = (_note.noteOctave!);
     print_debug('Note.fromNote($note) => $this');
   }
 
   Note.fromFrequency(double frequency) {
     Note note = (noteFromFrequency(frequency));
-    this.noteFrequency = (note.getFrequency);
-    this.noteNote = (note.getNote);
-    this.noteOctave = (note.getOctave);
+    this.setFrequency = (note.getFrequency);
+    this.setNote = (note.getNote);
+    this.setOctave = (note.getOctave);
     print_debug('Note.fromFrequency($frequency) => $this');
   }
 
@@ -408,13 +411,13 @@ class Note {
   // TODO: implement hashCode
   int get hashCode {
     int out = (super.hashCode);
-    print_debug('$toStringObject().hashcode => $out');
+    print_debug(toStringObject() + '.hashcode => $out');
     return (out);
   }
 
   int get length {
     int out = (toString().length);
-    print_debug('$toStringObject().length => $out');
+    print_debug(toStringObject() + '.length => $out');
     return (out);
   }
 
@@ -422,42 +425,42 @@ class Note {
     double out = (this.noteFrequency != null)
         ? (noteFrequency!)
         : (0.0);
-    print_debug('$toStringObject().getFrequency => $out');
+    print_debug(toStringObject() + '.getFrequency => $out');
     return (out);
   }
 
   String get getNote {
     String out = (this.noteNote!);
-    print_debug('$toStringObject().getNote => $out');
+    print_debug(toStringObject() + '.getNote => $out');
     return (out);
   }
 
   int get getOctave {
     int out = (this.noteOctave!);
-    print_debug('$toStringObject().getOctave => $out');
+    print_debug(toStringObject() + '.getOctave => $out');
     return (out);
   }
 
   int get getChromaticScaleIndex {
     int out = (chromaticScaleIndex(this));
-    print_debug('$toStringObject().getChromaticScale => $out');
+    print_debug(toStringObject() + '.getChromaticScale => $out');
     return (out);
   }
 
   // Mutators
 
   set setFrequency(double frequency) {
-    print_debug('$toStringObject().setFrequency = $frequency');
+    print_debug(toStringObject() + '.setFrequency = $frequency');
     this.noteFrequency = (frequency);
   }
 
   set setNote(String note) {
-    print_debug('$toStringObject().setNote = $note');
+    print_debug(toStringObject() + '.setNote = $note');
     this.noteNote = (note);
   }
 
   set setOctave(int octave) {
-    print_debug('$toStringObject().setOctave = $octave');
+    print_debug(toStringObject() + '.setOctave = $octave');
     this.noteOctave = (octave);
   }
 
