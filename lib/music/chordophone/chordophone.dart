@@ -6,25 +6,54 @@ import 'package:allegrias/music/note/note.dart';
 class Chordophone {
   static const int DEFAULT_FINGERBOARD_LENGTH = 24;
 
-  static const List<String> DEFAULT_CHORDOPHONE_STRING_TUNING = [
+  static const List<String> DEFAULT_CHORDOPHONE_TUNING = [
     //'D#4', 'A#3', 'F#3', 'C#3', 'G#2', 'D#2', 'A#1', 'F#1', 'C#1', 'G#0'
     //'D4', 'A3', 'F3', 'C3', 'G2', 'D2'//, 'A1', 'F1', 'C1', 'G0'
+    'E4', 'B3', 'G3', 'D3', 'A2', 'E2', 'B1', 'F#1', 'C#1', 'G#0'
+  ];
+
+  static const List<String> STANDARD_TEN_STRING_GUITAR_TUNING = [
+    'E4', 'B3', 'G3', 'D3', 'A2', 'E2', 'B1', 'F#1', 'C#1', 'G#0'
+  ];
+
+  static const List<String> STANDARD_SEVEN_STRING_GUITAR_TUNING = [
+    'E4', 'B3', 'G3', 'D3', 'A2', 'E2', 'B1'
+  ];
+
+  static const List<String> STANDARD_GUITAR_TUNING = [
     'E4', 'B3', 'G3', 'D3', 'A2', 'E2'
   ];
 
-  static const List<String> STANDARD_GUITAR_STRING_TUNING = [
-    //'D#4', 'A#3', 'F#3', 'C#3', 'G#2', 'D#2', 'A#1', 'F#1', 'C#1', 'G#0'
-    //'D4', 'A3', 'F3', 'C3', 'G2', 'D2'//, 'A1', 'F1', 'C1', 'G0'
-    'E4', 'B3', 'G3', 'D3', 'A2', 'E2'
+  static const List<String> STANDARD_UKULELE_TUNING = [
+    'G4', 'C4', 'E4', 'A4'
   ];
 
-  static const List<String> STANDARD_VIOLIN_STRING_TUNING = [
+  static const List<String> STANDARD_VIOLIN_TUNING = [
     'E5', 'A4', 'D4', 'G3'
+  ];
+
+  static const List<String> STANDARD_VIOLA_TUNING = [
+    'A4', 'D4', 'G3', 'C3'
+  ];
+
+  static const List<String> STANDARD_CELLO_TUNING = [
+    'A3', 'D3', 'G2', 'C2'
+  ];
+
+  static const List<String> STANDARD_SIX_STRING_BASS_TUNING = [
+    'C3', 'G2', 'D2', 'A1', 'E1', 'B0'
+  ];
+
+  static const List<String> STANDARD_FIVE_STRING_BASS_TUNING = [
+    'G2', 'D2', 'A1', 'E1', 'B0'
+  ];
+
+  static const List<String> STANDARD_BASS_TUNING = [
+    'G2', 'D2', 'A1', 'E1'
   ];
 
   /// TODO: Implement this to writing efficient tablature.
   static const int DEFAULT_POSITION_RANGE = 5;
-
 
   static List<Map<int, int>> fingerboardCoordinatesToPositions(
       Map<Note, Map<int, int>> fingerboardCoordinatesNoteMap) {
@@ -111,14 +140,59 @@ class Chordophone {
 
   Chordophone({this.chordophoneStringTuning});
 
+  Chordophone.fromDefaultChordophoneTuning() {
+    this.chordophoneStringTuning = (DEFAULT_CHORDOPHONE_TUNING);
+    print_debug('Chordophone.fromDefaultChordophoneTuning() => $this');
+  }
+
+  Chordophone.fromStandardTenStringGuitarTuning() {
+    this.chordophoneStringTuning = (STANDARD_TEN_STRING_GUITAR_TUNING);
+    print_debug('Chordophone.fromStandardTenStringGuitarTuning() => $this');
+  }
+
+  Chordophone.fromStandardSevenStringGuitarTuning() {
+    this.chordophoneStringTuning = (STANDARD_SEVEN_STRING_GUITAR_TUNING);
+    print_debug('Chordophone.fromStandardSevenStringGuitarTuning() => $this');
+  }
+
   Chordophone.fromStandardGuitarTuning() {
-    this.chordophoneStringTuning = (STANDARD_GUITAR_STRING_TUNING);
+    this.chordophoneStringTuning = (STANDARD_GUITAR_TUNING);
     print_debug('Chordophone.fromStandardGuitarTuning() => $this');
   }
 
-  Chordophone.fromDefaultChordophoneTuning() {
-    this.chordophoneStringTuning = (DEFAULT_CHORDOPHONE_STRING_TUNING);
-    print_debug('Chordophone.fromDefaultChordophoneTuning() => $this');
+  Chordophone.fromStandardUkuleleTuning() {
+    this.chordophoneStringTuning = (STANDARD_UKULELE_TUNING);
+    print_debug('Chordophone.fromStandardUkuleleTuning() => $this');
+  }
+
+  Chordophone.fromStandardViolinTuning() {
+    this.chordophoneStringTuning = (STANDARD_VIOLIN_TUNING);
+    print_debug('Chordophone.fromStandardViolinTuning() => $this');
+  }
+
+  Chordophone.fromStandardViolaTuning() {
+    this.chordophoneStringTuning = (STANDARD_VIOLA_TUNING);
+    print_debug('Chordophone.fromStandardViolaTuning() => $this');
+  }
+
+  Chordophone.fromStandardCelloTuning() {
+    this.chordophoneStringTuning = (STANDARD_CELLO_TUNING);
+    print_debug('Chordophone.fromStandardCelloTuning() => $this');
+  }
+
+  Chordophone.fromStandardSixStringBassTuning() {
+    this.chordophoneStringTuning = (STANDARD_SIX_STRING_BASS_TUNING);
+    print_debug('Chordophone.fromStandardSixStringBassTuning() => $this');
+  }
+
+  Chordophone.fromStandardFiveStringBassTuning() {
+    this.chordophoneStringTuning = (STANDARD_FIVE_STRING_BASS_TUNING);
+    print_debug('Chordophone.fromStandardFiveStringBassTuning() => $this');
+  }
+
+  Chordophone.fromStandardBassTuning() {
+    this.chordophoneStringTuning = (STANDARD_BASS_TUNING);
+    print_debug('Chordophone.fromStandardBassTuning() => $this');
   }
 
   @override
