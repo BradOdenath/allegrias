@@ -5,12 +5,12 @@ import 'package:allegrias/music/note/note.dart';
 class ChordophoneString {
 
   // fingerboard note/fret
-  static int? noteTabIndex(
+  static int noteTabIndex(
       Note note,
       ChordophoneString chordophoneString
       )
   {
-    int? out;
+    int out = -1;
     for (
     int i = 0;
     (i < Chordophone.DEFAULT_FINGERBOARD_LENGTH);
@@ -22,7 +22,6 @@ class ChordophoneString {
         break;
       }
     }
-    //print('=> -1');
     return (out);
   }
 
