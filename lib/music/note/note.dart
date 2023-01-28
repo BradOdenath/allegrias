@@ -336,7 +336,7 @@ class Note {
     Map<Note, Map<int, int>> outCoordinates = {};
     for (Note note in _notes) {
       outCoordinates.addAll(
-          {note: fingerboardCoordinates(chordophone, note)}
+          {note:fingerboardCoordinates(chordophone, note)}
       );
     }
     print_debug('Note.notesToFingerboardCoordinates($chordophone,$_notes)'

@@ -58,4 +58,5 @@ void test() {
 
   print_test("TODO: assert()");
 }
+
 void main() => test();

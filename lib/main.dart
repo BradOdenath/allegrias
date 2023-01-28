@@ -13,7 +13,6 @@ class TabApp extends StatefulWidget {
 }
 
 class TabAppState extends State<TabApp> {
-  // Flutterfft Data
   double? frequency;
   bool? isRecording;
   bool? onPitch;
@@ -22,6 +21,7 @@ class TabAppState extends State<TabApp> {
   Note note = Note.C0;
 
   // String tabulatureStr;
+
   Tablature tablature =
       new Tablature(
           Chordophone.fromStandardGuitarTuning()
