@@ -231,14 +231,7 @@ class Note {
   }
 
   static Note noteFromMidiIndex(int index) {
-    int trueIndex = (index + 1);
-    int octave = ((trueIndex / CHROMATIC_SCALE.length).floor());
-    int noteIndex = (trueIndex % CHROMATIC_SCALE.length);
-    Note outNote = Note(
-        noteFrequency: (frequencyFromMidiIndex(index)),
-        noteOctave: (octave),
-        noteNote: (CHROMATIC_SCALE[noteIndex])
-    );
+    Note outNote = Note.fromFrequency(frequencyFromMidiIndex(index));
     print_debug('Note.noteFromMidiIndex($index) => $outNote');
     return (outNote);
   }
@@ -317,11 +310,10 @@ class Note {
     Note _note = toNote(note);
     for (int i = 0; (i < chordophone.getChordophoneStringCount); i++) {
       int? _noteFingerboardPosition = chordophone
-          .getChordophoneStrings![i]
+          .getChordophoneStrings[i]
           .noteExistsAtPosition(_note);
       if (_noteFingerboardPosition != null) {
-        noteCoordinates.addAll(
-            {i: _noteFingerboardPosition});
+        noteCoordinates.addAll({i: _noteFingerboardPosition});
       }
     }
     print_debug('Note.fingerboardCoordinates($chordophone,$_note)'
@@ -388,8 +380,13 @@ class Note {
     return (out);
   }
 
+  String toStringObject() {
+    String out = ('Note($noteNote$noteOctave)');
+    return (out);
+  }
+
   @override
-  String toString() => ('Note($noteNote$noteOctave)');
+  String toString() => ('$noteNote$noteOctave');
 
   @override
   bool operator ==(Object other) {
@@ -404,13 +401,13 @@ class Note {
   // TODO: implement hashCode
   int get hashCode {
     int out = (super.hashCode);
-    print_debug('$this.hashcode => $out');
+    print_debug('$toStringObject().hashcode => $out');
     return (out);
   }
 
   int get length {
     int out = (toString().length);
-    print_debug('$this.length => $out');
+    print_debug('$toStringObject().length => $out');
     return (out);
   }
 
@@ -418,13 +415,13 @@ class Note {
     double out = (this.noteFrequency != null)
         ? (noteFrequency!)
         : (0.0);
-    print_debug('$this.getFrequency => $out');
+    print_debug('$toStringObject().getFrequency => $out');
     return (out);
   }
 
   String get getNote {
     String out = (this.noteNote!);
-    print_debug('$this.getNote => $out');
+    print_debug('$toStringObject().getNote => $out');
     return (out);
   }
 
