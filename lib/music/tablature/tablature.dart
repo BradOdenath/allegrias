@@ -1,4 +1,5 @@
 import 'package:allegrias/music/chordophone/chordophone.dart';
+import 'package:allegrias/music/note/note.dart';
 import 'package:allegrias/music/tablature/tab_stanza/tab_stanza.dart';
 
 void test() {
@@ -45,8 +46,12 @@ class Tablature {
   bool addNote(note) {
     tabs.add(TabStanza(chordophone!));
     return (tabs[getLastTabStanzaIndex]
-        .addNote(note)!);
+        .addNote(Note.toNote(note))!);
   }
+  @override
+  String toString() => (isNotEmpty)
+      ? (tabStanzasToString(chordophone!, tabs))
+      : ('Make Notes :)');
   
   List<TabStanza> get getTabs => (this.tabs);
 
@@ -56,10 +61,5 @@ class Tablature {
           : (0);
 
   bool get isNotEmpty => (this.tabs.isNotEmpty);
-
-  @override
-  String toString() => (isNotEmpty)
-          ? (tabStanzasToString(chordophone!, tabs))
-          : ('Make Notes :)');
 
 }
