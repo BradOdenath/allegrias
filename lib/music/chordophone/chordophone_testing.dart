@@ -50,7 +50,7 @@ void test_chordophone() {
           .toString());
 
   print_test('Chordophone.fromDefaultTuning()'
-      '.getChordophoneStringCount'
+      '.getChordophoneStringCount => '
       + Chordophone.fromStandardGuitarTuning()
           .getChordophoneStringCount.toString());
 

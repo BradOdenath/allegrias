@@ -57,6 +57,9 @@ class ChordophoneString {
     this.chordophoneStringLength = (Chordophone.DEFAULT_FINGERBOARD_LENGTH);
   }
 
+  @override
+  String toString() => '$indexNote';
+
   int? noteExistsOnChordophoneString(Note note) =>
       (noteTabIndex(note, this));
 
