@@ -20,7 +20,7 @@ class TabAppState extends State<TabApp> {
       child: Text(value)
   )).toList());
 
-  String chordophoneTuning = Chordophone.chordophoneTunings[0];
+  String chordophoneTuning = (Chordophone.chordophoneTunings[0]);
 
   double? frequency;
   bool? isRecording;
@@ -33,16 +33,16 @@ class TabAppState extends State<TabApp> {
 
   Tablature tablature =
       new Tablature(
-          Chordophone.fromStandardGuitarTuning()
+          Chordophone.fromDefaultChordophoneTuning()
       );
 
   FlutterFft flutterFft = new FlutterFft();
 
   @override
   void initState() {
-    isRecording = flutterFft.getIsRecording;
-    frequency = flutterFft.getFrequency;
-    onPitch = flutterFft.getIsOnPitch;
+    isRecording = (flutterFft.getIsRecording);
+    frequency = (flutterFft.getFrequency);
+    onPitch = (flutterFft.getIsOnPitch);
 
     super.initState();
     _initialize();
@@ -61,31 +61,30 @@ class TabAppState extends State<TabApp> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (note != null) Text(
-                note!.toStringFrequency(),
-                style: ApplicationTheme.TXTSTYLE,
+                (note!.toStringFrequency()),
+                style: (ApplicationTheme.TXTSTYLE),
               ),
               Text(
-                isRecording!
-                    ? this.tablature.toString()
-                    : 'Not Recording',
-                style: ApplicationTheme.TXTSTYLE,
+                ((isRecording!)
+                    ? (this.tablature.toString())
+                    : ('Not Recording')),
+                style: (ApplicationTheme.TXTSTYLE),
               ),
               /// TODO: Fix glitching tablature button
               ListTile(
                 title: const Text('Chordophone Tuning:'),
                 trailing: DropdownButton(
-                  value: chordophoneTuning,
+                  value: (chordophoneTuning),
                   onChanged: (String? newTuning) {
                     if (newTuning != null) {
                       setState(() {
-                        chordophoneTuning = newTuning;
-                        tablature
-                            .setChordophone = new Chordophone
-                            .fromStringTuning(chordophoneTuning);
+                        chordophoneTuning = (newTuning);
+                        tablature.chordophone!
+                            .setChordophoneStringTuning = (chordophoneTuning);
                       });
                     }
                   },
-                  items: dropDownTuningItems,
+                  items: (dropDownTuningItems),
                 ),
               ),
             ],
@@ -104,7 +103,7 @@ class TabAppState extends State<TabApp> {
 
     await flutterFft.startRecorder();
     print("Recorder started.");
-    setState(() => isRecording = flutterFft.getIsRecording);
+    setState(() => isRecording = (flutterFft.getIsRecording));
 
     flutterFft.onRecorderStateChanged.listen(
         (data) => {
@@ -112,12 +111,12 @@ class TabAppState extends State<TabApp> {
             onPitch = data[10] as bool,
             frequency = data[1] as double,
             if (frequency != null) {
-              note = Note.fromFrequency(frequency!),
+              note = (Note.fromFrequency(frequency!)),
               tablature.addNote(note)
             },
           }),
-          flutterFft.setIsOnPitch = onPitch!,
-          flutterFft.setFrequency = frequency!,
+          flutterFft.setIsOnPitch = (onPitch!),
+          flutterFft.setFrequency = (frequency!),
         },
         onError: (err) => print("Error: $err"),
         onDone: () => print("Is done")
