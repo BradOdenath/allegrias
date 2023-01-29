@@ -87,13 +87,17 @@ class ChordophoneString {
   }
 
   set setIndexNote(Note note) {
-    print_debug(toStringObject() + '.setIndexNote => $note');
+    String out = (toStringObject() + '.setIndexNote = $note');
     this.indexNote = (note);
+    out += (' => ' + toStringObject());
+    print_debug(out);
   }
 
   set setChordophoneStringLength(int length) {
-    print_debug(toStringObject() + '.setChordophoneStringLength => $length');
+    String out = (toStringObject() + '.setChordophoneStringLength = $length');
     this.chordophoneStringLength = (length);
+    out += (' => ' + toStringObject());
+    print_debug(out);
   }
 
 }

@@ -220,8 +220,10 @@ class TabStanza {
   }
 
   set setChordophone(Chordophone chordophone) {
-    print_debug(toStringObject() + '.setChordophone = $chordophone');
+    String out = (toStringObject() + '.setChordophone = $chordophone');
     this.chordophone = chordophone;
+    out += (' => ' + toStringObject());
+    print_debug(out);
   }
 
 }

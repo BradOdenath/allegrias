@@ -220,8 +220,10 @@ class Chordophone {
   }
 
   set setChordophoneStringTuning(chordophoneStringTuning) {
-    print_debug('$this.setChordophoneStringTuning => $chordophoneStringTuning');
+    String out = ('$this.setChordophoneStringTuning = $chordophoneStringTuning');
     this.chordophoneStringTuning = chordophoneStringTuning;
+    out += (' => $this');
+    print_debug(out);
   }
 
 }

@@ -464,18 +464,24 @@ class Note {
   // Mutators
 
   set setFrequency(double frequency) {
-    print_debug(toStringObject() + '.setFrequency => $frequency');
+    String out = (toStringObject() + '.setFrequency = $frequency');
     this.noteFrequency = (frequency);
+    out += (' => ' + toStringObject());
+    print_debug(out);
   }
 
   set setNote(String note) {
-    print_debug(toStringObject() + '.setNote => $note');
+    String out = (toStringObject() + '.setNote = $note');
     this.noteNote = (note);
+    out += (' => ' + toStringObject());
+    print_debug(out);
   }
 
   set setOctave(int octave) {
-    print_debug(toStringObject() + '.setOctave => $octave');
+    String out = (toStringObject() + '.setOctave = $octave');
     this.noteOctave = (octave);
+    out += (' => ' + toStringObject());
+    print_debug(out);
   }
 
 }
