@@ -60,9 +60,8 @@ class TabAppState extends State<TabApp> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text((note != null)
-                  ? note!.toStringFrequency()
-                  : '',
+              if (note != null) Text(
+                note!.toStringFrequency(),
                 style: ApplicationTheme.TXTSTYLE,
               ),
               Text(
@@ -72,7 +71,7 @@ class TabAppState extends State<TabApp> {
                 style: ApplicationTheme.TXTSTYLE,
               ),
               ListTile(
-                title: const Text('Tuning:'),
+                title: const Text('Chordophone Tuning:'),
                 trailing: DropdownButton(
                   value: chordophoneTuning,
                   onChanged: (String? newTuning) {
@@ -99,8 +98,8 @@ class TabAppState extends State<TabApp> {
     print("Starting recorder...");
 
     while (!(await(flutterFft.checkPermission()))) {
-		flutterFft.requestPermission();
-	}
+      flutterFft.requestPermission();
+    }
 
     await flutterFft.startRecorder();
     print("Recorder started.");
