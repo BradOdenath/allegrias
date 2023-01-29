@@ -65,8 +65,8 @@ class TabAppState extends State<TabApp> {
                 style: ApplicationTheme.TXTSTYLE,
               ),
               Text(
-                isRecording! ?
-                this.tablature.toString()
+                isRecording!
+                    ? this.tablature.toString()
                     : 'Not Recording',
                 style: ApplicationTheme.TXTSTYLE,
               ),
