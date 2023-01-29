@@ -55,7 +55,7 @@ class Tablature {
     return (out);
   }
 
-  String toStringObject() => ('Tablature($tabs,$chordophone)');
+  String toStringObject() => ('Tablature($tabs, $chordophone)');
 
   @override
   String toString() {

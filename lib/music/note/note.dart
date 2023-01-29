@@ -405,7 +405,7 @@ class Note {
   }
 
   String toStringObject() {
-    String out = ('Note($noteNote$noteOctave)');
+    String out = ('Note($noteNote,$noteOctave,$noteFrequency)');
     return (out);
   }
 
