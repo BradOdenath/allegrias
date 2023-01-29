@@ -70,6 +70,7 @@ class TabAppState extends State<TabApp> {
                     : 'Not Recording',
                 style: ApplicationTheme.TXTSTYLE,
               ),
+              /// TODO: Fix glitching tablature button
               ListTile(
                 title: const Text('Chordophone Tuning:'),
                 trailing: DropdownButton(
