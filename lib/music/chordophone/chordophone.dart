@@ -129,7 +129,7 @@ class Chordophone {
   ];
 
   static const String
-  EHRU_TUNING_NAME = 'Da Ruan (C)';
+  EHRU_TUNING_NAME = 'Ehru';
 
   static const List<String> EHRU_TUNING = [
     'A4', 'D4'
