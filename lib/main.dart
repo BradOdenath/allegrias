@@ -1,3 +1,5 @@
+import 'package:allegrias/music/chordophone/chordophone_tuning_widget.dart';
+
 import 'theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fft/flutter_fft.dart';
@@ -52,11 +54,15 @@ class TabAppState extends State<TabApp> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
+                note.toStringFrequency()
+              ),
+              Text(
                   isRecording! ?
                   this.tablature.toString()
                   : 'Not Recording',
                   style: ApplicationTheme.TXTSTYLE
-              )
+              ),
+              ChordophoneTuningDropdownButton(),
             ],
           ),
         ),

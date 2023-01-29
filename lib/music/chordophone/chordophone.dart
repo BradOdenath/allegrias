@@ -3,6 +3,7 @@ import 'package:allegrias/music/chordophone/'
     'chordophone_string/chordophone_string.dart';
 import 'package:allegrias/music/note/note.dart';
 
+
 class Chordophone {
   static const int DEFAULT_FINGERBOARD_LENGTH = 24;
 
@@ -50,6 +51,20 @@ class Chordophone {
 
   static const List<String> STANDARD_BASS_TUNING = [
     'G2', 'D2', 'A1', 'E1'
+  ];
+
+  static const chordophoneTunings = <String>[
+    'Default',
+    '10 String Guitar',
+    '7 String Guitar',
+    '6 String Guitar',
+    'Ukulele',
+    'Violin',
+    'Viola',
+    'Cello',
+    '6 String Bass',
+    '5 String Bass',
+    '4 String Bass'
   ];
 
   /// TODO: Implement this to writing efficient tablature.
