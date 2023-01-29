@@ -121,7 +121,7 @@ class TabStanza {
     print_debug(toStringObject() + '.noteExists($note) => $out');
     return (out);
   }
-  String toStringObject() => 'TabStanza($getNotes, $getChordophone)';
+  String toStringObject() => 'TabStanza($notes, $chordophone)';
 
   @override
   String toString() {
