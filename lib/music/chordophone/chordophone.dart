@@ -86,6 +86,48 @@ class Chordophone {
     'G2', 'D2', 'A1', 'E1'
   ];
 
+  static const String
+  ZHONG_RUAN_A_TUNING_NAME = 'Zhong Ruan (A)';
+
+  static const List<String> ZHONG_RUAN_A_TUNING = [
+    'D4', 'G3', 'D3', 'G2'
+  ];
+
+  static const String
+  ZHONG_RUAN_B_TUNING_NAME = 'Zhong Ruan (B)';
+
+  static const List<String> ZHONG_B_RUAN_TUNING = [
+    'D4', 'A3', 'D3', 'A2'
+  ];
+
+  static const String
+  ZHONG_RUAN_C_TUNING_NAME = 'Zhong Ruan (C)';
+
+  static const List<String> ZHONG_C_RUAN_TUNING = [
+    'E4', 'A3', 'D3', 'G2'
+  ];
+
+  static const String
+  DA_RUAN_A_TUNING_NAME = 'Da Ruan (A)';
+
+  static const List<String> DA_RUAN_A_TUNING = [
+    'A3', 'D3', 'A2', 'D2'
+  ];
+
+  static const String
+  DA_RUAN_B_TUNING_NAME = 'Da Ruan (B)';
+
+  static const List<String> DA_B_RUAN_TUNING = [
+    'A3', 'D3', 'G2', 'C2'
+  ];
+
+  static const String
+  DA_RUAN_C_TUNING_NAME = 'Da Ruan (C)';
+
+  static const List<String> DA_C_RUAN_TUNING = [
+    'G3', 'D3', 'G2', 'D2'
+  ];
+
   /// TODO: Modify the dart language with const list contain const elements.
   static const List<String> chordophoneTunings = [
     Chordophone.DEFAULT_CHORDOPHONE_TUNING_NAME,
@@ -98,7 +140,13 @@ class Chordophone {
     Chordophone.STANDARD_CELLO_TUNING_NAME,
     Chordophone.STANDARD_SIX_STRING_BASS_TUNING_NAME,
     Chordophone.STANDARD_FIVE_STRING_BASS_TUNING_NAME,
-    Chordophone.STANDARD_BASS_TUNING_NAME
+    Chordophone.STANDARD_BASS_TUNING_NAME,
+    Chordophone.ZHONG_RUAN_A_TUNING_NAME,
+    Chordophone.ZHONG_RUAN_B_TUNING_NAME,
+    Chordophone.ZHONG_RUAN_C_TUNING_NAME,
+    Chordophone.DA_RUAN_A_TUNING_NAME,
+    Chordophone.DA_RUAN_B_TUNING_NAME,
+    Chordophone.DA_RUAN_C_TUNING_NAME
   ];
 
   static List<String> chordophoneTuningFromString(
@@ -134,6 +182,24 @@ class Chordophone {
         break;
       case (Chordophone.STANDARD_BASS_TUNING_NAME):
         out = Chordophone.STANDARD_BASS_TUNING;
+        break;
+      case (Chordophone.ZHONG_RUAN_A_TUNING_NAME):
+        out = Chordophone.ZHONG_RUAN_A_TUNING;
+        break;
+      case (Chordophone.ZHONG_RUAN_B_TUNING_NAME):
+        out = Chordophone.ZHONG_B_RUAN_TUNING;
+        break;
+      case (Chordophone.ZHONG_RUAN_C_TUNING_NAME):
+        out = Chordophone.ZHONG_C_RUAN_TUNING;
+        break;
+      case (Chordophone.DA_RUAN_A_TUNING_NAME):
+        out = Chordophone.DA_RUAN_A_TUNING;
+        break;
+      case (Chordophone.DA_RUAN_B_TUNING_NAME):
+        out = Chordophone.DA_B_RUAN_TUNING;
+        break;
+      case (Chordophone.DA_RUAN_C_TUNING_NAME):
+        out = Chordophone.DA_C_RUAN_TUNING;
         break;
       default:
         out = Chordophone.DEFAULT_CHORDOPHONE_TUNING;
