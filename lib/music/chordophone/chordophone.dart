@@ -31,7 +31,7 @@ class Chordophone {
   ];
 
   static const String
-  STANDARD_GUITAR_TUNING_NAME = '6 String Guitar';
+  STANDARD_GUITAR_TUNING_NAME = 'Guitar';
 
   static const List<String> STANDARD_GUITAR_TUNING = [
     'E4', 'B3', 'G3', 'D3', 'A2', 'E2'
@@ -100,6 +100,46 @@ class Chordophone {
     Chordophone.STANDARD_FIVE_STRING_BASS_TUNING_NAME,
     Chordophone.STANDARD_BASS_TUNING_NAME
   ];
+
+  static List<String> chordophoneTuningFromString(
+      String chordophoneStringTuning) {
+    List<String> out;
+    switch (chordophoneStringTuning) {
+      case (Chordophone.STANDARD_TEN_STRING_GUITAR_TUNING_NAME):
+        out = Chordophone.STANDARD_TEN_STRING_GUITAR_TUNING;
+        break;
+      case (Chordophone.STANDARD_SEVEN_STRING_GUITAR_TUNING_NAME):
+        out = Chordophone.STANDARD_SEVEN_STRING_GUITAR_TUNING;
+        break;
+      case (Chordophone.STANDARD_GUITAR_TUNING_NAME):
+        out = Chordophone.STANDARD_GUITAR_TUNING;
+        break;
+      case (Chordophone.STANDARD_UKULELE_TUNING_NAME):
+        out = Chordophone.STANDARD_UKULELE_TUNING;
+        break;
+      case (Chordophone.STANDARD_VIOLIN_TUNING_NAME):
+        out = Chordophone.STANDARD_VIOLIN_TUNING;
+        break;
+      case (Chordophone.STANDARD_VIOLA_TUNING_NAME):
+        out = Chordophone.STANDARD_VIOLA_TUNING;
+        break;
+      case (Chordophone.STANDARD_CELLO_TUNING_NAME):
+        out = Chordophone.STANDARD_CELLO_TUNING;
+        break;
+      case (Chordophone.STANDARD_SIX_STRING_BASS_TUNING_NAME):
+        out = Chordophone.STANDARD_SIX_STRING_BASS_TUNING;
+        break;
+      case (Chordophone.STANDARD_FIVE_STRING_BASS_TUNING_NAME):
+        out = Chordophone.STANDARD_FIVE_STRING_BASS_TUNING;
+        break;
+      case (Chordophone.STANDARD_BASS_TUNING_NAME):
+        out = Chordophone.STANDARD_BASS_TUNING;
+        break;
+      default:
+        out = Chordophone.DEFAULT_CHORDOPHONE_TUNING;
+    }
+    return (out);
+  }
 
   /// TODO: Implement this to writing efficient tablature.
   static const int DEFAULT_POSITION_RANGE = 5;
@@ -244,61 +284,9 @@ class Chordophone {
     print_debug('Chordophone.fromStandardBassTuning() => $this');
   }
 
-  Chordophone.fromStringTuning(String chordophoneTuning) {
-    switch (chordophoneTuning) {
-      case (Chordophone.STANDARD_TEN_STRING_GUITAR_TUNING_NAME):
-      // Chordophone.fromStandardTenStringGuitarTuning();
-        setChordophoneStringTuning =
-            Chordophone.STANDARD_TEN_STRING_GUITAR_TUNING;
-        break;
-      case (Chordophone.STANDARD_SEVEN_STRING_GUITAR_TUNING_NAME):
-      //Chordophone.fromStandardSevenStringGuitarTuning();
-        setChordophoneStringTuning =
-            Chordophone.STANDARD_SEVEN_STRING_GUITAR_TUNING;
-        break;
-      case (Chordophone.STANDARD_GUITAR_TUNING_NAME):
-      // Chordophone.fromStandardGuitarTuning();
-        setChordophoneStringTuning =
-            Chordophone.STANDARD_GUITAR_TUNING;
-        break;
-      case (Chordophone.STANDARD_UKULELE_TUNING_NAME):
-      // Chordophone.fromStandardUkuleleTuning();
-        setChordophoneStringTuning =
-            Chordophone.STANDARD_UKULELE_TUNING;
-        break;
-      case (Chordophone.STANDARD_VIOLIN_TUNING_NAME):
-      // Chordophone.fromStandardViolinTuning();
-        setChordophoneStringTuning =
-            Chordophone.STANDARD_VIOLIN_TUNING;
-        break;
-      case (Chordophone.STANDARD_VIOLA_TUNING_NAME):
-      // Chordophone.fromStandardViolaTuning();
-        setChordophoneStringTuning =
-            Chordophone.STANDARD_VIOLA_TUNING;
-        break;
-      case (Chordophone.STANDARD_CELLO_TUNING_NAME):
-      // Chordophone.fromStandardCelloTuning();
-        setChordophoneStringTuning =
-            Chordophone.STANDARD_CELLO_TUNING;
-        break;
-      case (Chordophone.STANDARD_SIX_STRING_BASS_TUNING_NAME):
-      // Chordophone.fromStandardSixStringBassTuning();
-        setChordophoneStringTuning =
-            Chordophone.STANDARD_SIX_STRING_BASS_TUNING;
-        break;
-      case (Chordophone.STANDARD_FIVE_STRING_BASS_TUNING_NAME):
-      // Chordophone.fromStandardFiveStringBassTuning();
-        setChordophoneStringTuning =
-            Chordophone.STANDARD_FIVE_STRING_BASS_TUNING;
-        break;
-      case (Chordophone.STANDARD_BASS_TUNING_NAME):
-      // Chordophone.fromStandardBassTuning();
-        setChordophoneStringTuning =
-            Chordophone.STANDARD_BASS_TUNING;
-        break;
-      default:
-        Chordophone.fromDefaultChordophoneTuning();
-    }
+  Chordophone.fromStringTuning(String chordophoneStringTuning) {
+    setChordophoneStringTuning = chordophoneTuningFromString(
+        chordophoneStringTuning);
   }
 
   @override
@@ -331,60 +319,8 @@ class Chordophone {
     if (chordophoneStringTuning is List<String>) {
       this.chordophoneStringTuning = chordophoneStringTuning;
     } else if (chordophoneStringTuning is String) {
-      switch (chordophoneStringTuning) {
-        case (Chordophone.STANDARD_TEN_STRING_GUITAR_TUNING_NAME):
-        // Chordophone.fromStandardTenStringGuitarTuning();
-          setChordophoneStringTuning =
-              Chordophone.STANDARD_TEN_STRING_GUITAR_TUNING;
-          break;
-        case (Chordophone.STANDARD_SEVEN_STRING_GUITAR_TUNING_NAME):
-        //Chordophone.fromStandardSevenStringGuitarTuning();
-          setChordophoneStringTuning =
-              Chordophone.STANDARD_SEVEN_STRING_GUITAR_TUNING;
-          break;
-        case (Chordophone.STANDARD_GUITAR_TUNING_NAME):
-        // Chordophone.fromStandardGuitarTuning();
-          setChordophoneStringTuning =
-              Chordophone.STANDARD_GUITAR_TUNING;
-          break;
-        case (Chordophone.STANDARD_UKULELE_TUNING_NAME):
-        // Chordophone.fromStandardUkuleleTuning();
-          setChordophoneStringTuning =
-              Chordophone.STANDARD_UKULELE_TUNING;
-          break;
-        case (Chordophone.STANDARD_VIOLIN_TUNING_NAME):
-        // Chordophone.fromStandardViolinTuning();
-          setChordophoneStringTuning =
-              Chordophone.STANDARD_VIOLIN_TUNING;
-          break;
-        case (Chordophone.STANDARD_VIOLA_TUNING_NAME):
-        // Chordophone.fromStandardViolaTuning();
-          setChordophoneStringTuning =
-              Chordophone.STANDARD_VIOLA_TUNING;
-          break;
-        case (Chordophone.STANDARD_CELLO_TUNING_NAME):
-        // Chordophone.fromStandardCelloTuning();
-          setChordophoneStringTuning =
-              Chordophone.STANDARD_CELLO_TUNING;
-          break;
-        case (Chordophone.STANDARD_SIX_STRING_BASS_TUNING_NAME):
-        // Chordophone.fromStandardSixStringBassTuning();
-          setChordophoneStringTuning =
-              Chordophone.STANDARD_SIX_STRING_BASS_TUNING;
-          break;
-        case (Chordophone.STANDARD_FIVE_STRING_BASS_TUNING_NAME):
-        // Chordophone.fromStandardFiveStringBassTuning();
-          setChordophoneStringTuning =
-              Chordophone.STANDARD_FIVE_STRING_BASS_TUNING;
-          break;
-        case (Chordophone.STANDARD_BASS_TUNING_NAME):
-        // Chordophone.fromStandardBassTuning();
-          setChordophoneStringTuning =
-              Chordophone.STANDARD_BASS_TUNING;
-          break;
-        default:
-          Chordophone.fromDefaultChordophoneTuning();
-      }
+      setChordophoneStringTuning = chordophoneTuningFromString(
+          chordophoneStringTuning);
     }
     out += (' => $this');
     print_debug(out);
