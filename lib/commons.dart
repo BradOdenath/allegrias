@@ -1,6 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
-bool debug = true;
+bool debug = false;
 bool test = true;
 bool time = true;
 
