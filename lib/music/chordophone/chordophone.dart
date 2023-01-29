@@ -128,6 +128,13 @@ class Chordophone {
     'G3', 'D3', 'G2', 'D2'
   ];
 
+  static const String
+  EHRU_TUNING_NAME = 'Da Ruan (C)';
+
+  static const List<String> EHRU_TUNING = [
+    'A4', 'D4'
+  ];
+
   /// TODO: Modify the dart language with const list contain const elements.
   static const List<String> chordophoneTunings = [
     Chordophone.DEFAULT_CHORDOPHONE_TUNING_NAME,
@@ -146,7 +153,8 @@ class Chordophone {
     Chordophone.ZHONG_RUAN_C_TUNING_NAME,
     Chordophone.DA_RUAN_A_TUNING_NAME,
     Chordophone.DA_RUAN_B_TUNING_NAME,
-    Chordophone.DA_RUAN_C_TUNING_NAME
+    Chordophone.DA_RUAN_C_TUNING_NAME,
+    Chordophone.EHRU_TUNING_NAME
   ];
 
   static List<String> chordophoneTuningFromString(
@@ -200,6 +208,9 @@ class Chordophone {
         break;
       case (Chordophone.DA_RUAN_C_TUNING_NAME):
         out = Chordophone.DA_C_RUAN_TUNING;
+        break;
+      case (Chordophone.EHRU_TUNING_NAME):
+        out = Chordophone.EHRU_TUNING;
         break;
       default:
         out = Chordophone.DEFAULT_CHORDOPHONE_TUNING;
