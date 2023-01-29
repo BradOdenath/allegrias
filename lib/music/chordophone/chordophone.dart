@@ -141,57 +141,57 @@ class Chordophone {
   Chordophone({this.chordophoneStringTuning});
 
   Chordophone.fromDefaultChordophoneTuning() {
-    this.chordophoneStringTuning = (DEFAULT_CHORDOPHONE_TUNING);
+    this.setChordophoneStringTuning = (DEFAULT_CHORDOPHONE_TUNING);
     print_debug('Chordophone.fromDefaultChordophoneTuning() => $this');
   }
 
   Chordophone.fromStandardTenStringGuitarTuning() {
-    this.chordophoneStringTuning = (STANDARD_TEN_STRING_GUITAR_TUNING);
+    this.setChordophoneStringTuning = (STANDARD_TEN_STRING_GUITAR_TUNING);
     print_debug('Chordophone.fromStandardTenStringGuitarTuning() => $this');
   }
 
   Chordophone.fromStandardSevenStringGuitarTuning() {
-    this.chordophoneStringTuning = (STANDARD_SEVEN_STRING_GUITAR_TUNING);
+    this.setChordophoneStringTuning = (STANDARD_SEVEN_STRING_GUITAR_TUNING);
     print_debug('Chordophone.fromStandardSevenStringGuitarTuning() => $this');
   }
 
   Chordophone.fromStandardGuitarTuning() {
-    this.chordophoneStringTuning = (STANDARD_GUITAR_TUNING);
+    this.setChordophoneStringTuning = (STANDARD_GUITAR_TUNING);
     print_debug('Chordophone.fromStandardGuitarTuning() => $this');
   }
 
   Chordophone.fromStandardUkuleleTuning() {
-    this.chordophoneStringTuning = (STANDARD_UKULELE_TUNING);
+    this.setChordophoneStringTuning = (STANDARD_UKULELE_TUNING);
     print_debug('Chordophone.fromStandardUkuleleTuning() => $this');
   }
 
   Chordophone.fromStandardViolinTuning() {
-    this.chordophoneStringTuning = (STANDARD_VIOLIN_TUNING);
+    this.setChordophoneStringTuning = (STANDARD_VIOLIN_TUNING);
     print_debug('Chordophone.fromStandardViolinTuning() => $this');
   }
 
   Chordophone.fromStandardViolaTuning() {
-    this.chordophoneStringTuning = (STANDARD_VIOLA_TUNING);
+    this.setChordophoneStringTuning = (STANDARD_VIOLA_TUNING);
     print_debug('Chordophone.fromStandardViolaTuning() => $this');
   }
 
   Chordophone.fromStandardCelloTuning() {
-    this.chordophoneStringTuning = (STANDARD_CELLO_TUNING);
+    this.setChordophoneStringTuning = (STANDARD_CELLO_TUNING);
     print_debug('Chordophone.fromStandardCelloTuning() => $this');
   }
 
   Chordophone.fromStandardSixStringBassTuning() {
-    this.chordophoneStringTuning = (STANDARD_SIX_STRING_BASS_TUNING);
+    this.setChordophoneStringTuning = (STANDARD_SIX_STRING_BASS_TUNING);
     print_debug('Chordophone.fromStandardSixStringBassTuning() => $this');
   }
 
   Chordophone.fromStandardFiveStringBassTuning() {
-    this.chordophoneStringTuning = (STANDARD_FIVE_STRING_BASS_TUNING);
+    this.setChordophoneStringTuning = (STANDARD_FIVE_STRING_BASS_TUNING);
     print_debug('Chordophone.fromStandardFiveStringBassTuning() => $this');
   }
 
   Chordophone.fromStandardBassTuning() {
-    this.chordophoneStringTuning = (STANDARD_BASS_TUNING);
+    this.setChordophoneStringTuning = (STANDARD_BASS_TUNING);
     print_debug('Chordophone.fromStandardBassTuning() => $this');
   }
 
@@ -217,6 +217,11 @@ class Chordophone {
     (chordophoneStrings(getChordophoneStringTuning));
     print_debug('$this.getChordophoneStrings => $out');
     return (out);
+  }
+
+  set setChordophoneStringTuning(chordophoneStringTuning) {
+    print_debug('$this.setChordophoneStringTuning => $chordophoneStringTuning');
+    this.chordophoneStringTuning = chordophoneStringTuning;
   }
 
 }

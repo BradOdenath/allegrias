@@ -335,7 +335,7 @@ class Note {
     for (int i = 0; (i < chordophone.getChordophoneStringCount); i++) {
       int? _noteFingerboardPosition = chordophone
           .getChordophoneStrings[i]
-          .noteExistsAtPosition(_note);
+          .notePositionOnChordophoneString(_note);
       if (_noteFingerboardPosition != null) {
         noteCoordinates.addAll({i: _noteFingerboardPosition});
       }
@@ -464,17 +464,17 @@ class Note {
   // Mutators
 
   set setFrequency(double frequency) {
-    print_debug(toStringObject() + '.setFrequency = $frequency');
+    print_debug(toStringObject() + '.setFrequency => $frequency');
     this.noteFrequency = (frequency);
   }
 
   set setNote(String note) {
-    print_debug(toStringObject() + '.setNote = $note');
+    print_debug(toStringObject() + '.setNote => $note');
     this.noteNote = (note);
   }
 
   set setOctave(int octave) {
-    print_debug(toStringObject() + '.setOctave = $octave');
+    print_debug(toStringObject() + '.setOctave => $octave');
     this.noteOctave = (octave);
   }
 

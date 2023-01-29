@@ -18,8 +18,8 @@ void chordophone_string_test() {
       'indexNote: Note.C0, '
       'chordophoneStringLength: Chordophone.DEFAULT_FINGERBOARD_LENGTH) => '
       + ChordophoneString(
-          indexNote: Note.C0,
-          chordophoneStringLength: Chordophone.DEFAULT_FINGERBOARD_LENGTH)
+          Note.C0,
+          Chordophone.DEFAULT_FINGERBOARD_LENGTH)
           .toString());
 
   print_test('ChordophoneString.fingerboardPositionNotes('
@@ -32,19 +32,12 @@ void chordophone_string_test() {
 
   print_test('ChordophoneString'
       '.fromDefaultFingerboardLength(Note.C0)'
-      '.noteExistsOnChordophoneString(Note.C0) => '
+      '.notePositionOnChordophoneString(Note.C0) => '
       + ChordophoneString
           .fromDefaultFingerboardLength(Note.C0)
-          .noteExistsOnChordophoneString(Note.C0)
+          .notePositionOnChordophoneString(Note.C0)
           .toString());
 
-  print_test('ChordophoneString'
-      '.fromDefaultFingerboardLength(Note.C0)'
-      '.noteExistsAtPosition(Note.C0) => '
-      + ChordophoneString
-          .fromDefaultFingerboardLength(Note.C0)
-          .noteExistsAtPosition(Note.C0)
-          .toString());
 
   print_test('ChordophoneString'
       '.fromDefaultFingerboardLength(Note.C0)'

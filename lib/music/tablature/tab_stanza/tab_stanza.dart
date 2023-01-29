@@ -33,19 +33,23 @@ class TabStanza {
         out.add('---');
       }
     }
+    print_debug('TabStanza.noteToTabStanzaList($chordophone, $note) => $out');
     return (out);
   }
 
   static Map<int,int> notesToTabStanzaMap(
-      Chordophone chordophone, List notes) =>
-      Chordophone.positionsToChord(
-          Chordophone.fingerboardCoordinatesToPositions(
-              Note.notesToFingerboardCoordinates(
-                  chordophone, Note.toNotes(notes))));
-
+      Chordophone chordophone, List notes) {
+    Map<int,int> out = Chordophone.positionsToChord(
+        Chordophone.fingerboardCoordinatesToPositions(
+            Note.notesToFingerboardCoordinates(
+                chordophone, Note.toNotes(notes))));
+    print_debug('TabStanza.notesToTabStanzaMap($chordophone, $notes) => $out');
+    return (out);
+  }
   static String tabChordophoneString(String fretIndex) {
     String out = ('-$fretIndex--');
     out = out.substring(0, (out.length + 1 - fretIndex.length));
+    print_debug('TabStanza.tabChordophoneString($fretIndex) => $out');
     return (out);
   }
 
@@ -63,6 +67,9 @@ class TabStanza {
         tabStanza.add(tabChordophoneString('-'));
       }
     }
+    print_debug('TabStanza'
+        '.tabStanzaMapToTabStanzaList($tabStanzaMap, $chordophone) '
+        '=> $tabStanza');
     return (tabStanza);
   }
 
@@ -83,15 +90,19 @@ class TabStanza {
                 : ('-'))));
       }
     }
+    print_debug('TabStanza'
+        '.noteToTabStanzaChordophoneStringList($chordophone, $note) => $out');
     return (out);
   }
 
   List<Note>? notes;
-  Chordophone? chordophone = Chordophone.fromStandardGuitarTuning();
+  Chordophone? chordophone = Chordophone.fromStandardGuitarTuning(); // <_<
 
+  /// TODO: May delete this class and merge it with Tablature
   TabStanza(Chordophone chordophone) {
     this.notes = [];
     this.chordophone = (chordophone);
+    print_debug('TabStanza($chordophone) => ' + toStringObject());
   }
 
   bool? addNote(note) {
@@ -101,22 +112,32 @@ class TabStanza {
       notes?.add(_note);
       out = true;
     }
+    print_debug(toStringObject() + '.addNote($note) => $out');
     return (out);
   }
 
-  bool noteExists(note) => (Note.noteExists(notes!, note));
+  bool noteExists(note) {
+    bool out = (Note.noteExists(notes!, note));
+    print_debug(toStringObject() + '.noteExists($note) => $out');
+    return (out);
+  }
+  String toStringObject() => 'TabStanza($getNotes, $getChordophone)';
 
   @override
-  String toString() => (chordophoneStringTabsToString);
+  String toString() {
+    String out = (getChordophoneStringTabsToString);
+    print_debug(toStringObject() + '.toString() => $out');
+    return (out);
+  }
 
   bool validNoteAddition(note) {
-    Note _note = Note.toNote(note);
-    bool out =  ((notes!.length <= 1 == true)
+    Note _note = Note.toNote(note); // >_>
+    bool out =  ((notes!.length <= 1)
         //&& notes.length <= Chordophone.CHORDOPHONE_STRING_COUNT == true);
         //&& !(noteExists(note)) == true
         //&& isThereAvailableChordophoneString(note) == true);
     );
-    print_debug("$this.........");
+    print_debug(toStringObject() + '.ValidNoteAddition($note) => $out');
     return out;
   }
 
@@ -130,12 +151,17 @@ class TabStanza {
               .getChordophoneStrings[
           chordophoneStringIndex
           ]
-      )! >= 0);
+      ) >= 0);
     }
+    print_debug(toStringObject() + '.availableChordophoneString($note) => $out');
     return (out);
   }
 
-  List<Note> get getNotes => (notes!);
+  List<Note> get getNotes {
+    List<Note> out = (notes!);
+    print_debug(toStringObject() + '.getNotes => $out');
+    return (out);
+  }
 
   List<String> get getNotesToTablature {
     List<String> out;
@@ -147,17 +173,23 @@ class TabStanza {
     } else {
       out = (noteToTabStanzaList(chordophone!,Note.C0));
     }
+    print_debug(toStringObject() + '.getNotesToTablature => $out');
     return (out);
   }
   
-  Map<int,int> get getOfficialTabStanzaChordophoneStringMap =>
-      notesToTabStanzaMap(chordophone!, this.notes!);
+  Map<int,int> get getOfficialTabStanzaChordophoneStringMap {
+    Map<int,int> out = notesToTabStanzaMap(chordophone!, this.notes!);
+    print_debug(toStringObject() + '.getOfficialTabStanzaChordophoneStringMap => $out');
+    return (out);
+  }
 
-  String get chordophoneStringTabsToString {
+  String get getChordophoneStringTabsToString {
     String tablatureStanza = ('');
     for (String chordophoneString in getNotesToTablature) {
       tablatureStanza += (chordophoneString);
     }
+    print_debug(toStringObject()
+        + '.getChordophoneStringTabsToString => $tablatureStanza');
     return (tablatureStanza);
   }
 
@@ -177,8 +209,20 @@ class TabStanza {
         openChordophoneStrings.add(i);
       }
     }
+    print_debug(toStringObject()
+        + '.getOpenChordophoneStrings => $openChordophoneStrings');
     return (openChordophoneStrings);
   }
-  
+
+  Chordophone? get getChordophone {
+    print_debug(toStringObject() + '.getChordophone => $chordophone');
+    return (chordophone);
+  }
+
+  set setChordophone(Chordophone chordophone) {
+    print_debug(toStringObject() + '.setChordophone = $chordophone');
+    this.chordophone = chordophone;
+  }
+
 }
 

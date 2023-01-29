@@ -1,3 +1,4 @@
+import 'package:allegrias/commons.dart';
 import 'package:allegrias/music/chordophone/chordophone.dart';
 import 'package:allegrias/music/note/note.dart';
 import 'package:allegrias/music/tablature/tab_stanza/tab_stanza.dart';
@@ -31,6 +32,8 @@ class Tablature {
         outChordophoneString += '\n';
       }
     }
+    print_debug('Tablature.tabStanzaToString($chordophone, $tabStanzas)'
+        ' => $outChordophoneString');
     return outChordophoneString;
   }
 
@@ -40,26 +43,53 @@ class Tablature {
 
   Tablature(Chordophone chordophone) {
     this.tabs = [];
-    this.chordophone = chordophone;
+    this.setChordophone = chordophone;
+    print_debug(toStringObject());
   }
   
   bool addNote(note) {
     tabs.add(TabStanza(chordophone!));
-    return (tabs[getLastTabStanzaIndex]
+    bool out = (tabs[getLastTabStanzaIndex]
         .addNote(Note.toNote(note))!);
+    print_debug(toStringObject() + '.addNote($note) => $out');
+    return (out);
   }
+
+  String toStringObject() => ('Tablature($tabs,$chordophone)');
+
   @override
-  String toString() => (isNotEmpty)
-      ? (tabStanzasToString(chordophone!, tabs))
-      : ('Make Notes :)');
-  
-  List<TabStanza> get getTabs => (this.tabs);
+  String toString() {
+    String out = ((isNotEmpty)
+        ? (tabStanzasToString(chordophone!, tabs))
+        : ('Make Notes :)'));
+    print_debug(toStringObject() + '.toString() => $out');
+    return (out);
+  }
 
-  int get getLastTabStanzaIndex =>
-      (tabs.length > 0)
-          ? (this.tabs.length-1)
-          : (0);
+    List<TabStanza> get getTabs => (this.tabs);
 
-  bool get isNotEmpty => (this.tabs.isNotEmpty);
+    int get getLastTabStanzaIndex {
+      int out = ((tabs.length > 0)
+          ? (this.tabs.length - 1)
+          : (0));
+      print_debug(toStringObject() + '.getLastTabStanzaIndex => $out');
+      return (out);
+    }
+
+    bool get isNotEmpty {
+      bool out = (this.tabs.isNotEmpty);
+      print_debug(toStringObject() + '.isNotEmpty => $out');
+      return (out);
+    }
+
+    set setChordophone(Chordophone chordophone) {
+      String out = (toStringObject() + '.setChordophone($chordophone)');
+      this.chordophone = chordophone;
+      for (var tabStanza in tabs) {
+        tabStanza.setChordophone = chordophone;
+      }
+      out += (' => ' + toStringObject());
+      print_debug(out);
+    }
 
 }
