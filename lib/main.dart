@@ -1,5 +1,3 @@
-import 'package:allegrias/music/chordophone/chordophone_tuning_widget.dart';
-
 import 'theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fft/flutter_fft.dart';
@@ -15,12 +13,21 @@ class TabApp extends StatefulWidget {
 }
 
 class TabAppState extends State<TabApp> {
+  static final List<DropdownMenuItem<String>>
+  dropDownTuningItems = (Chordophone.chordophoneTunings
+      .map((String value) => DropdownMenuItem(
+      value: value,
+      child: Text(value)
+  )).toList());
+
+  String chordophoneTuning = Chordophone.chordophoneTunings[0];
+
   double? frequency;
   bool? isRecording;
   bool? onPitch;
 
   //Current note data
-  Note note = Note.C0;
+  Note? note;
 
   // String tabulatureStr;
 
@@ -53,16 +60,34 @@ class TabAppState extends State<TabApp> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                note.toStringFrequency()
+              Text((note != null)
+                  ? note!.toStringFrequency()
+                  : '',
+                style: ApplicationTheme.TXTSTYLE,
               ),
               Text(
-                  isRecording! ?
-                  this.tablature.toString()
-                  : 'Not Recording',
-                  style: ApplicationTheme.TXTSTYLE
+                isRecording! ?
+                this.tablature.toString()
+                    : 'Not Recording',
+                style: ApplicationTheme.TXTSTYLE,
               ),
-              ChordophoneTuningDropdownButton(),
+              ListTile(
+                title: const Text('Tuning:'),
+                trailing: DropdownButton(
+                  value: chordophoneTuning,
+                  onChanged: (String? newTuning) {
+                    if (newTuning != null) {
+                      setState(() {
+                        chordophoneTuning = newTuning;
+                        tablature
+                            .setChordophone = new Chordophone
+                            .fromStringTuning(chordophoneTuning);
+                      });
+                    }
+                  },
+                  items: dropDownTuningItems,
+                ),
+              ),
             ],
           ),
         ),
@@ -93,7 +118,6 @@ class TabAppState extends State<TabApp> {
           }),
           flutterFft.setIsOnPitch = onPitch!,
           flutterFft.setFrequency = frequency!,
-          print(note.toStringFrequency()),
         },
         onError: (err) => print("Error: $err"),
         onDone: () => print("Is done")

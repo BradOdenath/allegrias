@@ -7,64 +7,98 @@ import 'package:allegrias/music/note/note.dart';
 class Chordophone {
   static const int DEFAULT_FINGERBOARD_LENGTH = 24;
 
+  static const String
+  DEFAULT_CHORDOPHONE_TUNING_NAME = 'Default';
+
   static const List<String> DEFAULT_CHORDOPHONE_TUNING = [
     //'D#4', 'A#3', 'F#3', 'C#3', 'G#2', 'D#2', 'A#1', 'F#1', 'C#1', 'G#0'
     //'D4', 'A3', 'F3', 'C3', 'G2', 'D2'//, 'A1', 'F1', 'C1', 'G0'
     'E4', 'B3', 'G3', 'D3', 'A2', 'E2', 'B1', 'F#1', 'C#1', 'G#0'
   ];
 
+  static const String
+  STANDARD_TEN_STRING_GUITAR_TUNING_NAME = '10 String Guitar';
+
   static const List<String> STANDARD_TEN_STRING_GUITAR_TUNING = [
     'E4', 'B3', 'G3', 'D3', 'A2', 'E2', 'B1', 'F#1', 'C#1', 'G#0'
   ];
+
+  static const String
+  STANDARD_SEVEN_STRING_GUITAR_TUNING_NAME = '7 String Guitar';
 
   static const List<String> STANDARD_SEVEN_STRING_GUITAR_TUNING = [
     'E4', 'B3', 'G3', 'D3', 'A2', 'E2', 'B1'
   ];
 
+  static const String
+  STANDARD_GUITAR_TUNING_NAME = '6 String Guitar';
+
   static const List<String> STANDARD_GUITAR_TUNING = [
     'E4', 'B3', 'G3', 'D3', 'A2', 'E2'
   ];
+
+  static const String
+  STANDARD_UKULELE_TUNING_NAME = 'Ukulele';
 
   static const List<String> STANDARD_UKULELE_TUNING = [
     'G4', 'C4', 'E4', 'A4'
   ];
 
+  static const String
+  STANDARD_VIOLIN_TUNING_NAME = 'Violin';
+
   static const List<String> STANDARD_VIOLIN_TUNING = [
     'E5', 'A4', 'D4', 'G3'
   ];
+
+  static const String
+  STANDARD_VIOLA_TUNING_NAME = 'Viola';
 
   static const List<String> STANDARD_VIOLA_TUNING = [
     'A4', 'D4', 'G3', 'C3'
   ];
 
+  static const String
+  STANDARD_CELLO_TUNING_NAME = 'Cello';
+
   static const List<String> STANDARD_CELLO_TUNING = [
     'A3', 'D3', 'G2', 'C2'
   ];
+
+  static const String
+  STANDARD_SIX_STRING_BASS_TUNING_NAME = '6 String Bass';
 
   static const List<String> STANDARD_SIX_STRING_BASS_TUNING = [
     'C3', 'G2', 'D2', 'A1', 'E1', 'B0'
   ];
 
+  static const String
+  STANDARD_FIVE_STRING_BASS_TUNING_NAME = '5 String Bass';
+
   static const List<String> STANDARD_FIVE_STRING_BASS_TUNING = [
     'G2', 'D2', 'A1', 'E1', 'B0'
   ];
+
+  static const String
+  STANDARD_BASS_TUNING_NAME = 'Bass';
 
   static const List<String> STANDARD_BASS_TUNING = [
     'G2', 'D2', 'A1', 'E1'
   ];
 
-  static const chordophoneTunings = <String>[
-    'Default',
-    '10 String Guitar',
-    '7 String Guitar',
-    '6 String Guitar',
-    'Ukulele',
-    'Violin',
-    'Viola',
-    'Cello',
-    '6 String Bass',
-    '5 String Bass',
-    '4 String Bass'
+  /// TODO: Modify the dart language with const list contain const elements.
+  static const List<String> chordophoneTunings = [
+    Chordophone.DEFAULT_CHORDOPHONE_TUNING_NAME,
+    Chordophone.STANDARD_TEN_STRING_GUITAR_TUNING_NAME,
+    Chordophone.STANDARD_SEVEN_STRING_GUITAR_TUNING_NAME,
+    Chordophone.STANDARD_GUITAR_TUNING_NAME,
+    Chordophone.STANDARD_UKULELE_TUNING_NAME,
+    Chordophone.STANDARD_VIOLIN_TUNING_NAME,
+    Chordophone.STANDARD_VIOLA_TUNING_NAME,
+    Chordophone.STANDARD_CELLO_TUNING_NAME,
+    Chordophone.STANDARD_SIX_STRING_BASS_TUNING_NAME,
+    Chordophone.STANDARD_FIVE_STRING_BASS_TUNING_NAME,
+    Chordophone.STANDARD_BASS_TUNING_NAME
   ];
 
   /// TODO: Implement this to writing efficient tablature.
@@ -208,6 +242,43 @@ class Chordophone {
   Chordophone.fromStandardBassTuning() {
     this.setChordophoneStringTuning = (STANDARD_BASS_TUNING);
     print_debug('Chordophone.fromStandardBassTuning() => $this');
+  }
+
+  Chordophone.fromStringTuning(String chordophoneTuning) {
+    switch(chordophoneTuning) {
+      case (Chordophone.STANDARD_TEN_STRING_GUITAR_TUNING_NAME):
+        Chordophone.fromStandardTenStringGuitarTuning();
+        break;
+      case (Chordophone.STANDARD_SEVEN_STRING_GUITAR_TUNING_NAME):
+        Chordophone.fromStandardSevenStringGuitarTuning();
+        break;
+      case (Chordophone.STANDARD_GUITAR_TUNING_NAME):
+        Chordophone.fromStandardGuitarTuning();
+        break;
+      case (Chordophone.STANDARD_UKULELE_TUNING_NAME):
+        Chordophone.fromStandardUkuleleTuning();
+        break;
+      case (Chordophone.STANDARD_VIOLIN_TUNING_NAME):
+        Chordophone.fromStandardViolinTuning();
+        break;
+      case (Chordophone.STANDARD_VIOLA_TUNING_NAME):
+        Chordophone.fromStandardViolaTuning();
+        break;
+      case (Chordophone.STANDARD_CELLO_TUNING_NAME):
+        Chordophone.fromStandardCelloTuning();
+        break;
+      case (Chordophone.STANDARD_SIX_STRING_BASS_TUNING_NAME):
+        Chordophone.fromStandardSixStringBassTuning();
+        break;
+      case (Chordophone.STANDARD_FIVE_STRING_BASS_TUNING_NAME):
+        Chordophone.fromStandardFiveStringBassTuning();
+        break;
+      case (Chordophone.STANDARD_BASS_TUNING_NAME):
+        Chordophone.fromStandardBassTuning();
+        break;
+      default:
+        Chordophone.fromDefaultChordophoneTuning();
+    }
   }
 
   @override
