@@ -17,9 +17,10 @@ class Tablature {
       for (int i = 0;
       (i < chordophone.getChordophoneStringCount);
       i++) {
-        outChordophoneString += '|-'
-            + chordophone.getChordophoneStringTuning[i].toString()
-            + '-|-';
+        outChordophoneString += '|'
+            + (TabStanza.tabChordophoneString(chordophone
+                .getChordophoneStringTuning[i].toString()))
+            + '|-';
         for (int j = (tabStanzas.length > 10)
             ? (tabStanzas.length-10)
             : (0);
