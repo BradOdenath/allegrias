@@ -40,7 +40,7 @@ class ChordophoneString {
   }
 
   Note? indexNote;
-  int? chordophoneStringLength;
+  int? chordophoneStringPositionCount;
 
   ChordophoneString(Note indexNote, int chordophoneStringLength) {
     this.setIndexNote = indexNote;
@@ -50,12 +50,12 @@ class ChordophoneString {
 
   ChordophoneString.fromDefaultFingerboardLength(Note indexNote) {
     this.indexNote = (indexNote);
-    this.chordophoneStringLength = (Chordophone.DEFAULT_FINGERBOARD_LENGTH);
+    this.chordophoneStringPositionCount = (Chordophone.DEFAULT_FINGERBOARD_LENGTH);
     print_debug(toStringObject());
   }
 
   String toStringObject() =>
-      'ChordophoneString($indexNote, $chordophoneStringLength)';
+      'ChordophoneString($indexNote, $chordophoneStringPositionCount)';
 
   @override
   String toString() {
@@ -79,7 +79,7 @@ class ChordophoneString {
 
   List<Note> get getScale {
     List<Note> out = (fingerboardPositionNotes(
-        this.chordophoneStringLength!,
+        this.chordophoneStringPositionCount!,
         this.indexNote!
     ));
     print_debug(toStringObject() + '.getScale => $out');
@@ -95,7 +95,7 @@ class ChordophoneString {
 
   set setChordophoneStringLength(int length) {
     String out = (toStringObject() + '.setChordophoneStringLength = $length');
-    this.chordophoneStringLength = (length);
+    this.chordophoneStringPositionCount = (length);
     out += (' => ' + toStringObject());
     print_debug(out);
   }

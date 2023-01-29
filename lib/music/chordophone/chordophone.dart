@@ -13,6 +13,7 @@ class Chordophone {
   static const List<String> DEFAULT_CHORDOPHONE_TUNING = [
     //'D#4', 'A#3', 'F#3', 'C#3', 'G#2', 'D#2', 'A#1', 'F#1', 'C#1', 'G#0'
     //'D4', 'A3', 'F3', 'C3', 'G2', 'D2'//, 'A1', 'F1', 'C1', 'G0'
+    'F6', 'C6', 'G#5', 'D#5', 'A#4',
     'E4', 'B3', 'G3', 'D3', 'A2', 'E2', 'B1', 'F#1', 'C#1', 'G#0'
   ];
 
@@ -135,6 +136,34 @@ class Chordophone {
     'A4', 'D4'
   ];
 
+  static const String
+  PIPA_TUNING_NAME = 'Pipa';
+
+  static const List<String> PIPA_TUNING = [
+    'A3', 'E3', 'D3', 'A2'
+  ];
+
+  static const String
+  TURKISH_OUD_TUNING_NAME = 'Turkish Oud';
+
+  static const List<String> TURKISH_OUD_TUNING = [
+    'D4', 'A3', 'E3', 'B2', 'G2', 'D2'
+  ];
+
+  static const String
+  NEW_TURKISH_CLASSICAL_OUD_TUNING_NAME = 'New Turkish Classical Oud';
+
+  static const List<String> NEW_TURKISH_CLASSICAL_OUD_TUNING = [
+    'D4', 'A3', 'E3', 'B2', 'F#2', 'C#2'
+  ];
+
+  static const String
+  ALT_NEW_TURKISH_CLASSICAL_OUD_TUNING_NAME = 'Alt. New Turkish Classical Oud';
+
+  static const List<String> ALT_NEW_TURKISH_CLASSICAL_OUD_TUNING = [
+    'D4', 'A3', 'E3', 'B2', 'F#2', 'D2'
+  ];
+
   /// TODO: Modify the dart language with const list contain const elements.
   static const List<String> chordophoneTunings = [
     Chordophone.DEFAULT_CHORDOPHONE_TUNING_NAME,
@@ -154,7 +183,11 @@ class Chordophone {
     Chordophone.DA_RUAN_A_TUNING_NAME,
     Chordophone.DA_RUAN_B_TUNING_NAME,
     Chordophone.DA_RUAN_C_TUNING_NAME,
-    Chordophone.EHRU_TUNING_NAME
+    Chordophone.EHRU_TUNING_NAME,
+    Chordophone.PIPA_TUNING_NAME,
+    Chordophone.TURKISH_OUD_TUNING_NAME,
+    Chordophone.NEW_TURKISH_CLASSICAL_OUD_TUNING_NAME,
+    Chordophone.ALT_NEW_TURKISH_CLASSICAL_OUD_TUNING_NAME,
   ];
 
   static List<String> chordophoneTuningFromString(
@@ -211,6 +244,18 @@ class Chordophone {
         break;
       case (Chordophone.EHRU_TUNING_NAME):
         out = Chordophone.EHRU_TUNING;
+        break;
+      case (Chordophone.PIPA_TUNING_NAME):
+        out = Chordophone.PIPA_TUNING;
+        break;
+      case (Chordophone.TURKISH_OUD_TUNING_NAME):
+        out = Chordophone.TURKISH_OUD_TUNING;
+        break;
+      case (Chordophone.NEW_TURKISH_CLASSICAL_OUD_TUNING_NAME):
+        out = Chordophone.NEW_TURKISH_CLASSICAL_OUD_TUNING;
+        break;
+      case (Chordophone.ALT_NEW_TURKISH_CLASSICAL_OUD_TUNING_NAME):
+        out = Chordophone.ALT_NEW_TURKISH_CLASSICAL_OUD_TUNING;
         break;
       default:
         out = Chordophone.DEFAULT_CHORDOPHONE_TUNING;
