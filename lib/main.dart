@@ -72,8 +72,8 @@ class TabAppState extends State<TabApp> {
               ),
               /// TODO: Fix glitching tablature button
               ListTile(
-                title: const Text('Chordophone Tuning:'),
-                trailing: DropdownButton(
+                title: const Text('Chordophone Tuning'),
+                subtitle: DropdownButton(
                   value: (chordophoneTuning),
                   onChanged: (String? newTuning) {
                     if (newTuning != null) {

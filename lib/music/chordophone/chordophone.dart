@@ -13,8 +13,8 @@ class Chordophone {
   static const List<String> DEFAULT_CHORDOPHONE_TUNING = [
     //'D#4', 'A#3', 'F#3', 'C#3', 'G#2', 'D#2', 'A#1', 'F#1', 'C#1', 'G#0'
     //'D4', 'A3', 'F3', 'C3', 'G2', 'D2'//, 'A1', 'F1', 'C1', 'G0'
-    'F6', 'C6', 'G#5', 'D#5', 'A#4',
-    'E4', 'B3', 'G3', 'D3', 'A2', 'E2', 'B1', 'F#1', 'C#1', 'G#0'
+    //'F6', 'C6', 'G#5', 'D#5', 'A#4',
+    'E4', 'B3', 'G3', 'D3', 'A2', 'E2', 'B1', 'F#1'//, 'C#1', 'G#0'
   ];
 
   static const String
@@ -144,6 +144,48 @@ class Chordophone {
   ];
 
   static const String
+  OUD_A_TUNING_NAME = 'Oud (A)';
+
+  static const List<String> OUD_A_TUNING = [
+    'C4', 'G3', 'D3', 'A2', 'F2', 'C2'
+  ];
+
+  static const String
+  OUD_B_TUNING_NAME = 'Oud (B)';
+
+  static const List<String> OUD_B_TUNING = [
+    'C4', 'G3', 'D3', 'A2', 'F2', 'C2'
+  ];
+
+  static const String
+  ARABIC_OUD_A_TUNING_NAME = 'Arabic Oud (A)';
+
+  static const List<String> ARABIC_OUD_A_TUNING = [
+    'C4', 'G3', 'D3', 'A2', 'F2', 'C2'
+  ];
+
+  static const String
+  ARABIC_OUD_B_TUNING_NAME = 'Arabic Oud (B)';
+
+  static const List<String> ARABIC_OUD_B_TUNING = [
+    'F4', 'C4', 'G3', 'D3', 'A2', 'F2'
+  ];
+
+  static const String
+  ARABIC_OUD_C_TUNING_NAME = 'Arabic Oud (C)';
+
+  static const List<String> ARABIC_OUD_C_TUNING = [
+    'C4', 'G3', 'D3', 'A2', 'G2', 'D2'
+  ];
+
+  static const String
+  OTTOMAN_OUD_TUNING_NAME = 'Ottoman Oud';
+
+  static const List<String> OTTOMAN_OUD_TUNING = [
+    'D4', 'A3', 'E3', 'B2', 'G2', 'D2'
+  ];
+
+  static const String
   TURKISH_OUD_TUNING_NAME = 'Turkish Oud';
 
   static const List<String> TURKISH_OUD_TUNING = [
@@ -151,16 +193,16 @@ class Chordophone {
   ];
 
   static const String
-  NEW_TURKISH_CLASSICAL_OUD_TUNING_NAME = 'New Turkish Classical Oud';
+  TURKISH_CLASSICAL_OUD_A_TUNING_NAME = 'Turkish Classical Oud (A)';
 
-  static const List<String> NEW_TURKISH_CLASSICAL_OUD_TUNING = [
+  static const List<String> TURKISH_CLASSICAL_OUD_A_TUNING = [
     'D4', 'A3', 'E3', 'B2', 'F#2', 'C#2'
   ];
 
   static const String
-  ALT_NEW_TURKISH_CLASSICAL_OUD_TUNING_NAME = 'Alt. New Turkish Classical Oud';
+  TURKISH_CLASSICAL_OUD_B_TUNING_NAME = 'Turkish Classical Oud (B)';
 
-  static const List<String> ALT_NEW_TURKISH_CLASSICAL_OUD_TUNING = [
+  static const List<String> TURKISH_CLASSICAL_OUD_B_TUNING = [
     'D4', 'A3', 'E3', 'B2', 'F#2', 'D2'
   ];
 
@@ -185,9 +227,15 @@ class Chordophone {
     Chordophone.DA_RUAN_C_TUNING_NAME,
     Chordophone.EHRU_TUNING_NAME,
     Chordophone.PIPA_TUNING_NAME,
+    Chordophone.OUD_A_TUNING_NAME,
+    Chordophone.OUD_B_TUNING_NAME,
+    Chordophone.ARABIC_OUD_A_TUNING_NAME,
+    Chordophone.ARABIC_OUD_B_TUNING_NAME,
+    Chordophone.ARABIC_OUD_C_TUNING_NAME,
+    Chordophone.OTTOMAN_OUD_TUNING_NAME,
     Chordophone.TURKISH_OUD_TUNING_NAME,
-    Chordophone.NEW_TURKISH_CLASSICAL_OUD_TUNING_NAME,
-    Chordophone.ALT_NEW_TURKISH_CLASSICAL_OUD_TUNING_NAME,
+    Chordophone.TURKISH_CLASSICAL_OUD_A_TUNING_NAME,
+    Chordophone.TURKISH_CLASSICAL_OUD_B_TUNING_NAME,
   ];
 
   static List<String> chordophoneTuningFromString(
@@ -248,14 +296,32 @@ class Chordophone {
       case (Chordophone.PIPA_TUNING_NAME):
         out = Chordophone.PIPA_TUNING;
         break;
+      case (Chordophone.OUD_A_TUNING_NAME):
+        out = Chordophone.OUD_A_TUNING;
+        break;
+      case (Chordophone.OUD_B_TUNING_NAME):
+        out = Chordophone.OUD_B_TUNING;
+        break;
+      case (Chordophone.ARABIC_OUD_A_TUNING_NAME):
+        out = Chordophone.ARABIC_OUD_A_TUNING;
+        break;
+      case (Chordophone.ARABIC_OUD_B_TUNING_NAME):
+        out = Chordophone.ARABIC_OUD_B_TUNING;
+        break;
+      case (Chordophone.ARABIC_OUD_C_TUNING_NAME):
+        out = Chordophone.ARABIC_OUD_C_TUNING;
+        break;
+      case (Chordophone.OTTOMAN_OUD_TUNING_NAME):
+        out = Chordophone.OTTOMAN_OUD_TUNING;
+        break;
       case (Chordophone.TURKISH_OUD_TUNING_NAME):
         out = Chordophone.TURKISH_OUD_TUNING;
         break;
-      case (Chordophone.NEW_TURKISH_CLASSICAL_OUD_TUNING_NAME):
-        out = Chordophone.NEW_TURKISH_CLASSICAL_OUD_TUNING;
+      case (Chordophone.TURKISH_CLASSICAL_OUD_A_TUNING_NAME):
+        out = Chordophone.TURKISH_CLASSICAL_OUD_A_TUNING;
         break;
-      case (Chordophone.ALT_NEW_TURKISH_CLASSICAL_OUD_TUNING_NAME):
-        out = Chordophone.ALT_NEW_TURKISH_CLASSICAL_OUD_TUNING;
+      case (Chordophone.TURKISH_CLASSICAL_OUD_B_TUNING_NAME):
+        out = Chordophone.TURKISH_CLASSICAL_OUD_B_TUNING;
         break;
       default:
         out = Chordophone.DEFAULT_CHORDOPHONE_TUNING;
