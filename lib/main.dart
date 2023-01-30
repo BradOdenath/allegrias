@@ -71,20 +71,24 @@ class TabAppState extends State<TabApp> {
                 style: (ApplicationTheme.TXTSTYLE),
               ),
               /// TODO: Fix glitching tablature button
-              ListTile(
-                title: const Text('Chordophone Tuning'),
-                subtitle: DropdownButton(
-                  value: (chordophoneTuning),
-                  onChanged: (String? newTuning) {
-                    if (newTuning != null) {
-                      setState(() {
-                        chordophoneTuning = (newTuning);
-                        tablature.chordophone!
-                            .setChordophoneStringTuning = (chordophoneTuning);
-                      });
-                    }
-                  },
-                  items: (dropDownTuningItems),
+              Card(
+                child: ListTile(
+                  title: const Text('Chordophone Tuning',
+                    style: (ApplicationTheme.TXTSTYLE),
+                  ),
+                  subtitle: DropdownButton(
+                    value: (chordophoneTuning),
+                    onChanged: (String? newTuning) {
+                      if (newTuning != null) {
+                        setState(() {
+                          chordophoneTuning = (newTuning);
+                          tablature.chordophone!
+                              .setChordophoneStringTuning = (chordophoneTuning);
+                        });
+                      }
+                    },
+                    items: (dropDownTuningItems),
+                  ),
                 ),
               ),
             ],
