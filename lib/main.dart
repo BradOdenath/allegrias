@@ -56,42 +56,63 @@ class TabAppState extends State<TabApp> {
       color: Colors.blue,
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (note != null) Text(
-                (note!.toStringFrequency()),
-                style: (ApplicationTheme.TXTSTYLE),
-              ),
-              Text(
-                ((isRecording!)
-                    ? (this.tablature.toString())
-                    : ('Not Recording')),
-                style: (ApplicationTheme.TXTSTYLE),
-              ),
-              /// TODO: Fix glitching tablature button
-              Card(
-                child: ListTile(
-                  title: const Text('Chordophone Tuning',
-                    style: (ApplicationTheme.TXTSTYLE),
-                  ),
-                  subtitle: DropdownButton(
-                    value: (chordophoneTuning),
-                    onChanged: (String? newTuning) {
-                      if (newTuning != null) {
-                        setState(() {
-                          chordophoneTuning = (newTuning);
-                          tablature.chordophone!
-                              .setChordophoneStringTuning = (chordophoneTuning);
-                        });
-                      }
-                    },
-                    items: (dropDownTuningItems),
+        body: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment(0.8, 1),
+              colors: <Color>[
+                Color(0xff1f005c),
+                Color(0xff5b0060),
+                Color(0xff870160),
+                Color(0xffac255e),
+                Color(0xffca485c),
+                Color(0xffe16b5c),
+                Color(0xfff39060),
+                Color(0xffffb56b),
+              ],
+              tileMode: TileMode.mirror,
+            ),
+          ),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (note != null) Text(
+                  (note!.toStringFrequency()),
+                  style: (ApplicationTheme.TXTSTYLE),
+                ),
+                Text(
+                  ((isRecording!)
+                      ? (this.tablature.toString())
+                      : ('Not Recording')),
+                  style: (ApplicationTheme.TXTSTYLE),
+                ),
+                /// TODO: Fix glitching tablature button
+                Center(
+                  child: ListTile(
+                    title: const Text('Tuning:',
+                      style: (ApplicationTheme.TXTSTYLE),
+                    ),
+                    trailing: DropdownButton(
+                      value: (chordophoneTuning),
+                      style: (ApplicationTheme.TXTSTYLE),
+                      dropdownColor: Color.fromRGBO(90, 90, 90, 0.2),
+                      onChanged: (String? newTuning) {
+                        if (newTuning != null) {
+                          setState(() {
+                            chordophoneTuning = (newTuning);
+                            tablature.chordophone!
+                                .setChordophoneStringTuning = (chordophoneTuning);
+                          });
+                        }
+                      },
+                      items: (dropDownTuningItems),
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
