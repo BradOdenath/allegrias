@@ -6,6 +6,7 @@ import 'package:allegrias/music/tablature/tab_stanza/tab_stanza.dart';
 void test() {
   print("TODO: assert()");
 }
+
 void main() => test();
 
 class Tablature {
@@ -53,7 +54,7 @@ class Tablature {
     bool out = (tabs[getLastTabStanzaIndex]
         .addNote(Note.toNote(note))!);
     print_debug(toStringObject() + '.addNote($note) => $out');
-    return (out);
+    return out;
   }
 
   String toStringObject() => ('Tablature($tabs, $chordophone)');
@@ -64,23 +65,23 @@ class Tablature {
         ? (tabStanzasToString(chordophone!, tabs))
         : ('Make Notes :)'));
     print_debug(toStringObject() + '.toString() => $out');
-    return (out);
+    return out;
   }
 
-    List<TabStanza> get getTabs => (this.tabs);
+    List<TabStanza> get getTabs => this.tabs;
 
     int get getLastTabStanzaIndex {
       int out = ((tabs.length > 0)
           ? (this.tabs.length - 1)
           : (0));
       print_debug(toStringObject() + '.getLastTabStanzaIndex => $out');
-      return (out);
+      return out;
     }
 
     bool get isNotEmpty {
       bool out = (this.tabs.isNotEmpty);
       print_debug(toStringObject() + '.isNotEmpty => $out');
-      return (out);
+      return out;
     }
 
     set setChordophone(Chordophone chordophone) {

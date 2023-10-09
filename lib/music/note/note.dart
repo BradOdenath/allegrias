@@ -28,12 +28,12 @@ class Note {
   static const List<int> SCALE_PATTERN = [
     //-12   -11   -10   -9    -8    -7    -6   -5    -4    -3    -2    -1
     //0     1     2     3     4     5     6     7     8     9     10    11
-    1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1
+      1,    0,    1,    0,    1,    1,    0,    1,    0,    1,     0,    1
     //H           W           W     H           W           W           W
   ];
 
   // Frequency for Note C0
-  static const double C0_FREQUENCY = (16.35);
+  static const double C0_FREQUENCY = 16.35; // I like parenthesis removed for speed
 
   // Object for Note C0
   // footnote: non_modifiable as if const
@@ -142,7 +142,7 @@ class Note {
             .compareTo(b.getFrequency)
     );
     print_debug('Note.sortNotes($notes) => $outNotes');
-    return (outNotes);
+    return outNotes;
   }
 
   static List<Note> sortNotesBackwards(List notes) {
@@ -160,7 +160,7 @@ class Note {
       }
     }
     print_debug('Note.noteExists($noteList, $objNote) => $out');
-    return (out);
+    return out;
   }
 
 
@@ -186,13 +186,13 @@ class Note {
         noteNoOctave(scale[0]) + noteToOctave(nextNote(focusNote)).toString()
     )); // 7 Note Scale is 8 Note Scale (H)
     print_debug('Note.scaleFromNote($patternIndex,$note) => $scale');
-    return (scale);
+    return scale;
   }
 
   static int chromaticScaleIndex(note) {
     int out = CHROMATIC_SCALE.indexOf(toNote(note).getNote);
     print_debug('Note.chromaticScaleIndex($note) => $out');
-    return (out);
+    return out;
   }
 
   static Note toNote(note) {
@@ -206,7 +206,7 @@ class Note {
       outNote.setFrequency = frequencyFromNote(outNote);
     }
     print_debug('Note.toNote($note) => $outNote');
-    return (outNote);
+    return outNote;
   }
 
   static List<Note> toNotes(List notes) {
@@ -215,19 +215,19 @@ class Note {
       noteList.add(toNote(note));
     }
     print_debug('Note.toNotes($notes) => $noteList');
-    return (noteList);
+    return noteList;
   }
 
   static double frequencyFromMidiIndex(n) {
     double out = (C0.noteFrequency! * pow(2, (n / 12)));
     print_debug('Note.frequencyFromMidiIndex($n) => $out');
-    return (out);
+    return out;
   }
 
   static int midiIndexFromFrequency(frequency) {
     int out = (17.3123 * log(0.06116207951070336 * frequency)).round();
     print_debug('Note.midiIndexFromFrequency($frequency) => $out');
-    return (out);
+    return out;
   }
 
   static int midiIndexFromNote(note) {
@@ -237,14 +237,14 @@ class Note {
             + (_note.getOctave * 12))
     );
     print_debug('Note.midiIndexFromNote($note) => $index');
-    return (index);
+    return index;
   }
 
   static double frequencyFromNote(note) {
     int index = midiIndexFromNote(note);
     double out = (frequencyFromMidiIndex(index));
     print_debug('Note.frequencyFromNote($note) => $out');
-    return (out);
+    return out;
   }
 
   static Note noteFromMidiIndex(int index) {
@@ -257,13 +257,13 @@ class Note {
         noteNote: (CHROMATIC_SCALE[noteIndex])
     );
     print_debug('Note.noteFromMidiIndex($index) => $outNote');
-    return (outNote);
+    return outNote;
   }
 
   static Note noteFromFrequency(frequency) {
     Note out = (noteFromMidiIndex(midiIndexFromFrequency(frequency)));
     print_debug('Note.noteFromFrequency($frequency) => $out');
-    return (out);
+    return out;
   }
 
   static String noteNoOctave(note) {
@@ -279,7 +279,7 @@ class Note {
       print_debug('uw0tm8');
     }
     print_debug('Note.noteNoOctave($note) => $out');
-    return (out);
+    return out;
   }
 
   static Note nextNote(note) {
@@ -295,7 +295,7 @@ class Note {
       focusNote.incrementOctave();
     }
     print_debug('Note.nextNote($note) => $focusNote');
-    return (focusNote);
+    return focusNote;
   }
 
   static int noteToOctave(note) {
@@ -319,14 +319,14 @@ class Note {
       out = note.getOctave;
     }
     print_debug('Note.noteToOctave($note) => $out');
-    return (out);
+    return out;
   }
 
   static Note incrementNoteOctave(note) {
     Note out = (toNote(note)
       ..setOctave = (note.getOctave + 1));
     print_debug('Note.incrementNoteOctave($note) => $out');
-    return (out);
+    return out;
   }
 
   static Map<int, int> fingerboardCoordinates(Chordophone chordophone, note) {
@@ -342,7 +342,7 @@ class Note {
     }
     print_debug('Note.fingerboardCoordinates($chordophone,$_note)'
         ' => $noteCoordinates');
-    return (noteCoordinates);
+    return noteCoordinates;
   }
 
   static Map<Note, Map<int, int>> notesToFingerboardCoordinates(
@@ -357,7 +357,7 @@ class Note {
     }
     print_debug('Note.notesToFingerboardCoordinates($chordophone,$_notes)'
         ' => $outCoordinates');
-    return (outCoordinates);
+    return outCoordinates;
   }
 
   double? noteFrequency;
@@ -389,24 +389,24 @@ class Note {
   Note sharpen() {
     Note out = (nextNote(this));
     print_debug('$this.sharpen() => $out');
-    return (out);
+    return out;
   }
 
   Note incrementOctave() {
     Note out = (incrementNoteOctave(this));
     print_debug('$this.incrementOctave() => $out');
-    return (out);
+    return out;
   }
 
   String toStringFrequency() {
     String out = (this.toString() + ' ($noteFrequency)');
     print_debug('$this.toStringFrequency() => $out');
-    return (out);
+    return out;
   }
 
   String toStringObject() {
     String out = ('Note($noteNote,$noteOctave,$noteFrequency)');
-    return (out);
+    return out;
   }
 
   @override
@@ -416,7 +416,7 @@ class Note {
   bool operator ==(Object other) {
     bool out = (toString() == toNote(other).toString());
     print_debug('Note ==($other) => $out');
-    return (out);
+    return out;
   }
 
   // Accessors
@@ -426,13 +426,13 @@ class Note {
   int get hashCode {
     int out = (super.hashCode);
     print_debug(toStringObject() + '.hashcode => $out');
-    return (out);
+    return out;
   }
 
   int get length {
     int out = (toString().length);
     print_debug(toStringObject() + '.length => $out');
-    return (out);
+    return out;
   }
 
   double get getFrequency {
@@ -440,25 +440,25 @@ class Note {
         ? (noteFrequency!)
         : (0.0);
     print_debug(toStringObject() + '.getFrequency => $out');
-    return (out);
+    return out;
   }
 
   String get getNote {
     String out = (this.noteNote!);
     print_debug(toStringObject() + '.getNote => $out');
-    return (out);
+    return out;
   }
 
   int get getOctave {
     int out = (this.noteOctave!);
     print_debug(toStringObject() + '.getOctave => $out');
-    return (out);
+    return out;
   }
 
   int get getChromaticScaleIndex {
     int out = (chromaticScaleIndex(this));
     print_debug(toStringObject() + '.getChromaticScale => $out');
-    return (out);
+    return out;
   }
 
   // Mutators

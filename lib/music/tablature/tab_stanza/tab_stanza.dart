@@ -131,7 +131,7 @@ class TabStanza {
   }
 
   bool validNoteAddition(note) {
-    Note _note = Note.toNote(note); // >_>
+    // Note _note = Note.toNote(note); // >_>
     bool out =  ((notes!.length <= 1)
         //&& notes.length <= Chordophone.CHORDOPHONE_STRING_COUNT == true);
         //&& !(noteExists(note)) == true
