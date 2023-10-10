@@ -2,6 +2,7 @@ import 'package:allegrias/commons.dart';
 import 'package:allegrias/music/chordophone/'
     'chordophone_string/chordophone_string.dart';
 import 'package:allegrias/music/note/note.dart';
+import 'package:flutter/material.dart';
 
 
 class Chordophone {
@@ -13,18 +14,14 @@ class Chordophone {
     'Broomstick': 15, // Martin Backpacker
     'Shred24': 24,
     'Shred36': 36,
-    'TrollMartin': 7, //Overestimation ngl
+    'TrollMartin': 5, // Maybe 7
     'Martin18': 18,
   };
 
   static Map<int,int> STRING_FRET_LENGTHS(eye) {
     Map<int,int> out = DEFAULT_STRING_FRET_LENGTHS;
-    if (eye is Map<int,int>)
-      out = eye;
-    else
-      for (int i = 1; i < 6; i++)
-        out.addAll({i:eye});
-
+    if (eye is Map<int,int>) out = eye;
+    else for (int i = 1; i < 6; i++) out.addAll({i:eye});
     return out;
   }
 
@@ -36,8 +33,6 @@ class Chordophone {
     5: 19,
     6: 19
   };
-
-
 
   ///TODO: Map This All
 
@@ -242,6 +237,7 @@ class Chordophone {
     'D4', 'A3', 'E3', 'B2', 'F#2', 'D2'
   ];
 
+
   /// TODO: Modify the dart language with const list contain const elements.
   static const List<String> chordophoneTunings = [
     Chordophone.DEFAULT_CHORDOPHONE_TUNING_NAME,
@@ -273,6 +269,23 @@ class Chordophone {
     Chordophone.TURKISH_CLASSICAL_OUD_A_TUNING_NAME,
     Chordophone.TURKISH_CLASSICAL_OUD_B_TUNING_NAME,
   ];
+  static Map<String,List<String>> get chordophoneMapTunings =>
+      Map.fromIterables(
+          Chordophone.chordophoneTunings,
+          Chordophone.chordophoneTuningsFromString as Iterable<List<String>>
+      );
+
+
+  /// TODO: Figure this out
+  //static List<String> get chordophoneTuningsFromString =>
+  //    (for (int i = 0; i <= chordophoneTunings.length; i++) chordophoneTuningFromString(chordophoneTunings[i]));
+
+  static List<String> get chordophoneTuningsFromString {
+    List<String> out = [];
+    for (int i = 0; i <= chordophoneTunings.length; i++) chordophoneTuningFromString(chordophoneTunings[i]);
+    return out;
+  }
+
 
   static List<String> chordophoneTuningFromString(
       String chordophoneStringTuning) {
