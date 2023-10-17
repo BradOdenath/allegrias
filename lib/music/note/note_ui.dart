@@ -1,4 +1,4 @@
-enum RepresentationType { tablature, note, svaras}
+enum RepresentationType { tablature, note, svaras }
 
 class NoteUI {
     Note note;
